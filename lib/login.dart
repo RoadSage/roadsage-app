@@ -81,7 +81,31 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            const Padding(padding: EdgeInsets.all(100),),
+            const Padding(padding: EdgeInsets.all(50),),
+            SizedBox(
+              width: 325,
+              child: Text(
+                'By clicking Login, you agree to our terms and conditions. Learn how we process your data in our ...',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.mukta(
+                  fontSize: 14, 
+                  color: const Color(0xFFFFFFFF), 
+                  // shadows: <Shadow> [
+                  //   const Shadow(
+                  //     offset: Offset(0.5, 0.5),
+                  //     blurRadius: 1.0,
+                  //     color: Color.fromARGB(255, 0, 0, 0),
+                  //   ),
+                  //   const Shadow(
+                  //     offset: Offset(0.5, 0.5),
+                  //     blurRadius: 4.0,
+                  //     color: Color.fromARGB(125, 0, 0, 255),
+                  //   ),
+                  // ],
+                ),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(20),),
             Column(
               children: [
                 Row(
@@ -116,6 +140,31 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                   ],
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomePage(title: "Home Page")));
+                    },
+                    child: Text(
+                    'Trouble Signing in?',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.mukta(
+                      fontSize: 14, 
+                      color: const Color(0xFFFFFFFF), 
+                      shadows: <Shadow> [
+                        const Shadow(
+                          offset: Offset(0.5, 0.5),
+                          blurRadius: 1.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                        const Shadow(
+                          offset: Offset(0.5, 0.5),
+                          blurRadius: 4.0,
+                          color: Color.fromARGB(125, 0, 0, 255),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
