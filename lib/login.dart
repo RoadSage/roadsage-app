@@ -33,22 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       Constants.title,
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.mukta(
-                        fontSize: 48,
-                        color: Colors.white,
-                        shadows: <Shadow>[
-                          const Shadow(
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 3.0,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                          ),
-                          const Shadow(
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 8.0,
-                            color: Color.fromARGB(125, 0, 0, 255),
-                          ),
-                        ],
-                      ),
+                      style: Theme.of(context).textTheme.headline3,
                     ),
                   ]),
                   Container(
@@ -59,22 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                           Text(
                             Constants.byUnitic,
                             textAlign: TextAlign.right,
-                            style: GoogleFonts.mukta(
-                              fontSize: 18,
-                              color: const Color(0xFFFFFFFF),
-                              shadows: <Shadow>[
-                                const Shadow(
-                                  offset: Offset(1.0, 1.0),
-                                  blurRadius: 3.0,
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                                const Shadow(
-                                  offset: Offset(1.0, 1.0),
-                                  blurRadius: 8.0,
-                                  color: Color.fromARGB(125, 0, 0, 255),
-                                ),
-                              ],
-                            ),
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                         ]),
                   ),
@@ -91,19 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.mukta(
                   fontSize: 14,
-                  color: const Color(0xFFFFFFFF),
-                  // shadows: <Shadow> [
-                  //   const Shadow(
-                  //     offset: Offset(0.5, 0.5),
-                  //     blurRadius: 1.0,
-                  //     color: Color.fromARGB(255, 0, 0, 0),
-                  //   ),
-                  //   const Shadow(
-                  //     offset: Offset(0.5, 0.5),
-                  //     blurRadius: 4.0,
-                  //     color: Color.fromARGB(125, 0, 0, 255),
-                  //   ),
-                  // ],
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -165,12 +123,12 @@ class _LoginPageState extends State<LoginPage> {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.mukta(
                       fontSize: 14,
-                      color: const Color(0xFFFFFFFF),
+                      color: Colors.white,
                       shadows: <Shadow>[
                         const Shadow(
                           offset: Offset(0.5, 0.5),
                           blurRadius: 1.0,
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          color: Colors.black,
                         ),
                         const Shadow(
                           offset: Offset(0.5, 0.5),
