@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'home.dart';
 import 'login.dart';
 import 'constants.dart';
 
@@ -49,7 +51,13 @@ class RoadSageApp extends StatelessWidget {
                   ),
                 ])),
       ),
-      home: const LoginPage(title: Constants.loginPageTitle),
+      initialRoute: Routes.root,
+      routes: {
+        Routes.root: (context) =>
+            const LoginPage(title: Constants.loginPageTitle),
+        Routes.home: (context) => const HomePage(title: Constants.homePage),
+      },
+      // home: const LoginPage(title: Constants.loginPageTitle),
     );
   }
 }

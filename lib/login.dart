@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-import 'home.dart';
 import 'constants.dart';
 
 class LoginPage extends StatefulWidget {
@@ -78,11 +77,8 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     SignInButton(
                       Buttons.Google,
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                const HomePage(title: Constants.homePage)));
-                      },
+                      onPressed: () =>
+                          Navigator.pushNamed(context, Routes.home),
                     ),
                   ],
                 ),
@@ -91,11 +87,8 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     SignInButton(
                       Buttons.Facebook,
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                const HomePage(title: Constants.homePage)));
-                      },
+                      onPressed: () =>
+                          Navigator.pushNamed(context, Routes.home),
                     ),
                   ],
                 ),
@@ -104,20 +97,13 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     SignInButton(
                       Buttons.Email,
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                const HomePage(title: Constants.homePage)));
-                      },
+                      onPressed: () =>
+                          Navigator.pushNamed(context, Routes.home),
                     ),
                   ],
                 ),
                 TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            const HomePage(title: Constants.homePage)));
-                  },
+                  onPressed: () => Navigator.pushNamed(context, Routes.home),
                   child: Text(
                     Constants.troubleSigning,
                     textAlign: TextAlign.center,

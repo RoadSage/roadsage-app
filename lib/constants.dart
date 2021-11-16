@@ -10,6 +10,11 @@ class Constants {
   static const String troubleSigning = "Trouble Signing in?";
 }
 
+class Routes {
+  static const String root = "/";
+  static const String home = "/home";
+}
+
 class ConstantColours {
   static const Color backgroundBlue = Color(0xFF0AC0FF);
 }
