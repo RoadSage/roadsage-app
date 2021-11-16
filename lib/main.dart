@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
 import 'login.dart';
-
-// 0AC0FF
+import 'constants.dart';
 
 void main() {
   runApp(const RoadSageApp());
@@ -14,11 +12,11 @@ class RoadSageApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'RoadSage',
+      title: Constants.title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(title: 'RoadSage Home Page'),
+      home: const LoginPage(title: Constants.loginPageTitle),
     );
   }
 }
