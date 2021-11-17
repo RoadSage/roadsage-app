@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_signin_button: ^2.0.0
   tuple: ^2.0.0
+  flutter_siri_suggestions: ^2.0.0
 
 dev_dependencies:
   flutter_test:

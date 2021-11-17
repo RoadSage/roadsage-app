@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_siri_suggestions/flutter_siri_suggestions.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -12,11 +13,47 @@ import 'screens/home.dart';
 import 'screens/recents.dart';
 
 void main() {
-  runApp(const RoadSageApp());
+  runApp(RoadSageApp());
 }
 
 class RoadSageApp extends StatelessWidget {
-  const RoadSageApp({Key? key}) : super(key: key);
+  RoadSageApp({Key? key}) : super(key: key) {
+    initSiriSuggestions();
+  }
+
+  void initSiriSuggestions() async {
+    FlutterSiriSuggestions.instance.configure(
+        onLaunch: (Map<String, dynamic> message) async {
+      print("called by ${message['key']} suggestion.");
+
+      switch (message["key"]) {
+        case "mainPage":
+          // Launch main page
+          break;
+        case "thankYou":
+          // say thank you
+          break;
+        case "cheers":
+          // say cheers
+          break;
+        case "beam":
+          // ask to turn of high beam
+          break;
+        default:
+        // suggestion key wasn't added
+      }
+    });
+    for (String phrase in ["Launch Roadsage", "Start Roadsage"]) {
+      addEzSuggestion("mainPage", "Opens the application", phrase);
+    }
+
+    addEzSuggestion("thankYou", "Says thank you to the car behind you",
+        "Say Thank you on Roadsage");
+    addEzSuggestion("cheers", "Says cheers to the car begind you",
+        "Say Cheers on Roadsage");
+    addEzSuggestion("beam", "Asks car behind you to turn off high beam",
+        "Say turn off high beam on Roadsage");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -221,5 +258,20 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
     );
+  }
+
+  void addSuggestion(String name, String actionKey, bool search, bool predict,
+      String desc, String phrase) async {
+    await FlutterSiriSuggestions.instance.buildActivity(FlutterSiriActivity(
+        name, actionKey,
+        isEligibleForSearch: search,
+        isEligibleForPrediction: predict,
+        contentDescription: desc,
+        suggestedInvocationPhrase: phrase));
+  }
+
+  void addEzSuggestion(String actionKey, String desc, String phrase) async {
+    addSuggestion(
+        actionKey + " suggestion", actionKey, true, true, desc, phrase);
   }
 }
