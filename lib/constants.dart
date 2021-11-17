@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+class Routes {
+  static const String root = "/";
+  static const String home = "/home";
+}
+
 class Constants {
   static const String title = "RoadSage";
   static const String loginPageTitle = "RoadSage Home Page";
@@ -10,11 +15,15 @@ class Constants {
   static const String troubleSigning = "Trouble Signing in?";
 }
 
-class Routes {
-  static const String root = "/";
-  static const String home = "/home";
+// TODO: move some of the strings from Constants here
+class RoadSageStrings {
+  static const String signInWithGoogle = 'Sign in with Google';
 }
 
-class ConstantColours {
+class RoadSageIcons {
+  static const String googleIcon = 'assets/icons/google.png';
+}
+
+class RoadSageColours {
   static const Color backgroundBlue = Color(0xFF0AC0FF);
 }

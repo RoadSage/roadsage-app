@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ConstantColours.backgroundBlue,
+      backgroundColor: RoadSageColours.backgroundBlue,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -68,39 +68,33 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.all(20),
             ),
             Column(
-              // TODO: change these guys to pushReplacement
+              // TODO: change these guys to pushReplacementNamed
               // Needed so that there's no back button after login
               // Fine for now because testing and stuff
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SignInButton(
-                      Buttons.Google,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, Routes.home),
+                SignInButtonBuilder(
+                    text: RoadSageStrings.signInWithGoogle,
+                    textColor: Colors.black54,
+                    image: Image.asset(
+                      RoadSageIcons.googleIcon,
+                      height: 20,
                     ),
-                  ],
+                    backgroundColor: Colors.white,
+                    // innerPadding: EdgeInsets.only(left: 10),
+                    onPressed: () => Navigator.pushNamed(context, Routes.home),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15))),
+                SignInButton(
+                  Buttons.Facebook,
+                  onPressed: () => Navigator.pushNamed(context, Routes.home),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SignInButton(
-                      Buttons.Facebook,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, Routes.home),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SignInButton(
-                      Buttons.Email,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, Routes.home),
-                    ),
-                  ],
+                SignInButton(
+                  Buttons.Email,
+                  onPressed: () => Navigator.pushNamed(context, Routes.home),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
                 ),
                 TextButton(
                   onPressed: () => Navigator.pushNamed(context, Routes.home),
