@@ -13,6 +13,12 @@ class Constants {
       "By clicking Login, you agree to our terms and conditions. Learn how we process your data in our ...";
   static const String byUnitic = "By Unitic";
   static const String troubleSigning = "Trouble Signing in?";
+
+  static const String connected = "Connected";
+  static const String help = "Help";
+  static const String device = "Device";
+  static const String home = "Home";
+  static const String recents = "Recents";
 }
 
 // TODO: move some of the strings from Constants here
@@ -25,5 +31,6 @@ class RoadSageIcons {
 }
 
 class RoadSageColours {
-  static const Color backgroundBlue = Color(0xFF0AC0FF);
+  static const Color lightBlue = Color(0xFF0AC0FF);
+  static const Color lightGrey = Color(0xFFDCDCDC);
 }

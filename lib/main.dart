@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'home.dart';
 import 'login.dart';
 import 'constants.dart';
+
+import 'screens/help.dart';
+import 'screens/device.dart';
+import 'screens/home.dart';
+import 'screens/recents.dart';
 
 void main() {
   runApp(const RoadSageApp());
@@ -54,10 +58,105 @@ class RoadSageApp extends StatelessWidget {
       initialRoute: Routes.root,
       routes: {
         Routes.root: (context) =>
-            const LoginPage(title: Constants.loginPageTitle),
-        Routes.home: (context) => const HomePage(title: Constants.homePage),
+            const LoginScreen(title: Constants.loginPageTitle),
+        Routes.home: (context) => const MainScreen(title: Constants.homePage),
       },
-      // home: const LoginPage(title: Constants.loginPageTitle),
+    );
+  }
+}
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  final AppBar _appBar = AppBar(
+    title: const Text(
+      Constants.title,
+    ),
+    titleTextStyle: const TextStyle(fontSize: 32, shadows: [
+      Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
+    ]),
+    titleSpacing: 20,
+    backgroundColor: RoadSageColours.lightGrey,
+    toolbarHeight: 75,
+    elevation: 0,
+    centerTitle: false,
+    actions: [
+      Padding(
+          padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
+          child: ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(RoadSageColours.lightBlue),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)))),
+            child: const Text(Constants.connected),
+            onPressed: () {},
+          )),
+      IconButton(
+        icon: const Icon(Icons.menu),
+        iconSize: 36,
+        color: RoadSageColours.lightBlue,
+        onPressed: () {},
+      ),
+    ],
+  );
+
+  int _selectedIndex = 0;
+
+  static const List<Widget> _bottomNavScreens = <Widget>[
+    HelpScreen(),
+    DeviceScreen(),
+    HomeScreen(),
+    RecentsScreen(),
+  ];
+
+  void _onBottomNavItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _appBar,
+      body: _bottomNavScreens.elementAt(_selectedIndex),
+      backgroundColor: RoadSageColours.lightGrey,
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help_outline),
+            label: Constants.help,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.phone_android_outlined),
+            label: Constants.device,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: Constants.home,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message_outlined),
+            label: Constants.recents,
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        iconSize: 26,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: RoadSageColours.lightBlue,
+        unselectedItemColor: Colors.grey,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        onTap: _onBottomNavItemTapped,
+      ),
     );
   }
 }
