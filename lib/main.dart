@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'login.dart';
@@ -76,7 +75,41 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final AppBar _appBar = AppBar(
+    title: const Text(
+      Constants.title,
+    ),
+    titleTextStyle: const TextStyle(fontSize: 32, shadows: [
+      Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
+    ]),
+    titleSpacing: 20,
+    backgroundColor: RoadSageColours.lightGrey,
+    toolbarHeight: 75,
+    elevation: 0,
+    centerTitle: false,
+    actions: [
+      Padding(
+          padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
+          child: ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(RoadSageColours.lightBlue),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)))),
+            child: const Text(Constants.connected),
+            onPressed: () {},
+          )),
+      IconButton(
+        icon: const Icon(Icons.menu),
+        iconSize: 36,
+        color: RoadSageColours.lightBlue,
+        onPressed: () {},
+      ),
+    ],
+  );
+
   int _selectedIndex = 0;
+
   static const List<Widget> _bottomNavScreens = <Widget>[
     HelpScreen(),
     DeviceScreen(),
@@ -93,57 +126,26 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          Constants.title,
-        ),
-        titleTextStyle: const TextStyle(fontSize: 32, shadows: [
-          Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
-        ]),
-        titleSpacing: 20,
-        backgroundColor: RoadSageColours.lightGrey,
-        toolbarHeight: 75,
-        elevation: 0,
-        centerTitle: false,
-        actions: [
-          Padding(
-              padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(RoadSageColours.lightBlue),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)))),
-                child: const Text('Connected'),
-                onPressed: () {},
-              )),
-          IconButton(
-            icon: const Icon(Icons.menu),
-            iconSize: 36,
-            color: RoadSageColours.lightBlue,
-            onPressed: () {},
-          ),
-        ],
-      ),
+      appBar: _appBar,
       body: _bottomNavScreens.elementAt(_selectedIndex),
       backgroundColor: RoadSageColours.lightGrey,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.help_outline),
-            label: 'Help',
+            label: Constants.help,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.phone_android_outlined),
-            label: 'Device',
+            label: Constants.device,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
-            label: 'Home',
+            label: Constants.home,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message_outlined),
-            label: 'Recents',
+            label: Constants.recents,
           ),
         ],
         currentIndex: _selectedIndex,
