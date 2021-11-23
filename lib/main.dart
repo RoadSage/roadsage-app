@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'home.dart';
 import 'login.dart';
 import 'constants.dart';
+
+import 'screens/help.dart';
+import 'screens/device.dart';
+import 'screens/home.dart';
+import 'screens/recents.dart';
 
 void main() {
   runApp(const RoadSageApp());
@@ -55,9 +59,71 @@ class RoadSageApp extends StatelessWidget {
       routes: {
         Routes.root: (context) =>
             const LoginPage(title: Constants.loginPageTitle),
-        Routes.home: (context) => const HomePage(title: Constants.homePage),
+        Routes.home: (context) => const MainPage(title: Constants.homePage),
       },
-      // home: const LoginPage(title: Constants.loginPageTitle),
+    );
+  }
+}
+
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int _selectedIndex = 0;
+  static const List<Widget> _bottomNavScreens = <Widget>[
+    HelpScreen(),
+    DeviceScreen(),
+    HomeScreen(),
+    RecentsScreen(),
+  ];
+
+  void _onBottomNavItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: _bottomNavScreens.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help_outline),
+            label: 'Help',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.phone_android_outlined),
+            label: 'Device',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message_outlined),
+            label: 'Recents',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        iconSize: 26,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: RoadSageColours.lightBlue,
+        unselectedItemColor: Colors.grey,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        onTap: _onBottomNavItemTapped,
+      ),
     );
   }
 }
