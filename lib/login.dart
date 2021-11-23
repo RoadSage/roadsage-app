@@ -4,15 +4,15 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 import 'constants.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key, required this.title}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

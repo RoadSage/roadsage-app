@@ -58,23 +58,23 @@ class RoadSageApp extends StatelessWidget {
       initialRoute: Routes.root,
       routes: {
         Routes.root: (context) =>
-            const LoginPage(title: Constants.loginPageTitle),
-        Routes.home: (context) => const MainPage(title: Constants.homePage),
+            const LoginScreen(title: Constants.loginPageTitle),
+        Routes.home: (context) => const MainScreen(title: Constants.homePage),
       },
     );
   }
 }
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key, required this.title}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _bottomNavScreens = <Widget>[
     HelpScreen(),
