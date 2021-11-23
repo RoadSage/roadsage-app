@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'login.dart';
@@ -93,9 +94,39 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text(
+          Constants.title,
+        ),
+        titleTextStyle: const TextStyle(fontSize: 32, shadows: [
+          Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
+        ]),
+        titleSpacing: 20,
+        backgroundColor: RoadSageColours.lightGrey,
+        toolbarHeight: 75,
+        elevation: 0,
+        centerTitle: false,
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(RoadSageColours.lightBlue),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)))),
+                child: const Text('Connected'),
+                onPressed: () {},
+              )),
+          IconButton(
+            icon: const Icon(Icons.menu),
+            iconSize: 36,
+            color: RoadSageColours.lightBlue,
+            onPressed: () {},
+          ),
+        ],
       ),
       body: _bottomNavScreens.elementAt(_selectedIndex),
+      backgroundColor: RoadSageColours.lightGrey,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

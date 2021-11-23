@@ -81,7 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     backgroundColor: Colors.white,
                     // innerPadding: EdgeInsets.only(left: 10),
-                    onPressed: () => Navigator.pushNamed(context, Routes.home),
+                    onPressed: () =>
+                        Navigator.pushReplacementNamed(context, Routes.home),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15))),
                 SignInButton(
