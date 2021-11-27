@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_siri_suggestions/flutter_siri_suggestions.dart';
+import 'siri_suggestions.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -17,42 +17,51 @@ void main() {
 }
 
 class RoadSageApp extends StatelessWidget {
+  SiriSuggestions siri = SiriSuggestions();
   RoadSageApp({Key? key}) : super(key: key) {
     initSiriSuggestions();
   }
 
   void initSiriSuggestions() async {
-    FlutterSiriSuggestions.instance.configure(
-        onLaunch: (Map<String, dynamic> message) async {
+    print("Initializing siri suggestions");
+    WidgetsFlutterBinding.ensureInitialized();
+    siri.configure(onLaunch: (Map<String, dynamic> message) async {
       print("called by ${message['key']} suggestion.");
 
+      print("Siri Suggestion called to perform ${message['key']}");
+
       switch (message["key"]) {
-        case "mainPage":
+        case "Open_Roadsage":
           // Launch main page
           break;
-        case "thankYou":
+        case "Thanks_Roadsage":
           // say thank you
           break;
-        case "cheers":
+        case "Cheers_Roadsage":
           // say cheers
           break;
-        case "beam":
-          // ask to turn of high beam
+        case "Beam_RoadSage":
+          // open beam
           break;
         default:
-        // suggestion key wasn't added
+          // suggestion key wasn't added
+          break;
       }
     });
+
     for (String phrase in ["Launch Roadsage", "Start Roadsage"]) {
-      addEzSuggestion("mainPage", "Opens the application", phrase);
+      siri.addEzSuggestion("Open_Roadsage", "Opens the application", phrase);
     }
 
-    addEzSuggestion("thankYou", "Says thank you to the car behind you",
-        "Say Thank you on Roadsage");
-    addEzSuggestion("cheers", "Says cheers to the car begind you",
+    siri.addEzSuggestion("Thanks_Roadsage",
+        "Says thank you to the car behind you", "Say Thank you on Roadsage");
+    siri.addEzSuggestion("Cheers_Roadsage", "Says cheers to the car begind you",
         "Say Cheers on Roadsage");
-    addEzSuggestion("beam", "Asks car behind you to turn off high beam",
+    siri.addEzSuggestion(
+        "Beam_RoadSage",
+        "Asks car behind you to turn off high beam",
         "Say turn off high beam on Roadsage");
+    print("Initialized Siri Successfully!");
   }
 
   @override
@@ -258,20 +267,5 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
     );
-  }
-
-  void addSuggestion(String name, String actionKey, bool search, bool predict,
-      String desc, String phrase) async {
-    await FlutterSiriSuggestions.instance.buildActivity(FlutterSiriActivity(
-        name, actionKey,
-        isEligibleForSearch: search,
-        isEligibleForPrediction: predict,
-        contentDescription: desc,
-        suggestedInvocationPhrase: phrase));
-  }
-
-  void addEzSuggestion(String actionKey, String desc, String phrase) async {
-    addSuggestion(
-        actionKey + " suggestion", actionKey, true, true, desc, phrase);
   }
 }
