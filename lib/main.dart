@@ -17,18 +17,16 @@ void main() {
 }
 
 class RoadSageApp extends StatelessWidget {
-  SiriSuggestions siri = SiriSuggestions();
+  final SiriSuggestions siri = SiriSuggestions();
   RoadSageApp({Key? key}) : super(key: key) {
     initSiriSuggestions();
   }
 
   void initSiriSuggestions() async {
-    print("Initializing siri suggestions");
+    //print("Initializing siri suggestions");
     WidgetsFlutterBinding.ensureInitialized();
     siri.configure(onLaunch: (Map<String, dynamic> message) async {
-      print("called by ${message['key']} suggestion.");
-
-      print("Siri Suggestion called to perform ${message['key']}");
+      //print("Siri Suggestion called to perform ${message['key']}");
 
       switch (message["key"]) {
         case "Open_Roadsage":
@@ -61,7 +59,7 @@ class RoadSageApp extends StatelessWidget {
         "Beam_RoadSage",
         "Asks car behind you to turn off high beam",
         "Say turn off high beam on Roadsage");
-    print("Initialized Siri Successfully!");
+    //print("Initialized Siri Successfully!");
   }
 
   @override

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 Implementation adapted from
 https://github.com/myriky/flutter_siri_suggestions/blob/master/lib/flutter_siri_suggestions.dart
  */
-typedef Future<dynamic> MessageHandler(Map<String, dynamic> message);
+typedef MessageHandler = Future<dynamic> Function(Map<String, dynamic> message);
 
 class FlutterSiriActivity {
   const FlutterSiriActivity(
@@ -31,7 +31,7 @@ class SiriSuggestions {
   MessageHandler? _onLaunch;
   Map<String, dynamic>? retryActivity;
 
-  MethodChannel _channel =
+  final MethodChannel _channel =
   const MethodChannel('siri_suggestions');
 
   // create a suggestion
@@ -80,9 +80,6 @@ class SiriSuggestions {
         return _onLaunch!(call.arguments.cast<String, dynamic>());
       case "failedToLaunchWithActivity":
         retryActivity = call.arguments.cast<String, dynamic>();
-        break;
-      case "log":
-        print(call.arguments);
         break;
       default:
         throw UnsupportedError("Unrecognized JSON message");
