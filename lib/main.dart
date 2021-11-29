@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:tuple/tuple.dart';
+
 import 'login.dart';
 import 'constants.dart';
 
@@ -94,6 +96,24 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _drawerItems = [
+      Tuple2(RoadSageStrings.userProfile, () {
+        Navigator.pop(context);
+      }),
+      Tuple2(RoadSageStrings.activity, () {
+        Navigator.pop(context);
+      }),
+      Tuple2(RoadSageStrings.buyRoadSage, () {
+        Navigator.pop(context);
+      }),
+      Tuple2(RoadSageStrings.referAFriend, () {
+        Navigator.pop(context);
+      }),
+      Tuple2(RoadSageStrings.appPreferences, () {
+        Navigator.pop(context);
+      }),
+    ];
+
     return Scaffold(
       key: _key,
       appBar: AppBar(
@@ -161,21 +181,43 @@ class _MainScreenState extends State<MainScreen> {
         onTap: _onBottomNavItemTapped,
       ),
       endDrawer: Drawer(
-        child: ListView(
-          children: [
-            ListTile(
-              title: const Text('item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('item 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
+        backgroundColor: RoadSageColours.lightGrey,
+        child: ListView.builder(
+          padding: const EdgeInsets.only(top: 150),
+          itemCount: _drawerItems.length + 1,
+          itemBuilder: (context, index) {
+            if (index == _drawerItems.length) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(RoadSageColours.grey),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)))),
+                  child: const Text(
+                    RoadSageStrings.signOut,
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {},
+                ),
+              );
+            }
+
+            return Column(
+              children: [
+                ListTile(
+                    title: Text(
+                      _drawerItems[index].item1,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    onTap: _drawerItems[index].item2),
+                const Divider(
+                  color: Colors.black,
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

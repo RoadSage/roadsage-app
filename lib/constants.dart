@@ -24,6 +24,13 @@ class Constants {
 // TODO: move some of the strings from Constants here
 class RoadSageStrings {
   static const String signInWithGoogle = 'Sign in with Google';
+
+  static const String userProfile = 'User Profile';
+  static const String activity = 'Activity';
+  static const String buyRoadSage = 'Buy RoadSage';
+  static const String referAFriend = 'Refer a Friend';
+  static const String appPreferences = 'App Preferences';
+  static const String signOut = 'Sign Out';
 }
 
 class RoadSageIcons {
@@ -33,4 +40,5 @@ class RoadSageIcons {
 class RoadSageColours {
   static const Color lightBlue = Color(0xFF0AC0FF);
   static const Color lightGrey = Color(0xFFDCDCDC);
+  static const Color grey = Color(0xFFC4C4C4);
 }
