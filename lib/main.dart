@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:tuple/tuple.dart';
+
 import 'login.dart';
 import 'constants.dart';
 
@@ -75,38 +77,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final AppBar _appBar = AppBar(
-    title: const Text(
-      Constants.title,
-    ),
-    titleTextStyle: const TextStyle(fontSize: 32, shadows: [
-      Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
-    ]),
-    titleSpacing: 20,
-    backgroundColor: RoadSageColours.lightGrey,
-    toolbarHeight: 75,
-    elevation: 0,
-    centerTitle: false,
-    actions: [
-      Padding(
-          padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
-          child: ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(RoadSageColours.lightBlue),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)))),
-            child: const Text(Constants.connected),
-            onPressed: () {},
-          )),
-      IconButton(
-        icon: const Icon(Icons.menu),
-        iconSize: 36,
-        color: RoadSageColours.lightBlue,
-        onPressed: () {},
-      ),
-    ],
-  );
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   int _selectedIndex = 0;
 
@@ -125,8 +96,60 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _drawerItems = [
+      Tuple2(RoadSageStrings.userProfile, () {
+        Navigator.pop(context);
+      }),
+      Tuple2(RoadSageStrings.activity, () {
+        Navigator.pop(context);
+      }),
+      Tuple2(RoadSageStrings.buyRoadSage, () {
+        Navigator.pop(context);
+      }),
+      Tuple2(RoadSageStrings.referAFriend, () {
+        Navigator.pop(context);
+      }),
+      Tuple2(RoadSageStrings.appPreferences, () {
+        Navigator.pop(context);
+      }),
+    ];
+
     return Scaffold(
-      appBar: _appBar,
+      key: _key,
+      appBar: AppBar(
+        title: const Text(
+          Constants.title,
+        ),
+        titleTextStyle: const TextStyle(fontSize: 32, shadows: [
+          Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
+        ]),
+        titleSpacing: 20,
+        backgroundColor: RoadSageColours.lightGrey,
+        toolbarHeight: 75,
+        elevation: 0,
+        centerTitle: false,
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(RoadSageColours.lightBlue),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)))),
+                child: const Text(Constants.connected),
+                onPressed: () {},
+              )),
+          IconButton(
+            icon: const Icon(Icons.menu),
+            iconSize: 36,
+            color: RoadSageColours.lightBlue,
+            onPressed: () {
+              _key.currentState!.openEndDrawer();
+            },
+          ),
+        ],
+      ),
       body: _bottomNavScreens.elementAt(_selectedIndex),
       backgroundColor: RoadSageColours.lightGrey,
       bottomNavigationBar: BottomNavigationBar(
@@ -156,6 +179,46 @@ class _MainScreenState extends State<MainScreen> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         onTap: _onBottomNavItemTapped,
+      ),
+      endDrawer: Drawer(
+        backgroundColor: RoadSageColours.lightGrey,
+        child: ListView.builder(
+          padding: const EdgeInsets.only(top: 150),
+          itemCount: _drawerItems.length + 1,
+          itemBuilder: (context, index) {
+            if (index == _drawerItems.length) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(RoadSageColours.grey),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)))),
+                  child: const Text(
+                    RoadSageStrings.signOut,
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onPressed: () {},
+                ),
+              );
+            }
+
+            return Column(
+              children: [
+                ListTile(
+                    title: Text(
+                      _drawerItems[index].item1,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    onTap: _drawerItems[index].item2),
+                const Divider(
+                  color: Colors.black,
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
