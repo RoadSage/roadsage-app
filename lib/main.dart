@@ -75,38 +75,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final AppBar _appBar = AppBar(
-    title: const Text(
-      Constants.title,
-    ),
-    titleTextStyle: const TextStyle(fontSize: 32, shadows: [
-      Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
-    ]),
-    titleSpacing: 20,
-    backgroundColor: RoadSageColours.lightGrey,
-    toolbarHeight: 75,
-    elevation: 0,
-    centerTitle: false,
-    actions: [
-      Padding(
-          padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
-          child: ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(RoadSageColours.lightBlue),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)))),
-            child: const Text(Constants.connected),
-            onPressed: () {},
-          )),
-      IconButton(
-        icon: const Icon(Icons.menu),
-        iconSize: 36,
-        color: RoadSageColours.lightBlue,
-        onPressed: () {},
-      ),
-    ],
-  );
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   int _selectedIndex = 0;
 
@@ -126,7 +95,41 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar,
+      key: _key,
+      appBar: AppBar(
+        title: const Text(
+          Constants.title,
+        ),
+        titleTextStyle: const TextStyle(fontSize: 32, shadows: [
+          Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
+        ]),
+        titleSpacing: 20,
+        backgroundColor: RoadSageColours.lightGrey,
+        toolbarHeight: 75,
+        elevation: 0,
+        centerTitle: false,
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(RoadSageColours.lightBlue),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)))),
+                child: const Text(Constants.connected),
+                onPressed: () {},
+              )),
+          IconButton(
+            icon: const Icon(Icons.menu),
+            iconSize: 36,
+            color: RoadSageColours.lightBlue,
+            onPressed: () {
+              _key.currentState!.openEndDrawer();
+            },
+          ),
+        ],
+      ),
       body: _bottomNavScreens.elementAt(_selectedIndex),
       backgroundColor: RoadSageColours.lightGrey,
       bottomNavigationBar: BottomNavigationBar(
@@ -156,6 +159,24 @@ class _MainScreenState extends State<MainScreen> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         onTap: _onBottomNavItemTapped,
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              title: const Text('item 1'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('item 2'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
