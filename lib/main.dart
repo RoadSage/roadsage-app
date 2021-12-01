@@ -148,7 +148,71 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _drawerItems = [
+    final AppBar appBar = AppBar(
+      title: const Text(
+        Constants.title,
+      ),
+      titleTextStyle: const TextStyle(fontSize: 32, shadows: [
+        Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
+      ]),
+      titleSpacing: 20,
+      backgroundColor: RoadSageColours.lightGrey,
+      toolbarHeight: 75,
+      elevation: 0,
+      centerTitle: false,
+      actions: [
+        Padding(
+            padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(RoadSageColours.lightBlue),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)))),
+              child: const Text(Constants.connected),
+              onPressed: () {},
+            )),
+        IconButton(
+          icon: const Icon(Icons.menu),
+          iconSize: 36,
+          color: RoadSageColours.lightBlue,
+          onPressed: () {
+            _key.currentState!.openEndDrawer();
+          },
+        ),
+      ],
+    );
+
+    final BottomNavigationBar bottomNavBar = BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.help_outline),
+          label: Constants.help,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.phone_android_outlined),
+          label: Constants.device,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home_outlined),
+          label: Constants.home,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.message_outlined),
+          label: Constants.recents,
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      iconSize: 26,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: RoadSageColours.lightBlue,
+      unselectedItemColor: Colors.grey,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      onTap: _onBottomNavItemTapped,
+    );
+
+    final drawerItems = [
       Tuple2(RoadSageStrings.userProfile, () {
         Navigator.pop(context);
       }),
@@ -166,112 +230,52 @@ class _MainScreenState extends State<MainScreen> {
       }),
     ];
 
-    return Scaffold(
-      key: _key,
-      appBar: AppBar(
-        title: const Text(
-          Constants.title,
-        ),
-        titleTextStyle: const TextStyle(fontSize: 32, shadows: [
-          Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
-        ]),
-        titleSpacing: 20,
-        backgroundColor: RoadSageColours.lightGrey,
-        toolbarHeight: 75,
-        elevation: 0,
-        centerTitle: false,
-        actions: [
-          Padding(
-              padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
+    final Drawer drawer = Drawer(
+      backgroundColor: RoadSageColours.lightGrey,
+      child: ListView.builder(
+        padding: const EdgeInsets.only(top: 150),
+        itemCount: drawerItems.length + 1,
+        itemBuilder: (context, index) {
+          if (index == drawerItems.length) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
               child: ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(RoadSageColours.lightBlue),
+                        MaterialStateProperty.all(RoadSageColours.grey),
                     shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)))),
-                child: const Text(Constants.connected),
+                child: const Text(
+                  RoadSageStrings.signOut,
+                  style: TextStyle(fontSize: 14),
+                ),
                 onPressed: () {},
-              )),
-          IconButton(
-            icon: const Icon(Icons.menu),
-            iconSize: 36,
-            color: RoadSageColours.lightBlue,
-            onPressed: () {
-              _key.currentState!.openEndDrawer();
-            },
-          ),
-        ],
-      ),
-      body: _bottomNavScreens.elementAt(_selectedIndex),
-      backgroundColor: RoadSageColours.lightGrey,
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help_outline),
-            label: Constants.help,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.phone_android_outlined),
-            label: Constants.device,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: Constants.home,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message_outlined),
-            label: Constants.recents,
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        iconSize: 26,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: RoadSageColours.lightBlue,
-        unselectedItemColor: Colors.grey,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        onTap: _onBottomNavItemTapped,
-      ),
-      endDrawer: Drawer(
-        backgroundColor: RoadSageColours.lightGrey,
-        child: ListView.builder(
-          padding: const EdgeInsets.only(top: 150),
-          itemCount: _drawerItems.length + 1,
-          itemBuilder: (context, index) {
-            if (index == _drawerItems.length) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(RoadSageColours.grey),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)))),
-                  child: const Text(
-                    RoadSageStrings.signOut,
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  onPressed: () {},
-                ),
-              );
-            }
-
-            return Column(
-              children: [
-                ListTile(
-                    title: Text(
-                      _drawerItems[index].item1,
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    onTap: _drawerItems[index].item2),
-                const Divider(
-                  color: Colors.black,
-                ),
-              ],
+              ),
             );
-          },
-        ),
+          }
+          return Column(
+            children: [
+              ListTile(
+                  title: Text(
+                    drawerItems[index].item1,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  onTap: drawerItems[index].item2),
+              const Divider(
+                color: Colors.black,
+              ),
+            ],
+          );
+        },
       ),
     );
+
+    return Scaffold(
+        key: _key,
+        appBar: appBar,
+        body: _bottomNavScreens.elementAt(_selectedIndex),
+        backgroundColor: RoadSageColours.lightGrey,
+        bottomNavigationBar: bottomNavBar,
+        endDrawer: drawer);
   }
 }
