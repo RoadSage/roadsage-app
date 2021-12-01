@@ -138,7 +138,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _bottomNavScreens = <Widget>[
-    HelpScreen(),
+    FAQScreen(),
     DeviceScreen(),
     HomeScreen(),
     RecentsScreen(),
