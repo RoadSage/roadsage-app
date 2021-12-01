@@ -9,7 +9,7 @@ import 'package:tuple/tuple.dart';
 import 'login.dart';
 import 'constants.dart';
 
-import 'screens/help.dart';
+// import 'screens/help.dart';
 import 'screens/device.dart';
 import 'screens/home.dart';
 import 'screens/recents.dart';
@@ -116,7 +116,6 @@ class RoadSageApp extends StatelessWidget {
         Routes.root: (context) =>
             const LoginScreen(title: Constants.loginPageTitle),
         Routes.home: (context) => const MainScreen(title: Constants.homePage),
-        Routes.faq: (context) => const FAQScreen(),
         Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
       },
     );

@@ -87,7 +87,7 @@ class _FAQScreenState extends State<FAQScreen> {
                         style: ElevatedButton.styleFrom(
                             primary: const Color(0xFF0AC0FF),
                             textStyle: const TextStyle(fontSize: 20)),
-                        onPressed: () => Navigator.pushReplacementNamed(
+                        onPressed: () => Navigator.pushNamed(
                             context, Routes.faqSubmitQuestion),
                         child: const Text('Ask Question'),
                       ))),
