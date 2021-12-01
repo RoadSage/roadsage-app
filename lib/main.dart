@@ -13,6 +13,7 @@ import 'siri_suggestions.dart';
 import 'screens/login.dart';
 import 'screens/home.dart';
 import 'screens/recents.dart';
+import 'screens/device.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
