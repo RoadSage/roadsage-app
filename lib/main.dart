@@ -28,17 +28,17 @@ class RoadSageApp extends StatelessWidget {
     siri.configure(onLaunch: (Map<String, dynamic> message) async {
       //print("Siri Suggestion called to perform ${message['key']}");
 
-      switch (message["key"]) {
-        case "Open_Roadsage":
+      switch (message[Constants.siriSuggestionKey]) {
+        case RoadSageStrings.openRoadsage:
           // Launch main page
           break;
-        case "Thanks_Roadsage":
+        case RoadSageStrings.thanksRoadsage:
           // say thank you
           break;
-        case "Cheers_Roadsage":
+        case RoadSageStrings.cheersRoadsage:
           // say cheers
           break;
-        case "Beam_RoadSage":
+        case RoadSageStrings.beamRoadsage:
           // open beam
           break;
         default:
@@ -47,18 +47,26 @@ class RoadSageApp extends StatelessWidget {
       }
     });
 
-    for (String phrase in ["Launch Roadsage", "Start Roadsage"]) {
-      siri.addEzSuggestion("Open_Roadsage", "Opens the application", phrase);
+    for (String phrase in [
+      RoadSageStrings.launchRoadsage,
+      RoadSageStrings.startRoadsage
+    ]) {
+      siri.addEzSuggestion(RoadSageStrings.openRoadsage,
+          RoadSageStrings.openRoadsageDesc, phrase);
     }
 
-    siri.addEzSuggestion("Thanks_Roadsage",
-        "Says thank you to the car behind you", "Say Thank you on Roadsage");
-    siri.addEzSuggestion("Cheers_Roadsage", "Says cheers to the car begind you",
-        "Say Cheers on Roadsage");
     siri.addEzSuggestion(
-        "Beam_RoadSage",
-        "Asks car behind you to turn off high beam",
-        "Say turn off high beam on Roadsage");
+        RoadSageStrings.thanksRoadsage,
+        RoadSageStrings.thanksRoadsageDesc,
+        RoadSageStrings.thanksRoadsagePhrase);
+
+    siri.addEzSuggestion(
+        RoadSageStrings.cheersRoadsage,
+        RoadSageStrings.cheersRoadsageDesc,
+        RoadSageStrings.cheersRoadsagePhrase);
+
+    siri.addEzSuggestion(RoadSageStrings.beamRoadsage,
+        RoadSageStrings.beamRoadsageDesc, RoadSageStrings.beamRoadsagePhrase);
     //print("Initialized Siri Successfully!");
   }
 

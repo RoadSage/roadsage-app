@@ -1,5 +1,8 @@
-import 'dart:async';
 import 'package:flutter/services.dart';
+
+import 'dart:async';
+import 'constants.dart';
+
 /*
 Implementation adapted from
 https://github.com/myriky/flutter_siri_suggestions/blob/master/lib/flutter_siri_suggestions.dart
@@ -8,13 +11,13 @@ typedef MessageHandler = Future<dynamic> Function(Map<String, dynamic> message);
 
 class FlutterSiriActivity {
   const FlutterSiriActivity(
-      this.title,
-      this.key, {
-        this.contentDescription,
-        this.isEligibleForSearch = true,
-        this.isEligibleForPrediction = true,
-        this.suggestedInvocationPhrase = "",
-      });
+    this.title,
+    this.key, {
+    this.contentDescription,
+    this.isEligibleForSearch = true,
+    this.isEligibleForPrediction = true,
+    this.suggestedInvocationPhrase = "",
+  });
 
   final String title;
   final String key;
@@ -27,39 +30,36 @@ class FlutterSiriActivity {
 class SiriSuggestions {
   SiriSuggestions();
 
-
   MessageHandler? _onLaunch;
   Map<String, dynamic>? retryActivity;
 
-  final MethodChannel _channel =
-  const MethodChannel('siri_suggestions');
+  final MethodChannel _channel = const MethodChannel('siri_suggestions');
 
   // create a suggestion
   Future<String> buildActivity(FlutterSiriActivity activity) async {
     return await _channel.invokeMethod('becomeCurrent', <String, Object?>{
-    'title': activity.title,
-    'key': activity.key,
-    'contentDescription': activity.contentDescription,
-    'isEligibleForSearch': activity.isEligibleForSearch,
-    'isEligibleForPrediction': activity.isEligibleForPrediction,
-    'suggestedInvocationPhrase': activity.suggestedInvocationPhrase,
+      'title': activity.title,
+      Constants.siriSuggestionKey: activity.key,
+      'contentDescription': activity.contentDescription,
+      'isEligibleForSearch': activity.isEligibleForSearch,
+      'isEligibleForPrediction': activity.isEligibleForPrediction,
+      'suggestedInvocationPhrase': activity.suggestedInvocationPhrase,
     });
   }
 
-
-  void addSuggestion(String name, String actionKey, bool search, bool predict, String desc, String phrase) async{
-    await buildActivity(FlutterSiriActivity(
-        name, actionKey,
+  void addSuggestion(String name, String actionKey, bool search, bool predict,
+      String desc, String phrase) async {
+    await buildActivity(FlutterSiriActivity(name, actionKey,
         isEligibleForSearch: search,
         isEligibleForPrediction: predict,
         contentDescription: desc,
         suggestedInvocationPhrase: phrase));
   }
 
-  void addEzSuggestion(String actionKey, String desc, String phrase) async{
-    addSuggestion(actionKey + " suggestion", actionKey, true, true, desc, phrase);
+  void addEzSuggestion(String actionKey, String desc, String phrase) async {
+    addSuggestion(
+        actionKey + " suggestion", actionKey, true, true, desc, phrase);
   }
-
 
   // configure the calls for each suggestion
   void configure({required MessageHandler onLaunch}) {
