@@ -2,26 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/submit_question.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tuple/tuple.dart';
+import 'package:roadsage/authentication/auth_services.dart';
+
+import 'constants.dart';
 import 'siri_suggestions.dart';
 
-import 'package:tuple/tuple.dart';
-
-import 'login.dart';
-import 'constants.dart';
-
-// import 'screens/help.dart';
-import 'screens/device.dart';
+import 'screens/login.dart';
 import 'screens/home.dart';
 import 'screens/recents.dart';
 
-void main() {
-  runApp(RoadSageApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const RoadSageApp());
 }
 
-class RoadSageApp extends StatelessWidget {
+AuthClass authClass = AuthClass();
+
+class RoadSageApp extends StatefulWidget {
+  const RoadSageApp({Key? key}) : super(key: key);
+
+  @override
+  _RoadSageApp createState() => _RoadSageApp();
+}
+
+class _RoadSageApp extends State<RoadSageApp> {
   final SiriSuggestions siri = SiriSuggestions();
-  RoadSageApp({Key? key}) : super(key: key) {
+
+  _RoadSageApp() :super() {
     initSiriSuggestions();
+  }
+
+  String defaultPage = Routes.root;
+  bool isLoggedIn = false;
+
+  @override
+  void initState() {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      isLoggedIn = true;
+    }
+    super.initState();
+    // new Future.delayed(const Duration(seconds: 2));
   }
 
   void initSiriSuggestions() async {
@@ -111,16 +136,17 @@ class RoadSageApp extends StatelessWidget {
                   ),
                 ])),
       ),
-      initialRoute: Routes.root,
       routes: {
         Routes.root: (context) =>
             const LoginScreen(title: Constants.loginPageTitle),
         Routes.home: (context) => const MainScreen(title: Constants.homePage),
         Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
       },
+      initialRoute: isLoggedIn ? Routes.home : Routes.root,
     );
   }
 }
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key, required this.title}) : super(key: key);
@@ -252,7 +278,7 @@ class _MainScreenState extends State<MainScreen> {
                   RoadSageStrings.signOut,
                   style: TextStyle(fontSize: 14),
                 ),
-                onPressed: () {},
+                onPressed:() =>  authClass.signOut(context: context),
               ),
             );
           }
