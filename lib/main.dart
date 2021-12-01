@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:roadsage/screens/faq.dart';
+import 'package:roadsage/screens/submit_question.dart';
 import 'siri_suggestions.dart';
 
 import 'package:tuple/tuple.dart';
@@ -7,7 +9,7 @@ import 'package:tuple/tuple.dart';
 import 'login.dart';
 import 'constants.dart';
 
-import 'screens/help.dart';
+// import 'screens/help.dart';
 import 'screens/device.dart';
 import 'screens/home.dart';
 import 'screens/recents.dart';
@@ -114,6 +116,7 @@ class RoadSageApp extends StatelessWidget {
         Routes.root: (context) =>
             const LoginScreen(title: Constants.loginPageTitle),
         Routes.home: (context) => const MainScreen(title: Constants.homePage),
+        Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
       },
     );
   }
@@ -134,7 +137,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _bottomNavScreens = <Widget>[
-    HelpScreen(),
+    FAQScreen(),
     DeviceScreen(),
     HomeScreen(),
     RecentsScreen(),

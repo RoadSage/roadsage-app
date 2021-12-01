@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Routes {
   static const String root = "/";
   static const String home = "/home";
+  static const String faqSubmitQuestion = "/faq/submit_question";
 }
 
 class Constants {
