@@ -19,6 +19,8 @@ class Constants {
   static const String device = "Device";
   static const String home = "Home";
   static const String recents = "Recents";
+
+  static const String siriSuggestionKey = "key";
 }
 
 // TODO: move some of the strings from Constants here
@@ -31,6 +33,25 @@ class RoadSageStrings {
   static const String referAFriend = 'Refer a Friend';
   static const String appPreferences = 'App Preferences';
   static const String signOut = 'Sign Out';
+
+  static const String openRoadsage = "Open_Roadsage";
+  static const String openRoadsageDesc = "Opens the application";
+  static const String launchRoadsage = "Launch Roadsage";
+  static const String startRoadsage = "Start Roadsage";
+
+  static const String thanksRoadsage = "Thanks_Roadsage";
+  static const String thanksRoadsageDesc =
+      "Says thank you to the car behind you";
+  static const String thanksRoadsagePhrase = "Say Thank you on Roadsage";
+
+  static const String cheersRoadsage = "Cheers_Roadsage";
+  static const String cheersRoadsageDesc = "Says cheers to the car behind you";
+  static const String cheersRoadsagePhrase = "Say Cheers on Roadsage";
+
+  static const String beamRoadsage = "Beam_Roadsage";
+  static const String beamRoadsageDesc =
+      "Asks car behind you to turn off high beam";
+  static const String beamRoadsagePhrase = "Say turn off high beam on Roadsage";
 }
 
 class RoadSageIcons {
