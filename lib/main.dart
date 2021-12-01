@@ -4,16 +4,18 @@ import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tuple/tuple.dart';
-import 'package:roadsage/authentication/auth_services.dart';
 
+import 'package:tuple/tuple.dart';
+
+import 'package:roadsage/authentication/auth_services.dart';
 import 'constants.dart';
 import 'siri_suggestions.dart';
 
 import 'screens/login.dart';
+import 'screens/help.dart';
+import 'screens/device.dart';
 import 'screens/home.dart';
 import 'screens/recents.dart';
-import 'screens/device.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
