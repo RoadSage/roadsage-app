@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:roadsage/screens/faq.dart';
+import 'package:roadsage/screens/submit_question.dart';
 import 'siri_suggestions.dart';
 
 import 'package:tuple/tuple.dart';
@@ -114,6 +116,8 @@ class RoadSageApp extends StatelessWidget {
         Routes.root: (context) =>
             const LoginScreen(title: Constants.loginPageTitle),
         Routes.home: (context) => const MainScreen(title: Constants.homePage),
+        Routes.faq: (context) => const FAQScreen(),
+        Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
       },
     );
   }
