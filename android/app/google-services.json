@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "147423212069",
+    "project_id": "roadsage-fa505",
+    "storage_bucket": "roadsage-fa505.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:147423212069:android:e47bec785943b3971145cc",
+        "android_client_info": {
+          "package_name": "io.unitic.roadsage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "147423212069-jclq6850pqgba618kf9679md61ejvjdt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.unitic.roadsage",
+            "certificate_hash": "aeaa21d87a5d7aa0c74d0829bcd14d112a547d21"
+          }
+        },
+        {
+          "client_id": "147423212069-tkp7qqr8vb9if7tl97ngg5f1idvkfum1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH1Q6cJUPPa6qVTQMkXJIMKz7H2x9GzaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "147423212069-tkp7qqr8vb9if7tl97ngg5f1idvkfum1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
