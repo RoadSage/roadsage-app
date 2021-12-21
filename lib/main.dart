@@ -12,7 +12,6 @@ import 'constants.dart';
 import 'siri_suggestions.dart';
 
 import 'screens/login.dart';
-import 'screens/help.dart';
 import 'screens/device.dart';
 import 'screens/home.dart';
 import 'screens/recents.dart';
@@ -35,7 +34,7 @@ class RoadSageApp extends StatefulWidget {
 class _RoadSageApp extends State<RoadSageApp> {
   final SiriSuggestions siri = SiriSuggestions();
 
-  _RoadSageApp() :super() {
+  _RoadSageApp() : super() {
     initSiriSuggestions();
   }
 
@@ -149,7 +148,6 @@ class _RoadSageApp extends State<RoadSageApp> {
     );
   }
 }
-
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key, required this.title}) : super(key: key);
@@ -281,7 +279,7 @@ class _MainScreenState extends State<MainScreen> {
                   RoadSageStrings.signOut,
                   style: TextStyle(fontSize: 14),
                 ),
-                onPressed:() =>  authClass.signOut(context: context),
+                onPressed: () => authClass.signOut(context: context),
               ),
             );
           }
