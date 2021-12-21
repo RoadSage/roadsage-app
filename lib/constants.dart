@@ -53,6 +53,8 @@ class RoadSageStrings {
   static const String beamRoadsageDesc =
       "Asks car behind you to turn off high beam";
   static const String beamRoadsagePhrase = "Say turn off high beam on Roadsage";
+
+  static const String trySaying = "Try Saying";
 }
 
 class RoadSageIcons {
