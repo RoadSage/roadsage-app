@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
-import 'constants.dart';
+import 'package:roadsage/constants.dart';
+import 'package:roadsage/authentication/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key, required this.title}) : super(key: key);
@@ -13,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
+  AuthClass authClass = AuthClass();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,19 +85,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     backgroundColor: Colors.white,
                     // innerPadding: EdgeInsets.only(left: 10),
-                    onPressed: () =>
-                        Navigator.pushReplacementNamed(context, Routes.home),
+                    onPressed: () => authClass.signInWithGoogle(context),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15))),
                 SignInButton(
                   Buttons.Facebook,
-                  onPressed: () => Navigator.pushNamed(context, Routes.home),
+                  onPressed: () => authClass.signInWithFacebook(context),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
                 SignInButton(
                   Buttons.Email,
+                  text: "Login / Sign up",
                   onPressed: () => Navigator.pushNamed(context, Routes.home),
+                  // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
