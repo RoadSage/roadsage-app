@@ -53,6 +53,22 @@ class RoadSageStrings {
   static const String beamRoadsageDesc =
       "Asks car behind you to turn off high beam";
   static const String beamRoadsagePhrase = "Say turn off high beam on Roadsage";
+
+  static const String trySaying = "Try Saying";
+
+  static const List<String> homeAndroidTrySayingEntries = <String>[
+    "Hey Google, Say Thank you on RoadSage",
+    "Hey Google, Say Cheers on RoadSage",
+    "Hey Google, Say Turn off High Beam on RoadSage",
+    "Hey Google, Say Cheers on RoadSage",
+  ];
+
+  static const List<String> homeIOSTrySayingEntries = <String>[
+    "Hey Siri, Say Thank you on RoadSage",
+    "Hey Siri, Say Cheers on RoadSage",
+    "Hey Siri, Say Turn off High Beam on RoadSage",
+    "Hey Siri, Say Cheers on RoadSage",
+  ];
 }
 
 class RoadSageIcons {
