@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
+import 'dart:io' show Platform;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -29,15 +30,21 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: RoadSageStrings.homeAndroidTrySayingEntries.length,
+              itemCount: (Platform.isAndroid)
+                  ? RoadSageStrings.homeAndroidTrySayingEntries.length
+                  : RoadSageStrings.homeIOSTrySayingEntries.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
                   contentPadding: const EdgeInsets.all(18),
                   leading: const Icon(Icons.message_outlined,
                       size: 28, color: RoadSageColours.lightBlue),
                   onTap: () {},
                   title: Text(
-                    RoadSageStrings.homeAndroidTrySayingEntries[index],
+                    (Platform.isAndroid)
+                        ? RoadSageStrings.homeAndroidTrySayingEntries[index]
+                        : RoadSageStrings.homeIOSTrySayingEntries[index],
                     style: const TextStyle(color: Colors.black, shadows: []),
                   ),
                   tileColor: Colors.white,

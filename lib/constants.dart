@@ -62,6 +62,13 @@ class RoadSageStrings {
     "Hey Google, Say Turn off High Beam on RoadSage",
     "Hey Google, Say Cheers on RoadSage",
   ];
+
+  static const List<String> homeIOSTrySayingEntries = <String>[
+    "Hey Siri, Say Thank you on RoadSage",
+    "Hey Siri, Say Cheers on RoadSage",
+    "Hey Siri, Say Turn off High Beam on RoadSage",
+    "Hey Siri, Say Cheers on RoadSage",
+  ];
 }
 
 class RoadSageIcons {
