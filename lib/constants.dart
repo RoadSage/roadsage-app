@@ -55,6 +55,13 @@ class RoadSageStrings {
   static const String beamRoadsagePhrase = "Say turn off high beam on Roadsage";
 
   static const String trySaying = "Try Saying";
+
+  static const List<String> homeAndroidTrySayingEntries = <String>[
+    "Hey Google, Say Thank you on RoadSage",
+    "Hey Google, Say Cheers on RoadSage",
+    "Hey Google, Say Turn off High Beam on RoadSage",
+    "Hey Google, Say Cheers on RoadSage",
+  ];
 }
 
 class RoadSageIcons {

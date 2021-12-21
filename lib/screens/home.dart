@@ -9,12 +9,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> entries = <String>[
-    'One',
-    'Two',
-    'Three',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -35,18 +29,16 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: entries.length,
+              itemCount: RoadSageStrings.homeAndroidTrySayingEntries.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
+                  contentPadding: const EdgeInsets.all(18),
                   leading: const Icon(Icons.message_outlined,
-                      color: RoadSageColours.lightBlue),
+                      size: 28, color: RoadSageColours.lightBlue),
                   onTap: () {},
                   title: Text(
-                    entries[index],
-                    style: const TextStyle(
-                        color: Colors.black,
-                        shadows: [],
-                        fontWeight: FontWeight.w600),
+                    RoadSageStrings.homeAndroidTrySayingEntries[index],
+                    style: const TextStyle(color: Colors.black, shadows: []),
                   ),
                   tileColor: Colors.white,
                 );
