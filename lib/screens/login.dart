@@ -36,7 +36,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(
                       Constants.title,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline3,
+                      style: GoogleFonts.mukta(
+                        fontSize: 48,
+                        color: Colors.white,
+                        shadows: <Shadow>[
+                          const Shadow(
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 3.0,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                          const Shadow(
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 8.0,
+                            color: Color.fromARGB(125, 0, 0, 255),
+                          ),
+                        ],
+                      ),
                     ),
                   ]),
                   Container(
@@ -47,7 +62,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             Constants.byUnitic,
                             textAlign: TextAlign.right,
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: GoogleFonts.mukta(
+                                fontSize: 18,
+                                color: Colors.white,
+                                shadows: <Shadow>[
+                                  const Shadow(
+                                    offset: Offset(1.0, 1.0),
+                                    blurRadius: 3.0,
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                  const Shadow(
+                                    offset: Offset(1.0, 1.0),
+                                    blurRadius: 8.0,
+                                    color: Color.fromARGB(125, 0, 0, 255),
+                                  ),
+                                ]),
                           ),
                         ]),
                   ),

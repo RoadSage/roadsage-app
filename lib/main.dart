@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -105,38 +104,6 @@ class _RoadSageApp extends State<RoadSageApp> {
       title: Constants.title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        textTheme: TextTheme(
-            headline3: GoogleFonts.mukta(
-              fontSize: 48,
-              color: Colors.white,
-              shadows: <Shadow>[
-                const Shadow(
-                  offset: Offset(1.0, 1.0),
-                  blurRadius: 3.0,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-                const Shadow(
-                  offset: Offset(1.0, 1.0),
-                  blurRadius: 8.0,
-                  color: Color.fromARGB(125, 0, 0, 255),
-                ),
-              ],
-            ),
-            subtitle1: GoogleFonts.mukta(
-                fontSize: 18,
-                color: Colors.white,
-                shadows: <Shadow>[
-                  const Shadow(
-                    offset: Offset(1.0, 1.0),
-                    blurRadius: 3.0,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                  const Shadow(
-                    offset: Offset(1.0, 1.0),
-                    blurRadius: 8.0,
-                    color: Color.fromARGB(125, 0, 0, 255),
-                  ),
-                ])),
       ),
       routes: {
         Routes.root: (context) =>
