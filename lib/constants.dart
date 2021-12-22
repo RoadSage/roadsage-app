@@ -17,7 +17,7 @@ class Constants {
 
   static const String connected = "Connected";
   static const String help = "Help";
-  static const String device = "Device";
+  static const String devices = "Devices";
   static const String home = "Home";
   static const String recents = "Recents";
 
@@ -34,6 +34,9 @@ class RoadSageStrings {
   static const String referAFriend = 'Refer a Friend';
   static const String appPreferences = 'App Preferences';
   static const String signOut = 'Sign Out';
+
+  static const String remote = 'Remote';
+  static const String display = 'Display';
 
   static const String openRoadsage = "Open_Roadsage";
   static const String openRoadsageDesc = "Opens the application";

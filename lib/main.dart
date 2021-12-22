@@ -11,7 +11,7 @@ import 'constants.dart';
 import 'siri_suggestions.dart';
 
 import 'screens/login.dart';
-import 'screens/device.dart';
+import 'screens/devices.dart';
 import 'screens/home.dart';
 import 'screens/recents.dart';
 
@@ -130,11 +130,12 @@ class _MainScreenState extends State<MainScreen> {
 
   int _selectedIndex = 0;
 
-  static const List<Widget> _bottomNavScreens = <Widget>[
-    FAQScreen(),
-    DeviceScreen(),
-    HomeScreen(),
-    RecentsScreen(),
+  // Tuple2(<Screen widget>, <App bar title>)
+  static const _bottomNavItems = [
+    Tuple2(FAQScreen(), Constants.help),
+    Tuple2(DevicesScreen(), Constants.devices),
+    Tuple2(HomeScreen(), Constants.home),
+    Tuple2(RecentsScreen(), Constants.recents),
   ];
 
   void _onBottomNavItemTapped(int index) {
@@ -145,10 +146,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final AppBar appBar = AppBar(
-      title: const Text(
-        Constants.title,
-      ),
+    AppBar appBar = AppBar(
+      title: Text(_bottomNavItems.elementAt(_selectedIndex).item2),
       titleTextStyle: const TextStyle(fontSize: 32, shadows: [
         Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
       ]),
@@ -188,7 +187,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.phone_android_outlined),
-          label: Constants.device,
+          label: Constants.devices,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
@@ -209,6 +208,7 @@ class _MainScreenState extends State<MainScreen> {
       onTap: _onBottomNavItemTapped,
     );
 
+    // Tuple2(<Item name>, <onClick>)
     final drawerItems = [
       Tuple2(RoadSageStrings.userProfile, () {
         Navigator.pop(context);
@@ -270,7 +270,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
         key: _key,
         appBar: appBar,
-        body: _bottomNavScreens.elementAt(_selectedIndex),
+        body: _bottomNavItems.elementAt(_selectedIndex).item1,
         backgroundColor: RoadSageColours.lightGrey,
         bottomNavigationBar: bottomNavBar,
         endDrawer: drawer);
