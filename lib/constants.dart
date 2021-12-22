@@ -40,6 +40,13 @@ class RoadSageStrings {
   static const String remote = 'Remote';
   static const String display = 'Display';
 
+  static const String status = 'Status';
+  static const String batteryLevel = 'Battery level';
+  static const String brightnessLevel = 'Brightness level';
+  static const String adaptiveBrightness = 'Adaptive Brightness';
+  static const String sensor = 'Sensor';
+  static const String stoppingDistance = 'Stopping distance';
+
   static const String openRoadsage = "Open_Roadsage";
   static const String openRoadsageDesc = "Opens the application";
   static const String launchRoadsage = "Launch Roadsage";

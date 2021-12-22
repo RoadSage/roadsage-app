@@ -25,13 +25,54 @@ class _RemoteScreenState extends State<RemoteScreen> {
       appBar: appBar,
       backgroundColor: RoadSageColours.lightGrey,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
-              'RemoteScreen goes here...',
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                contentPadding: const EdgeInsets.all(16),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+                title: const Text(
+                  RoadSageStrings.status,
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: const Padding(
+                  padding: EdgeInsets.only(right: 10.0),
+                  child: Icon(
+                    Icons.circle,
+                    size: 38,
+                    color: Colors.green,
+                  ),
+                ),
+                tileColor: Colors.white,
+              ),
+              const SizedBox(height: 15),
+              ListTile(
+                contentPadding: const EdgeInsets.all(16),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+                title: const Text(
+                  RoadSageStrings.batteryLevel,
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: SizedBox(
+                  width: 80,
+                  child: Row(
+                    children: const [
+                      Text('100%'),
+                      Icon(
+                        Icons.battery_std_outlined,
+                        size: 38,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ),
+                tileColor: Colors.white,
+              ),
+            ],
+          ),
         ),
       ),
     );
