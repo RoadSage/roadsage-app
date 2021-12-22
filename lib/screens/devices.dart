@@ -33,7 +33,9 @@ class _DevicesScreenState extends State<DevicesScreen> {
                   color: RoadSageColours.lightBlue,
                 ),
                 tileColor: Colors.white,
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.remote);
+                },
               ),
               const SizedBox(height: 15),
               ListTile(
@@ -50,7 +52,9 @@ class _DevicesScreenState extends State<DevicesScreen> {
                   color: RoadSageColours.lightBlue,
                 ),
                 tileColor: Colors.white,
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.display);
+                },
               )
             ],
           )),

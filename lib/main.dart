@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,6 +15,7 @@ import 'screens/login.dart';
 import 'screens/devices.dart';
 import 'screens/home.dart';
 import 'screens/recents.dart';
+import 'screens/remote.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -109,6 +111,8 @@ class _RoadSageApp extends State<RoadSageApp> {
         Routes.root: (context) =>
             const LoginScreen(title: Constants.loginPageTitle),
         Routes.home: (context) => const MainScreen(title: Constants.homePage),
+        Routes.remote: (context) => const RemoteScreen(),
+        Routes.display: (context) => const DisplayScreen(),
         Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
       },
       initialRoute: isLoggedIn ? Routes.home : Routes.root,
