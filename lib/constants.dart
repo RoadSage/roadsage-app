@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class Routes {
   static const String root = "/";
   static const String home = "/home";
+  static const String remote = "/devices/remote";
+  static const String display = "/devices/display";
   static const String faqSubmitQuestion = "/faq/submit_question";
 }
 
@@ -17,7 +19,7 @@ class Constants {
 
   static const String connected = "Connected";
   static const String help = "Help";
-  static const String device = "Device";
+  static const String devices = "Devices";
   static const String home = "Home";
   static const String recents = "Recents";
 
@@ -34,6 +36,16 @@ class RoadSageStrings {
   static const String referAFriend = 'Refer a Friend';
   static const String appPreferences = 'App Preferences';
   static const String signOut = 'Sign Out';
+
+  static const String remote = 'Remote';
+  static const String display = 'Display';
+
+  static const String status = 'Status';
+  static const String batteryLevel = 'Battery level';
+  static const String brightnessLevel = 'Brightness level';
+  static const String adaptiveBrightness = 'Adaptive Brightness';
+  static const String sensor = 'Sensor';
+  static const String stoppingDistance = 'Stopping distance';
 
   static const String openRoadsage = "Open_Roadsage";
   static const String openRoadsageDesc = "Opens the application";
