@@ -36,6 +36,40 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
               SettingsTile(
                 title: 'Language',
                 subtitle: 'English',
+              ),
+              SettingsTile(
+                title: 'Colour theme',
+                subtitle: 'System Theme',
+              ),
+              SettingsTile(
+                title: 'Time zone',
+                subtitle: 'GMT (London)',
+              ),
+              SettingsTile(
+                title: 'Temperature unit',
+                subtitle: 'Celsius',
+              ),
+              SettingsTile(
+                title: 'Distance unit',
+                subtitle: 'Kilometers',
+              )
+            ],
+          ),
+          SettingsSection(
+            title: 'About App',
+            tiles: [
+              SettingsTile(
+                title: 'App version',
+                subtitle: '0.3.0',
+              )
+            ],
+          ),
+          SettingsSection(
+            title: 'About RoadSage',
+            tiles: [
+              SettingsTile(
+                title: 'Product info',
+                subtitle: 'RoadSage for cars',
               )
             ],
           )
