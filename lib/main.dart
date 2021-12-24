@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
+import 'package:roadsage/screens/preferences.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -114,6 +115,7 @@ class _RoadSageApp extends State<RoadSageApp> {
         Routes.remote: (context) => const RemoteScreen(),
         Routes.display: (context) => const DisplayScreen(),
         Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
+        Routes.preferences: (context) => const PreferencesScreen(),
       },
       initialRoute: isLoggedIn ? Routes.home : Routes.root,
     );
@@ -226,8 +228,8 @@ class _MainScreenState extends State<MainScreen> {
       Tuple2(RoadSageStrings.referAFriend, () {
         Navigator.pop(context);
       }),
-      Tuple2(RoadSageStrings.appPreferences, () {
-        Navigator.pop(context);
+      Tuple2(RoadSageStrings.preferences, () {
+        Navigator.pushNamed(context, Routes.preferences);
       }),
     ];
 
