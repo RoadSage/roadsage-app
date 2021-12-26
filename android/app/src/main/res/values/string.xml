@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string name="app_name">RoadSage</string>
+<string name="shortcut_short_label">Test Shortcut</string>
+<string name="shortcut_long_label">Long Test Shortcut</string>
 <string name="facebook_app_id">1002206970334208</string>
 <string name="fb_login_protocol_scheme">fb1002206970334208</string>
 </resources>
