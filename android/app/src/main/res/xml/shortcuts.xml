@@ -7,17 +7,39 @@
         android:targetClass="io.unitic.roadsage.MainActivity">
         <parameter
             android:name="feature"
-            android:key="featureParam"/>
+            android:key="phraseType"/>
+    </intent>
+</capability>
+
+<capability android:name="actions.intent.CREATE_SOCIAL_MEDIA_POSTING">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="io.unitic.roadsage"
+        android:targetClass="io.unitic.roadsage.MainActivity">
+        <!-- Eg. articleBody = "Having fun with friends" -->
+        <parameter
+            android:name="socialMediaPosting.articleBody"
+            android:key="articleBody"/>
+        <!-- Eg. socialMediaPostingDisambiguatingdescription = "Post" -->
+        <parameter
+            android:name="socialMediaPosting.disambiguatingDescription"
+            android:key="socialMediaPostingDisambiguatingdescription"/>
+        <!-- Eg. sharedContentDisambiguatingdescription = "Image" -->
+        <parameter
+            android:name="socialMediaPosting.sharedContent.disambiguatingDescription"
+            android:key="sharedContentDisambiguatingdescription"/>
     </intent>
 </capability>
 
 <shortcut
     android:shortcutId="ID_ONE"
+    android:enabled="true"
     android:shortcutShortLabel="@string/shortcut_short_label"
     android:shortcutLongLabel="@string/shortcut_long_label">
+
     <capability-binding android:key="actions.intent.OPEN_APP_FEATURE">
         <parameter-binding
-            android:value="featureParam"
+            android:value="hello there"
             android:key="feature"/>
     </capability-binding>
 </shortcut>
