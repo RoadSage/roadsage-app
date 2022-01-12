@@ -234,8 +234,11 @@ class _MainScreenState extends State<MainScreen> {
     ];
 
     final Drawer drawer = Drawer(
-      backgroundColor: RoadSageColours.lightGrey,
-      child: ListView.builder(
+      child: Container(
+        width:  double.infinity,
+        height: double.infinity,
+        color: RoadSageColours.lightGrey,
+        child: ListView.builder(
         padding: const EdgeInsets.only(top: 150),
         itemCount: drawerItems.length + 1,
         itemBuilder: (context, index) {
@@ -271,6 +274,7 @@ class _MainScreenState extends State<MainScreen> {
           );
         },
       ),
+      )
     );
 
     return Scaffold(

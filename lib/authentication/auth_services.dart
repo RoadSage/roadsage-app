@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:roadsage/main.dart';
 import 'package:roadsage/constants.dart';
@@ -59,6 +60,30 @@ class AuthClass {
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<void> signInWithApple(BuildContext context) async{
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+
+    // TODO: SEE WHEN IT FAILS -- NEEED TESTING
+    // if (credential.authorizationCode
+
+    final userCredential = await _auth.signInWithCredential(OAuthCredential(providerId: "apple.com",signInMethod: "apple.com",accessToken:credential.authorizationCode));
+
+    await tokenStoage.write(key: "token", value: userCredential.credential?.token.toString());
+    await tokenStoage.write(key: "userCredential", value: userCredential.toString());
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (builder) => const MainScreen(title: Constants.homePage)),
+          (route) => false,
+    );
+
+
   }
 
   // Handles signing in via Facebook services
