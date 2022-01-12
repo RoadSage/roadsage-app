@@ -20,6 +20,11 @@ class MainActivity: FlutterActivity() {
     }
 
     private fun logIntent(intent: Intent) {
+        if (intent.action != null) {
+            Log.d(TAG, "Got intent");
+            Log.d(TAG, intent.action!!);
+        }
+
         val bundle: Bundle = intent.extras ?: return
 
         Log.d(TAG, "======= logIntent ========= %s")
@@ -55,5 +60,5 @@ class MainActivity: FlutterActivity() {
         // No-op for the iOS method channel
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
         call, result -> }
-  }
+    }
 }

@@ -2,7 +2,10 @@
 <resources>
 <string name="app_name">RoadSage</string>
 <string name="shortcut_short_label">Test Shortcut</string>
-<string name="shortcut_long_label">Long Test Shortcut</string>
+<string name="thankYou">Thank you</string>
+<string name="thankYouLabel">Thank you Label</string>
+<string name="cheers">Cheers</string>
+<string name="cheersLabel">Cheers label</string>
 <string name="facebook_app_id">1002206970334208</string>
 <string name="fb_login_protocol_scheme">fb1002206970334208</string>
 </resources>
