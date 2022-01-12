@@ -10,6 +10,7 @@ import Flutter
     var _keyset = NSMutableSet()
     var siriChannel: FlutterMethodChannel? = nil
     var plugin_name: String = "siri_suggestions"
+    var android_plugin_name: String = "io.unitic.roadsage/google_assistant"
 
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -22,6 +23,10 @@ import Flutter
             }else{
                 result(FlutterMethodNotImplemented)
             }
+        })
+
+        FlutterMethodChannel(name: android_plugin_name, binaryMessenger: controller.binaryMessenger)?.setMethodCallHandler({
+            [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
         })
         
         GeneratedPluginRegistrant.register(with: self)
