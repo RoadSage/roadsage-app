@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/preferences.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -144,10 +147,26 @@ class _MainScreenState extends State<MainScreen> {
     Tuple2(RecentsScreen(), Constants.recents),
   ];
 
-  void _onBottomNavItemTapped(int index) {
+  static const platform = MethodChannel(Constants.androidMethodChannel);
+  String? _assistantQuery;
+
+  Future<void> getAssistantQuery() async {
+    var assistantQuery = await platform.invokeMethod('getAssistantQuery');
+    if (assistantQuery != null) {
+      setState(() {
+        _assistantQuery = assistantQuery;
+      });
+    }
+  }
+
+  void _onBottomNavItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
     });
+
+    await getAssistantQuery();
+    Fluttertoast.showToast(msg: "Query is $_assistantQuery");
+    _assistantQuery = null;
   }
 
   @override
