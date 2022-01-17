@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<capability android:name="actions.intent.OPEN_APP_FEATURE">
+    <intent
+        android:targetPackage="io.unitic.roadsage"
+        android:targetClass="io.unitic.roadsage.MainActivity">
+        <parameter
+            android:name="feature"
+            android:key="phraseType"/>
+    </intent>
+</capability>
+
+<shortcut
+    android:shortcutId="ID_ONE"
+    android:enabled="true"
+    android:shortcutShortLabel="@string/shortcut_short_label">
+
+    <capability-binding android:key="actions.intent.OPEN_APP_FEATURE">
+        <parameter-binding
+            android:value="hello there"
+            android:key="feature"/>
+    </capability-binding>
+</shortcut>
+
+<capability android:name="actions.intent.CREATE_SOCIAL_MEDIA_POSTING">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="io.unitic.roadsage"
+        android:targetClass="io.unitic.roadsage.MainActivity">
+        <!-- Eg. articleBody = "Having fun with friends" -->
+        <parameter
+            android:name="socialMediaPosting.articleBody"
+            android:key="articleBody"/>
+        <!-- Eg. socialMediaPostingDisambiguatingdescription = "Post" -->
+        <parameter
+            android:name="socialMediaPosting.disambiguatingDescription"
+            android:key="socialMediaPostingDisambiguatingdescription"/>
+        <!-- Eg. sharedContentDisambiguatingdescription = "Image" -->
+        <parameter
+            android:name="socialMediaPosting.sharedContent.disambiguatingDescription"
+            android:key="sharedContentDisambiguatingdescription"/>
+    </intent>
+</capability>
+
+<capability
+    android:name="custom.actions.intent.SAY_ROAD_SAGE"
+    app:queryPatterns="@array/sayRoadSage">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="io.unitic.roadsage"
+        android:targetClass="io.unitic.roadsage.MainActivity">
+    <url-template android:value="https://roadsage.unitic.io/say{?messageKey}" />
+    <parameter
+        android:name="message"
+        android:key="messageKey" />
+    </intent>
+</capability>
+
+<shortcut
+    android:shortcutShortLabel="@string/thankYouLabel"
+    android:shortcutId="THANK_YOU">
+    <capability-binding android:key="custom.actions.intent.SAY_ROAD_SAGE">
+        <parameter-binding
+            android:key="message"
+            android:value="@string/thankYou" />
+    </capability-binding>
+</shortcut>
+
+<shortcut
+    android:shortcutShortLabel="@string/cheersLabel"
+    android:shortcutId="CHEERS">
+    <capability-binding android:key="custom.actions.intent.SAY_ROAD_SAGE">
+        <parameter-binding
+            android:key="message"
+            android:value="@string/cheers" />
+    </capability-binding>
+</shortcut>
+
+</shortcuts>

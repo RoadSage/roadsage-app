@@ -25,6 +25,9 @@ class Constants {
   static const String recents = "Recents";
 
   static const String siriSuggestionKey = "key";
+  static const String androidMethodChannel =
+      "io.unitic.roadsage/google_assistant";
+  static const String getAssistantMethod = "getAssistantQuery";
 }
 
 // TODO: move some of the strings from Constants here

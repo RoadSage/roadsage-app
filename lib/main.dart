@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/preferences.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lifecycle/lifecycle.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -33,7 +37,8 @@ class RoadSageApp extends StatefulWidget {
   _RoadSageApp createState() => _RoadSageApp();
 }
 
-class _RoadSageApp extends State<RoadSageApp> {
+class _RoadSageApp extends State<RoadSageApp>
+    with LifecycleAware, LifecycleMixin {
   final SiriSuggestions siri = SiriSuggestions();
 
   _RoadSageApp() : super() {
@@ -43,6 +48,35 @@ class _RoadSageApp extends State<RoadSageApp> {
   String defaultPage = Routes.root;
   bool isLoggedIn = false;
 
+  static const platform = MethodChannel(Constants.androidMethodChannel);
+  String? _assistantQuery;
+
+  // Get Google Assistant query from the Android platform
+  Future<void> getAssistantQuery() async {
+    var assistantQuery =
+        await platform.invokeMethod(Constants.getAssistantMethod);
+    if (assistantQuery != null) {
+      setState(() {
+        _assistantQuery = assistantQuery;
+      });
+    }
+  }
+
+  @override
+  void onLifecycleEvent(LifecycleEvent event) async {
+    // Push event is triggered when a Google Assistant request is received
+    if (event == LifecycleEvent.push) {
+      // Get the query from Android through the method channel
+      await getAssistantQuery();
+      // If a query was received, show a toast, log it and clear the field
+      if (_assistantQuery != null) {
+        debugPrint('Assistant query is $_assistantQuery');
+        Fluttertoast.showToast(msg: "Query is $_assistantQuery");
+        _assistantQuery = null;
+      }
+    }
+  }
+
   @override
   void initState() {
     User? user = FirebaseAuth.instance.currentUser;
@@ -50,7 +84,6 @@ class _RoadSageApp extends State<RoadSageApp> {
       isLoggedIn = true;
     }
     super.initState();
-    // new Future.delayed(const Duration(seconds: 2));
   }
 
   void initSiriSuggestions() async {
@@ -108,6 +141,7 @@ class _RoadSageApp extends State<RoadSageApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      navigatorObservers: [defaultLifecycleObserver],
       routes: {
         Routes.root: (context) =>
             const LoginScreen(title: Constants.loginPageTitle),
@@ -117,7 +151,7 @@ class _RoadSageApp extends State<RoadSageApp> {
         Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
         Routes.preferences: (context) => const PreferencesScreen(),
       },
-      initialRoute: isLoggedIn ? Routes.home : Routes.root,
+      initialRoute: isLoggedIn ? Routes.home : Routes.home,
     );
   }
 }
