@@ -268,44 +268,43 @@ class _MainScreenState extends State<MainScreen> {
     ];
 
     final Drawer drawer = Drawer(
-      backgroundColor: RoadSageColours.lightGrey,
-      child: ListView.builder(
-        padding: const EdgeInsets.only(top: 150),
-        itemCount: drawerItems.length + 1,
-        itemBuilder: (context, index) {
-          if (index == drawerItems.length) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(RoadSageColours.grey),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)))),
-                child: const Text(
-                  RoadSageStrings.signOut,
-                  style: TextStyle(fontSize: 14),
-                ),
-                onPressed: () => authClass.signOut(context: context),
-              ),
-            );
-          }
-          return Column(
-            children: [
-              ListTile(
-                  title: Text(
-                    drawerItems[index].item1,
-                    style: const TextStyle(fontSize: 16),
+        backgroundColor: RoadSageColours.lightGrey,
+        child: ListView.builder(
+          padding: const EdgeInsets.only(top: 150),
+          itemCount: drawerItems.length + 1,
+          itemBuilder: (context, index) {
+            if (index == drawerItems.length) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(RoadSageColours.grey),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)))),
+                  child: const Text(
+                    RoadSageStrings.signOut,
+                    style: TextStyle(fontSize: 14),
                   ),
-                  onTap: drawerItems[index].item2),
-              const Divider(
-                color: Colors.black,
-              ),
-            ],
-          );
-        },
-      ),
-    );
+                  onPressed: () => authClass.signOut(context: context),
+                ),
+              );
+            }
+            return Column(
+              children: [
+                ListTile(
+                    title: Text(
+                      drawerItems[index].item1,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    onTap: drawerItems[index].item2),
+                const Divider(
+                  color: Colors.black,
+                ),
+              ],
+            );
+          },
+        ));
 
     return Scaffold(
         key: _key,
