@@ -16,10 +16,10 @@ class _HelpScreenState extends State<HelpScreen> {
 
 
 
-  static ButtonStyle btn =  ElevatedButton.styleFrom(
-  primary:   const Color(0xFF0AC0FF),
-  textStyle:  const TextStyle(fontSize: 20),
-  );
+  // static ButtonStyle btn =  ElevatedButton.styleFrom(
+  // primary:   const Color(0xFF0AC0FF),
+  // textStyle:  const TextStyle(fontSize: 20),
+  // );
 
   static const bigFont = TextStyle(
   fontSize: 22.0,
