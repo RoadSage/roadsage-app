@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
 
-class Help extends StatefulWidget {
-  const Help({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<Help> createState() => _HelpScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _HelpScreenState extends State<Help> {
-
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Padding(
           padding: const EdgeInsets.only(top: 28.0),
@@ -21,19 +19,18 @@ class _HelpScreenState extends State<Help> {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: const <Widget>[
-                 Center(
-                  child:  Text( RoadSageStrings.userProfile, style: Fonts.bigFont),
+                Center(
+                  child:
+                      Text(RoadSageStrings.userProfile, style: Fonts.bigFont),
                 ),
-
-                 Spacer(),
-                 Padding(
+                Spacer(),
+                Padding(
                     child: Text(
                       RoadSageStrings.formFirstName,
                       style: Fonts.smallFont,
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
-
                 Padding(
                     child: Text(
                       RoadSageStrings.formFirstNameExample,
@@ -49,7 +46,6 @@ class _HelpScreenState extends State<Help> {
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
-
                 Padding(
                     child: Text(
                       RoadSageStrings.formLastNameExample,
@@ -65,7 +61,6 @@ class _HelpScreenState extends State<Help> {
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
-
                 Padding(
                     child: Text(
                       RoadSageStrings.formEmailExample,
@@ -73,7 +68,6 @@ class _HelpScreenState extends State<Help> {
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
-
                 Spacer(),
                 Padding(
                     child: Text(
@@ -82,7 +76,6 @@ class _HelpScreenState extends State<Help> {
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
-
                 Padding(
                     child: Text(
                       RoadSageStrings.formEmailExample,
@@ -90,7 +83,6 @@ class _HelpScreenState extends State<Help> {
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
-
                 Spacer(),
                 Padding(
                     child: Text(
@@ -99,7 +91,6 @@ class _HelpScreenState extends State<Help> {
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
-
                 Padding(
                     child: Text(
                       RoadSageStrings.formPhoneExample,
@@ -107,14 +98,10 @@ class _HelpScreenState extends State<Help> {
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
-
-
-              ]
-          )),
+              ])),
       color: const Color(0xFFDCDCDC),
       padding: const EdgeInsets.all(0.0),
       alignment: Alignment.center,
     );
   }
-
 }

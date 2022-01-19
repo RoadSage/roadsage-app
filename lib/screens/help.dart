@@ -9,74 +9,73 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
-
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Padding(
           padding: const EdgeInsets.only(top: 28.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ListView(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // mainAxisSize: MainAxisSize.max,
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                 const Center(
-                  child: Text(  RoadSageStrings.helpAndFeedback, style: Fonts.bigFont),
-                ),
-                 const Padding(
-                  child: Text(
-                    RoadSageStrings.helpAndFeedbackDesc,
-                    style: Fonts.smallFont,
-                    textAlign: TextAlign.center,
-                  ),
-                  padding: EdgeInsets.all(20.0)),
-
-            Padding(
-                child: Container(
-                  color:  const Color.fromARGB(60, 220, 220, 220),
-                  child:  const TextField(
-                    style:  Fonts.middleFont,
-                    maxLines: 1,
-                    decoration: InputDecoration.collapsed(hintText: RoadSageStrings.formName),
-                  ),
-
-
-                ), padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)
-            ),
-                Padding(
-                    child: Container(
-                      color:  const Color.fromARGB(60, 220, 220, 220),
-                      child:  const TextField(
-                        style:  Fonts.middleFont,
-                        maxLines: 1,
-                        decoration: InputDecoration.collapsed(hintText: RoadSageStrings.formEmail),
-                      ),
-
-
-                    ), padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)
-                ),
-
-                const Spacer(),
                 const Padding(
-                  child: Text(
-                    RoadSageStrings.giveFeedback,
-                    textAlign: TextAlign.center,
-                  ),
-                  padding: EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
+                    child: Text(
+                      RoadSageStrings.helpAndFeedbackDesc,
+                      style: Fonts.middleFont,
+                      textAlign: TextAlign.center,
+                    ),
+                    padding: EdgeInsets.all(20.0)),
+
+                // TODO: possibly convert to TextFormFields?
+                Padding(
+                    child: Container(
+                      color: const Color.fromARGB(60, 220, 220, 220),
+                      child: const TextField(
+                        style: Fonts.middleFont,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                            hintText: RoadSageStrings.formName,
+                            filled: true,
+                            fillColor: Colors.white),
+                      ),
+                    ),
+                    padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
+                Padding(
+                    child: Container(
+                      color: const Color.fromARGB(60, 220, 220, 220),
+                      child: const TextField(
+                        style: Fonts.middleFont,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                            hintText: RoadSageStrings.formEmail,
+                            filled: true,
+                            fillColor: Colors.white),
+                      ),
+                    ),
+                    padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
+
+                const Padding(
+                    child: Text(
+                      RoadSageStrings.giveFeedback,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    padding: EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
 
                 Padding(
                     child: Container(
-                      color:  const Color.fromARGB(60, 220, 220, 220),
-                      child:  const TextField(
-                        style:  Fonts.smallFont,
+                      color: const Color.fromARGB(60, 220, 220, 220),
+                      child: const TextField(
+                        style: Fonts.middleFont,
                         maxLines: 13,
-                        decoration: InputDecoration.collapsed(hintText: RoadSageStrings.feedbackHint),
+                        decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            filled: true,
+                            hintText: RoadSageStrings.feedbackHint),
                       ),
-
-
-                    ), padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)
-                ),
+                    ),
+                    padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
 
                 Padding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
@@ -91,47 +90,36 @@ class _HelpScreenState extends State<HelpScreen> {
                           child: const Text(RoadSageStrings.formSubmit),
                         ))),
 
-                const Spacer(),
                 // Contactus
-                getBtnContainer(RoadSageStrings.contactUs),
-                getBtnContainer(RoadSageStrings.faqs),
-                getBtnContainer(RoadSageStrings.rateUs)
-              ]
-          )),
+                getBtnContainer(RoadSageStrings.contactUs, ""),
+                getBtnContainer(RoadSageStrings.faqs, ""),
+                getBtnContainer(RoadSageStrings.rateUs, "")
+              ])),
       color: const Color(0xFFDCDCDC),
       padding: const EdgeInsets.all(0.0),
       alignment: Alignment.center,
     );
   }
 
-
-  Widget getBtnContainer(final String txt){
-    return Container(
-      child: Column(children: <Widget>[
-        Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.info_outline),
-                onPressed: () {},
-                iconSize: 30.0,
-                color: const Color(0xFF0AC0FF),
-              ),
-               Text(
-                txt,
-                style: Fonts.middleFont,
-              )
-            ]),
-      ]),
-      color: const Color(0xFFfafafa),
-      padding: const EdgeInsets.all(0.0),
-      alignment: Alignment.center,
+  Widget getBtnContainer(final String txt, String route) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      child: ElevatedButton.icon(
+          onPressed: () {},
+          icon:
+              const Icon(Icons.info_outline, color: RoadSageColours.lightBlue),
+          style: ButtonStyle(
+              padding: MaterialStateProperty.all(
+                  const EdgeInsets.symmetric(vertical: 8)),
+              backgroundColor: MaterialStateProperty.all(Colors.white)),
+          label: Text(
+            txt,
+            style: Fonts.middleFont,
+          )),
     );
   }
 
-  static void submit(){
+  static void submit() {
     // TODO: implement callback
   }
 }

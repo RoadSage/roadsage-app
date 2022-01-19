@@ -19,7 +19,7 @@ class Constants {
   static const String troubleSigning = "Trouble Signing in?";
 
   static const String connected = "Connected";
-  static const String help = "Help";
+  static const String help = "Help & Feedback";
   static const String devices = "Devices";
   static const String home = "Home";
   static const String recents = "Recents";
@@ -85,9 +85,10 @@ class RoadSageStrings {
   static const String beamRoadsagePhrase = "Say turn off high beam on Roadsage";
 
   static const String trySaying = "Try Saying";
-  
+
   static const String helpAndFeedback = "Help & Feedback";
-  static const String helpAndFeedbackDesc = "Your  feedback is important to help us improve our products";
+  static const String helpAndFeedbackDesc =
+      "Your  feedback is important to help us improve our products.";
   static const String feedbackHint = "Write your feedback here";
   static const String giveFeedback = "Give Feedback";
 
@@ -117,23 +118,21 @@ class RoadSageColours {
 }
 
 class Fonts {
-
   static const bigFont = TextStyle(
-    fontSize: 22.0,
-    color: Colors.black,
-    fontWeight: FontWeight.w400,
-    fontFamily: "Roboto");
+      fontSize: 22.0,
+      color: Colors.black,
+      fontWeight: FontWeight.w400,
+      fontFamily: "Roboto");
 
   static const middleFont = TextStyle(
       fontSize: 16.0,
       fontWeight: FontWeight.w300,
       color: Colors.black,
       fontFamily: "Roboto");
-  
+
   static const smallFont = TextStyle(
       fontSize: 12.0,
       fontWeight: FontWeight.w200,
       color: Colors.black,
       fontFamily: "Roboto");
-
 }

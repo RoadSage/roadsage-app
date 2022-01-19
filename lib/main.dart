@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
+import 'package:roadsage/screens/help.dart';
 import 'package:roadsage/screens/preferences.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -172,7 +173,7 @@ class _MainScreenState extends State<MainScreen> {
 
   // Tuple2(<Screen widget>, <App bar title>)
   static const _bottomNavItems = [
-    Tuple2(FAQScreen(), Constants.help),
+    Tuple2(HelpScreen(), Constants.help),
     Tuple2(DevicesScreen(), Constants.devices),
     Tuple2(HomeScreen(), Constants.home),
     Tuple2(RecentsScreen(), Constants.recents),
