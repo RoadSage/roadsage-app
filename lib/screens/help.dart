@@ -38,7 +38,7 @@ class _HelpScreenState extends State<HelpScreen> {
                   child:  const TextField(
                     style:  Fonts.middleFont,
                     maxLines: 1,
-                    decoration: InputDecoration.collapsed(hintText: RoadSageStrings.name),
+                    decoration: InputDecoration.collapsed(hintText: RoadSageStrings.formName),
                   ),
 
 
@@ -50,7 +50,7 @@ class _HelpScreenState extends State<HelpScreen> {
                       child:  const TextField(
                         style:  Fonts.middleFont,
                         maxLines: 1,
-                        decoration: InputDecoration.collapsed(hintText: RoadSageStrings.Email),
+                        decoration: InputDecoration.collapsed(hintText: RoadSageStrings.formEmail),
                       ),
 
 
@@ -88,13 +88,13 @@ class _HelpScreenState extends State<HelpScreen> {
                               primary: const Color(0xFF0AC0FF),
                               textStyle: const TextStyle(fontSize: 20)),
                           onPressed: () => submit(),
-                          child: const Text(RoadSageStrings.submit),
+                          child: const Text(RoadSageStrings.formSubmit),
                         ))),
 
                 const Spacer(),
                 // Contactus
                 getBtnContainer(RoadSageStrings.contactUs),
-                getBtnContainer(RoadSageStrings.FAQs),
+                getBtnContainer(RoadSageStrings.faqs),
                 getBtnContainer(RoadSageStrings.rateUs)
               ]
           )),

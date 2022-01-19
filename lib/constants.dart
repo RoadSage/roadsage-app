@@ -40,7 +40,7 @@ class RoadSageStrings {
   static const String referAFriend = 'Refer a Friend';
   static const String preferences = 'Preferences';
   static const String signOut = 'Sign Out';
-  static const String FAQs = 'FAQs';
+  static const String faqs = 'FAQs';
   static const String rateUs = 'Rate Us';
   static const String contactUs = 'Contact Us';
 
@@ -53,6 +53,7 @@ class RoadSageStrings {
   static const String formEmailExample = 'example@mail.com';
   static const String formPhone = 'Phone';
   static const String formPhoneExample = 'phone';
+  static const String formSubmit = "Submit";
 
   static const String remote = 'Remote';
   static const String display = 'Display';
