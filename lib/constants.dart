@@ -88,7 +88,7 @@ class RoadSageStrings {
   static const String helpAndFeedback = "Help & Feedback";
   static const String helpAndFeedbackDesc = "Your  feedback is important to help us improve our products";
   static const String feedbackHint = "Write your feedback here";
-  static const String giveFeedback = "Give Feedback"
+  static const String giveFeedback = "Give Feedback";
 
   static const List<String> homeAndroidTrySayingEntries = <String>[
     "Hey Google, Say Thank you on RoadSage",
