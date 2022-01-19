@@ -52,6 +52,10 @@ dependencies:
   fluttertoast: ^8.0.8
   lifecycle: ^0.4.2
   sign_in_with_apple: ^3.3.0
+  flutter_blue:
+    git:
+      url: https://github.com/boskokg/flutter_blue/
+      ref: 0.13.0
 
 dev_dependencies:
   flutter_test:
