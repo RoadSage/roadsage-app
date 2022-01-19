@@ -31,7 +31,7 @@ class _DisplayScreenState extends State<DisplayScreen> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
-          child: Column(
+          child: ListView(
             children: [
               ListTile(
                 contentPadding: const EdgeInsets.all(16),
@@ -52,9 +52,11 @@ class _DisplayScreenState extends State<DisplayScreen> {
                 tileColor: Colors.white,
               ),
               const SizedBox(height: 20),
-              const Text(
-                RoadSageStrings.brightnessLevel,
-                style: TextStyle(fontSize: 20),
+              const Center(
+                child: Text(
+                  RoadSageStrings.brightnessLevel,
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
               Slider(
                 value: _brightnessSliderValue,
@@ -83,9 +85,11 @@ class _DisplayScreenState extends State<DisplayScreen> {
                 },
               ),
               const SizedBox(height: 40),
-              const Text(
-                RoadSageStrings.sensor,
-                style: TextStyle(fontSize: 26),
+              const Center(
+                child: Text(
+                  RoadSageStrings.sensor,
+                  style: TextStyle(fontSize: 26),
+                ),
               ),
               const SizedBox(height: 20),
               ListTile(
@@ -131,9 +135,11 @@ class _DisplayScreenState extends State<DisplayScreen> {
                 tileColor: Colors.white,
               ),
               const SizedBox(height: 20),
-              const Text(
-                RoadSageStrings.stoppingDistance,
-                style: TextStyle(fontSize: 20),
+              const Center(
+                child: Text(
+                  RoadSageStrings.stoppingDistance,
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
               Slider(
                 value: _stoppingDistance,
