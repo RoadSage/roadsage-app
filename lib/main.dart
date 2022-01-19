@@ -5,6 +5,7 @@ import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/help.dart';
 import 'package:roadsage/screens/preferences.dart';
+import 'package:roadsage/screens/profile.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -152,6 +153,7 @@ class _RoadSageApp extends State<RoadSageApp>
         Routes.faq: (context) => const FAQScreen(),
         Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
         Routes.preferences: (context) => const PreferencesScreen(),
+        Routes.profile: (context) => const ProfileScreen(),
       },
       initialRoute: isLoggedIn ? Routes.home : Routes.home,
     );
@@ -253,7 +255,7 @@ class _MainScreenState extends State<MainScreen> {
     // Tuple2(<Item name>, <onClick>)
     final drawerItems = [
       Tuple2(RoadSageStrings.userProfile, () {
-        Navigator.pop(context);
+        Navigator.pushNamed(context, Routes.profile);
       }),
       Tuple2(RoadSageStrings.activity, () {
         Navigator.pop(context);

@@ -7,6 +7,7 @@ class Routes {
   static const String remote = "/devices/remote";
   static const String display = "/devices/display";
   static const String faq = "/faq";
+  static const String profile = "/profile";
   static const String faqSubmitQuestion = "/faq/submit_question";
 }
 
