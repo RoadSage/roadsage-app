@@ -32,7 +32,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
                   size: 38,
                   color: RoadSageColours.lightBlue,
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
                 onTap: () {
                   Navigator.pushNamed(context, Routes.remote);
                 },
@@ -51,7 +51,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
                   size: 38,
                   color: RoadSageColours.lightBlue,
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
                 onTap: () {
                   Navigator.pushNamed(context, Routes.display);
                 },

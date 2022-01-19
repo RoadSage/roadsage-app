@@ -24,7 +24,6 @@ class _FAQScreenState extends State<FAQScreen> {
                   "Frequently asked questions",
                   style: TextStyle(
                       fontSize: 22.0,
-                      color: Colors.black,
                       fontWeight: FontWeight.w400,
                       fontFamily: "Roboto"),
                 ),
@@ -85,15 +84,15 @@ class _FAQScreenState extends State<FAQScreen> {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFF0AC0FF),
                             textStyle: const TextStyle(fontSize: 20)),
                         onPressed: () => Navigator.pushNamed(
                             context, Routes.faqSubmitQuestion),
-                        child: const Text('Ask Question'),
+                        child: const Text(
+                          'Ask Question',
+                        ),
                       ))),
             ]),
       ),
-      color: const Color(0xFFDCDCDC),
       padding: const EdgeInsets.all(0.0),
       alignment: Alignment.center,
     );

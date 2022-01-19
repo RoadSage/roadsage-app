@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         : RoadSageStrings.homeIOSTrySayingEntries[index],
                     style: const TextStyle(color: Colors.black),
                   ),
-                  tileColor: Colors.white,
+                  tileColor: Theme.of(context).primaryColorLight,
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>

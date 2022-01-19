@@ -53,6 +53,8 @@ dependencies:
   lifecycle: ^0.4.2
   sign_in_with_apple: ^3.3.0
 
+  in_app_review: ^2.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

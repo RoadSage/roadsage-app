@@ -13,9 +13,8 @@ class _RemoteScreenState extends State<RemoteScreen> {
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
       title: const Text(RoadSageStrings.remote),
-      titleTextStyle: const TextStyle(fontSize: 28, color: Colors.black),
+      titleTextStyle: const TextStyle(fontSize: 28),
       titleSpacing: 20,
-      backgroundColor: RoadSageColours.lightGrey,
       toolbarHeight: 75,
       elevation: 0,
       centerTitle: false,
@@ -23,7 +22,6 @@ class _RemoteScreenState extends State<RemoteScreen> {
 
     return Scaffold(
       appBar: appBar,
-      backgroundColor: RoadSageColours.lightGrey,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -45,7 +43,7 @@ class _RemoteScreenState extends State<RemoteScreen> {
                     color: Colors.green,
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
               ),
               const SizedBox(height: 15),
               ListTile(
@@ -69,7 +67,7 @@ class _RemoteScreenState extends State<RemoteScreen> {
                     ],
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
               ),
             ],
           ),

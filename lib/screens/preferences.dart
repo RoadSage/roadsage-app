@@ -16,7 +16,6 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
       title: const Text(RoadSageStrings.preferences),
       titleTextStyle: const TextStyle(fontSize: 28, color: Colors.black),
       titleSpacing: 20,
-      backgroundColor: RoadSageColours.lightGrey,
       toolbarHeight: 75,
       elevation: 0,
       centerTitle: false,
@@ -28,7 +27,6 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
       body: Center(
           child: SettingsList(
         contentPadding: const EdgeInsets.all(16),
-        backgroundColor: RoadSageColours.lightGrey,
         sections: [
           SettingsSection(
             title: 'General',

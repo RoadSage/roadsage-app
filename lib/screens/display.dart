@@ -17,9 +17,8 @@ class _DisplayScreenState extends State<DisplayScreen> {
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
       title: const Text(RoadSageStrings.display),
-      titleTextStyle: const TextStyle(fontSize: 28, color: Colors.black),
+      titleTextStyle: const TextStyle(fontSize: 28),
       titleSpacing: 20,
-      backgroundColor: RoadSageColours.lightGrey,
       toolbarHeight: 75,
       elevation: 0,
       centerTitle: false,
@@ -27,7 +26,6 @@ class _DisplayScreenState extends State<DisplayScreen> {
 
     return Scaffold(
       appBar: appBar,
-      backgroundColor: RoadSageColours.lightGrey,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -49,7 +47,7 @@ class _DisplayScreenState extends State<DisplayScreen> {
                     color: Colors.green,
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
               ),
               const SizedBox(height: 20),
               const Text(
@@ -104,7 +102,7 @@ class _DisplayScreenState extends State<DisplayScreen> {
                     color: Colors.green,
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
               ),
               const SizedBox(height: 20),
               ListTile(
@@ -128,7 +126,7 @@ class _DisplayScreenState extends State<DisplayScreen> {
                     ],
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
               ),
               const SizedBox(height: 20),
               const Text(
