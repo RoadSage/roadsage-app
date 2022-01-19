@@ -149,6 +149,7 @@ class _RoadSageApp extends State<RoadSageApp>
         Routes.home: (context) => const MainScreen(title: Constants.homePage),
         Routes.remote: (context) => const RemoteScreen(),
         Routes.display: (context) => const DisplayScreen(),
+        Routes.faq: (context) => const FAQScreen(),
         Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
         Routes.preferences: (context) => const PreferencesScreen(),
       },

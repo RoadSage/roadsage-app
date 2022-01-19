@@ -92,7 +92,7 @@ class _HelpScreenState extends State<HelpScreen> {
 
                 // Contactus
                 getBtnContainer(RoadSageStrings.contactUs, ""),
-                getBtnContainer(RoadSageStrings.faqs, ""),
+                getBtnContainer(RoadSageStrings.faqs, Routes.faq),
                 getBtnContainer(RoadSageStrings.rateUs, "")
               ])),
       color: const Color(0xFFDCDCDC),
@@ -105,7 +105,7 @@ class _HelpScreenState extends State<HelpScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, route),
           icon:
               const Icon(Icons.info_outline, color: RoadSageColours.lightBlue),
           style: ButtonStyle(
