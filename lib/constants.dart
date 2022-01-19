@@ -6,6 +6,8 @@ class Routes {
   static const String preferences = "/preferences";
   static const String remote = "/devices/remote";
   static const String display = "/devices/display";
+  static const String faq = "/faq";
+  static const String profile = "/profile";
   static const String faqSubmitQuestion = "/faq/submit_question";
 }
 
@@ -19,7 +21,7 @@ class Constants {
   static const String troubleSigning = "Trouble Signing in?";
 
   static const String connected = "Connected";
-  static const String help = "Help";
+  static const String help = "Help & Feedback";
   static const String devices = "Devices";
   static const String home = "Home";
   static const String recents = "Recents";
@@ -40,6 +42,20 @@ class RoadSageStrings {
   static const String referAFriend = 'Refer a Friend';
   static const String preferences = 'Preferences';
   static const String signOut = 'Sign Out';
+  static const String faqs = 'FAQs';
+  static const String rateUs = 'Rate Us';
+  static const String contactUs = 'Contact Us';
+
+  static const String formName = 'Name';
+  static const String formFirstName = 'First Name';
+  static const String formLastName = 'Last Name';
+  static const String formFirstNameExample = 'Fatma';
+  static const String formLastNameExample = 'Alsayegh';
+  static const String formEmail = 'Email';
+  static const String formEmailExample = 'example@mail.com';
+  static const String formPhone = 'Phone';
+  static const String formPhoneExample = 'phone';
+  static const String formSubmit = "Submit";
 
   static const String remote = 'Remote';
   static const String display = 'Display';
@@ -72,6 +88,12 @@ class RoadSageStrings {
 
   static const String trySaying = "Try Saying";
 
+  static const String helpAndFeedback = "Help & Feedback";
+  static const String helpAndFeedbackDesc =
+      "Your  feedback is important to help us improve our products.";
+  static const String feedbackHint = "Write your feedback here";
+  static const String giveFeedback = "Give Feedback";
+
   static const List<String> homeAndroidTrySayingEntries = <String>[
     "Hey Google, Say Thank you on RoadSage",
     "Hey Google, Say Cheers on RoadSage",
@@ -95,4 +117,24 @@ class RoadSageColours {
   static const Color lightBlue = Color(0xFF0AC0FF);
   static const Color lightGrey = Color(0xFFDCDCDC);
   static const Color grey = Color(0xFFC4C4C4);
+}
+
+class Fonts {
+  static const bigFont = TextStyle(
+      fontSize: 22.0,
+      color: Colors.black,
+      fontWeight: FontWeight.w400,
+      fontFamily: "Roboto");
+
+  static const middleFont = TextStyle(
+      fontSize: 16.0,
+      fontWeight: FontWeight.w300,
+      color: Colors.black,
+      fontFamily: "Roboto");
+
+  static const smallFont = TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w200,
+      color: Colors.black,
+      fontFamily: "Roboto");
 }

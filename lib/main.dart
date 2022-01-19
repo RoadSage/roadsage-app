@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 
 import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
+import 'package:roadsage/screens/help.dart';
 import 'package:roadsage/screens/preferences.dart';
+import 'package:roadsage/screens/profile.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -148,8 +150,10 @@ class _RoadSageApp extends State<RoadSageApp>
         Routes.home: (context) => const MainScreen(title: Constants.homePage),
         Routes.remote: (context) => const RemoteScreen(),
         Routes.display: (context) => const DisplayScreen(),
+        Routes.faq: (context) => const FAQScreen(),
         Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
         Routes.preferences: (context) => const PreferencesScreen(),
+        Routes.profile: (context) => const ProfileScreen(),
       },
       initialRoute: isLoggedIn ? Routes.home : Routes.home,
     );
@@ -172,7 +176,7 @@ class _MainScreenState extends State<MainScreen> {
 
   // Tuple2(<Screen widget>, <App bar title>)
   static const _bottomNavItems = [
-    Tuple2(FAQScreen(), Constants.help),
+    Tuple2(HelpScreen(), Constants.help),
     Tuple2(DevicesScreen(), Constants.devices),
     Tuple2(HomeScreen(), Constants.home),
     Tuple2(RecentsScreen(), Constants.recents),
@@ -251,7 +255,7 @@ class _MainScreenState extends State<MainScreen> {
     // Tuple2(<Item name>, <onClick>)
     final drawerItems = [
       Tuple2(RoadSageStrings.userProfile, () {
-        Navigator.pop(context);
+        Navigator.pushNamed(context, Routes.profile);
       }),
       Tuple2(RoadSageStrings.activity, () {
         Navigator.pop(context);
