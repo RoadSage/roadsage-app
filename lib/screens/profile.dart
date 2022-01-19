@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:roadsage/constants.dart';
 
 class Help extends StatefulWidget {
   const Help({Key? key}) : super(key: key);
@@ -10,36 +9,6 @@ class Help extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<Help> {
-
-  static const title  = "Your Profile";
-
-
-
-  // static ButtonStyle btn =  ElevatedButton.styleFrom(
-  // primary:   const Color(0xFF0AC0FF),
-  // textStyle:  const TextStyle(fontSize: 20),
-  // );
-
-  static const bigFont = TextStyle(
-  fontSize: 22.0,
-  color: Colors.black,
-  fontWeight: FontWeight.w400,
-  fontFamily: "Roboto");
-
-
-  static const middleFont = TextStyle(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w300,
-      color: Colors.black,
-      fontFamily: "Roboto");
-  
-  
-  static const smallFont = TextStyle(
-      fontSize: 12.0,
-      fontWeight: FontWeight.w200,
-      color: Colors.black,
-      fontFamily: "Roboto");
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,73 +22,54 @@ class _HelpScreenState extends State<Help> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: const <Widget>[
                  Center(
-                  child:  Text( title, style: bigFont),
+                  child:  Text( RoadSageStrings.userProfile, style: Fonts.bigFont),
                 ),
-
-
 
                  Spacer(),
                  Padding(
                     child: Text(
-                      "First Name: ",
-                      style: smallFont,
+                      RoadSageStrings.formFirstName,
+                      style: Fonts.smallFont,
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
 
                 Padding(
                     child: Text(
-                      "Fatma ",
-                      style: middleFont,
+                      RoadSageStrings.formFirstNameExample,
+                      style: Fonts.middleFont,
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
                 Spacer(),
                 Padding(
                     child: Text(
-                      "Last Name: ",
-                      style: smallFont,
+                      RoadSageStrings.formLastName,
+                      style: Fonts.smallFont,
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
 
                 Padding(
                     child: Text(
-                      "Sayegh ",
-                      style: middleFont,
+                      RoadSageStrings.formLastNameExample,
+                      style: Fonts.middleFont,
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
                 Spacer(),
                 Padding(
                     child: Text(
-                      "Email: ",
-                      style: smallFont,
+                      RoadSageStrings.formEmail,
+                      style: Fonts.smallFont,
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
 
                 Padding(
                     child: Text(
-                      "mail ",
-                      style: middleFont,
-                      textAlign: TextAlign.center,
-                    ),
-                    padding: EdgeInsets.all(20.0)),
-
-                Spacer(),
-                Padding(
-                    child: Text(
-                      "Email: ",
-                      style: smallFont,
-                      textAlign: TextAlign.center,
-                    ),
-                    padding: EdgeInsets.all(20.0)),
-
-                Padding(
-                    child: Text(
-                      "mail ",
-                      style: middleFont,
+                      RoadSageStrings.formEmailExample,
+                      style: Fonts.middleFont,
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
@@ -127,16 +77,33 @@ class _HelpScreenState extends State<Help> {
                 Spacer(),
                 Padding(
                     child: Text(
-                      "Phone: ",
-                      style: smallFont,
+                      RoadSageStrings.formEmail,
+                      style: Fonts.smallFont,
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),
 
                 Padding(
                     child: Text(
-                      "phone ",
-                      style: middleFont,
+                      RoadSageStrings.formEmailExample,
+                      style: Fonts.middleFont,
+                      textAlign: TextAlign.center,
+                    ),
+                    padding: EdgeInsets.all(20.0)),
+
+                Spacer(),
+                Padding(
+                    child: Text(
+                      RoadSageStrings.formPhone,
+                      style: Fonts.smallFont,
+                      textAlign: TextAlign.center,
+                    ),
+                    padding: EdgeInsets.all(20.0)),
+
+                Padding(
+                    child: Text(
+                      RoadSageStrings.formPhoneExample,
+                      style: Fonts.middleFont,
                       textAlign: TextAlign.center,
                     ),
                     padding: EdgeInsets.all(20.0)),

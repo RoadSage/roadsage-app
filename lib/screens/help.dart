@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:roadsage/constants.dart';
 
 class HelpScreen extends StatefulWidget {
   const HelpScreen({Key? key}) : super(key: key);
@@ -10,37 +9,6 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
-
-  static const title  = "Help & Feedback";
-  static const feedback = "Your  feedback is important to help us improve our products";
-
-
-
-  // static ButtonStyle btn =  ElevatedButton.styleFrom(
-  // primary:   const Color(0xFF0AC0FF),
-  // textStyle:  const TextStyle(fontSize: 20),
-  // );
-
-  static const bigFont = TextStyle(
-  fontSize: 22.0,
-  color: Colors.black,
-  fontWeight: FontWeight.w400,
-  fontFamily: "Roboto");
-
-
-  static const middleFont = TextStyle(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w300,
-      color: Colors.black,
-      fontFamily: "Roboto");
-  
-  
-  static const smallFont = TextStyle(
-      fontSize: 12.0,
-      fontWeight: FontWeight.w200,
-      color: Colors.black,
-      fontFamily: "Roboto");
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +22,12 @@ class _HelpScreenState extends State<HelpScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                  const Center(
-                  child: Text( title, style: bigFont),
+                  child: Text(  RoadSageStrings.helpAndFeedback, style: Fonts.bigFont),
                 ),
                  const Padding(
                   child: Text(
-                    feedback,
-                    style: smallFont,
+                    RoadSageStrings.helpAndFeedbackDesc,
+                    style: Fonts.smallFont,
                     textAlign: TextAlign.center,
                   ),
                   padding: EdgeInsets.all(20.0)),
@@ -68,9 +36,9 @@ class _HelpScreenState extends State<HelpScreen> {
                 child: Container(
                   color:  const Color.fromARGB(60, 220, 220, 220),
                   child:  const TextField(
-                    style:  middleFont,
+                    style:  Fonts.middleFont,
                     maxLines: 1,
-                    decoration: InputDecoration.collapsed(hintText: "Name"),
+                    decoration: InputDecoration.collapsed(hintText: RoadSageStrings.name),
                   ),
 
 
@@ -80,9 +48,9 @@ class _HelpScreenState extends State<HelpScreen> {
                     child: Container(
                       color:  const Color.fromARGB(60, 220, 220, 220),
                       child:  const TextField(
-                        style:  middleFont,
+                        style:  Fonts.middleFont,
                         maxLines: 1,
-                        decoration: InputDecoration.collapsed(hintText: "Email"),
+                        decoration: InputDecoration.collapsed(hintText: RoadSageStrings.Email),
                       ),
 
 
@@ -92,7 +60,7 @@ class _HelpScreenState extends State<HelpScreen> {
                 const Spacer(),
                 const Padding(
                   child: Text(
-                    "Give  Feedback",
+                    RoadSageStrings.giveFeedback,
                     textAlign: TextAlign.center,
                   ),
                   padding: EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
@@ -101,9 +69,9 @@ class _HelpScreenState extends State<HelpScreen> {
                     child: Container(
                       color:  const Color.fromARGB(60, 220, 220, 220),
                       child:  const TextField(
-                        style:  smallFont,
+                        style:  Fonts.smallFont,
                         maxLines: 13,
-                        decoration: InputDecoration.collapsed(hintText: "Write your feedback here"),
+                        decoration: InputDecoration.collapsed(hintText: RoadSageStrings.feedbackHint),
                       ),
 
 
@@ -120,14 +88,14 @@ class _HelpScreenState extends State<HelpScreen> {
                               primary: const Color(0xFF0AC0FF),
                               textStyle: const TextStyle(fontSize: 20)),
                           onPressed: () => submit(),
-                          child: const Text('Submit'),
+                          child: const Text(RoadSageStrings.submit),
                         ))),
 
                 const Spacer(),
                 // Contactus
-                getBtnContainer("Contact us"),
-                getBtnContainer("FAQs"),
-                getBtnContainer("Rate Us")
+                getBtnContainer(RoadSageStrings.contactUs),
+                getBtnContainer(RoadSageStrings.FAQs),
+                getBtnContainer(RoadSageStrings.rateUs)
               ]
           )),
       color: const Color(0xFFDCDCDC),
@@ -153,7 +121,7 @@ class _HelpScreenState extends State<HelpScreen> {
               ),
                Text(
                 txt,
-                style: middleFont,
+                style: Fonts.middleFont,
               )
             ]),
       ]),
