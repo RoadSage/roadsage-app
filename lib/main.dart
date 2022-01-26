@@ -11,8 +11,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lifecycle/lifecycle.dart';
-
 import 'package:tuple/tuple.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:roadsage/authentication/auth_services.dart';
 import 'constants.dart';
@@ -27,7 +27,7 @@ import 'screens/remote.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const RoadSageApp());
+  runApp(const ProviderScope(child: RoadSageApp()));
 }
 
 AuthClass authClass = AuthClass();
