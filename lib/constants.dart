@@ -20,7 +20,6 @@ class Constants {
   static const String byUnitic = "By Unitic";
   static const String troubleSigning = "Trouble Signing in?";
 
-  static const String connected = "Connected";
   static const String help = "Help & Feedback";
   static const String devices = "Devices";
   static const String home = "Home";
@@ -45,6 +44,9 @@ class RoadSageStrings {
   static const String faqs = 'FAQs';
   static const String rateUs = 'Rate Us';
   static const String contactUs = 'Contact Us';
+
+  static const String connected = 'Connected';
+  static const String disconnected = 'Disconnected';
 
   static const String formName = 'Name';
   static const String formFirstName = 'First Name';

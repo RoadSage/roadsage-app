@@ -126,7 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 SignInButton(
                   Buttons.Email,
                   text: "Login / Sign up",
-                  onPressed: () => Navigator.pushNamed(context, Routes.home),
+                  onPressed: () =>
+                      Navigator.pushReplacementNamed(context, Routes.home),
                   // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),

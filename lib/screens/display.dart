@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../state/models.dart';
 
-class DisplayScreen extends StatefulWidget {
+class DisplayScreen extends ConsumerStatefulWidget {
   const DisplayScreen({Key? key}) : super(key: key);
 
   @override
-  State<DisplayScreen> createState() => _DisplayScreenState();
+  ConsumerState<DisplayScreen> createState() => _DisplayScreenState();
 }
 
-class _DisplayScreenState extends State<DisplayScreen> {
-  double _brightnessSliderValue = 20;
-  double _stoppingDistance = 1.5;
-  bool _adaptiveBrightness = true;
-
+class _DisplayScreenState extends ConsumerState<DisplayScreen> {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
@@ -24,6 +22,8 @@ class _DisplayScreenState extends State<DisplayScreen> {
       elevation: 0,
       centerTitle: false,
     );
+
+    final displayModel = ref.watch(displayModelProvider);
 
     return Scaffold(
       appBar: appBar,
@@ -41,15 +41,19 @@ class _DisplayScreenState extends State<DisplayScreen> {
                   RoadSageStrings.status,
                   style: TextStyle(fontSize: 20),
                 ),
-                trailing: const Padding(
-                  padding: EdgeInsets.only(right: 10.0),
+                trailing: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
                   child: Icon(
                     Icons.circle,
                     size: 38,
-                    color: Colors.green,
+                    color:
+                        displayModel.displayStatus ? Colors.green : Colors.red,
                   ),
                 ),
                 tileColor: Colors.white,
+                onTap: () => ref
+                    .read(displayModelProvider.notifier)
+                    .switchDisplayStatus(!displayModel.displayStatus),
               ),
               const SizedBox(height: 20),
               const Center(
@@ -59,14 +63,16 @@ class _DisplayScreenState extends State<DisplayScreen> {
                 ),
               ),
               Slider(
-                value: _brightnessSliderValue,
+                value: displayModel.brightnessLevel,
                 max: 100,
                 divisions: 20,
                 activeColor: RoadSageColours.lightBlue,
-                label: _brightnessSliderValue.round().toString() + "%",
+                label: "${displayModel.brightnessLevel.round()}%",
                 onChanged: (double value) {
                   setState(() {
-                    _brightnessSliderValue = value;
+                    ref
+                        .read(displayModelProvider.notifier)
+                        .updateBrightnessLevel(value);
                   });
                 },
               ),
@@ -76,11 +82,13 @@ class _DisplayScreenState extends State<DisplayScreen> {
                   RoadSageStrings.adaptiveBrightness,
                   style: TextStyle(fontSize: 20),
                 ),
-                value: _adaptiveBrightness,
+                value: displayModel.adaptiveBrightness,
                 activeColor: RoadSageColours.lightBlue,
                 onChanged: (bool value) {
                   setState(() {
-                    _adaptiveBrightness = value;
+                    ref
+                        .read(displayModelProvider.notifier)
+                        .switchAdaptiveBrightness(value);
                   });
                 },
               ),
@@ -100,15 +108,19 @@ class _DisplayScreenState extends State<DisplayScreen> {
                   RoadSageStrings.status,
                   style: TextStyle(fontSize: 20),
                 ),
-                trailing: const Padding(
-                  padding: EdgeInsets.only(right: 10.0),
+                trailing: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
                   child: Icon(
                     Icons.circle,
                     size: 38,
-                    color: Colors.green,
+                    color:
+                        displayModel.sensorStatus ? Colors.green : Colors.red,
                   ),
                 ),
                 tileColor: Colors.white,
+                onTap: () => ref
+                    .read(displayModelProvider.notifier)
+                    .switchSensorStatus(!displayModel.sensorStatus),
               ),
               const SizedBox(height: 20),
               ListTile(
@@ -122,9 +134,9 @@ class _DisplayScreenState extends State<DisplayScreen> {
                 trailing: SizedBox(
                   width: 80,
                   child: Row(
-                    children: const [
-                      Text('100%'),
-                      Icon(
+                    children: [
+                      Text('${displayModel.batteryLevel}%'),
+                      const Icon(
                         Icons.battery_std_outlined,
                         size: 38,
                         color: Colors.black,
@@ -142,15 +154,17 @@ class _DisplayScreenState extends State<DisplayScreen> {
                 ),
               ),
               Slider(
-                value: _stoppingDistance,
+                value: displayModel.stoppingDistance,
                 min: 1,
                 max: 2,
                 divisions: 20,
                 activeColor: RoadSageColours.lightBlue,
-                label: _stoppingDistance.toString() + "s",
+                label: displayModel.stoppingDistance.toString() + "s",
                 onChanged: (double value) {
                   setState(() {
-                    _stoppingDistance = value;
+                    ref
+                        .read(displayModelProvider.notifier)
+                        .updateStoppingDistance(value);
                   });
                 },
               ),

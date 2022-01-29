@@ -11,8 +11,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lifecycle/lifecycle.dart';
-
+import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:roadsage/authentication/auth_services.dart';
 import 'constants.dart';
@@ -27,19 +28,19 @@ import 'screens/remote.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const RoadSageApp());
+  runApp(const ProviderScope(child: RoadSageApp()));
 }
 
 AuthClass authClass = AuthClass();
 
-class RoadSageApp extends StatefulWidget {
+class RoadSageApp extends ConsumerStatefulWidget {
   const RoadSageApp({Key? key}) : super(key: key);
 
   @override
   _RoadSageApp createState() => _RoadSageApp();
 }
 
-class _RoadSageApp extends State<RoadSageApp>
+class _RoadSageApp extends ConsumerState<RoadSageApp>
     with LifecycleAware, LifecycleMixin {
   final SiriSuggestions siri = SiriSuggestions();
 
@@ -48,8 +49,6 @@ class _RoadSageApp extends State<RoadSageApp>
   }
 
   String defaultPage = Routes.root;
-  bool isLoggedIn = false;
-
   static const platform = MethodChannel(Constants.androidMethodChannel);
   String? _assistantQuery;
 
@@ -83,7 +82,7 @@ class _RoadSageApp extends State<RoadSageApp>
   void initState() {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      isLoggedIn = true;
+      ref.read(roadSageModelProvider.notifier).switchLoggedIn(true);
     }
     super.initState();
   }
@@ -138,6 +137,8 @@ class _RoadSageApp extends State<RoadSageApp>
 
   @override
   Widget build(BuildContext context) {
+    final roadSageModel = ref.watch(roadSageModelProvider);
+
     return MaterialApp(
       title: Constants.title,
       theme: ThemeData(
@@ -155,24 +156,25 @@ class _RoadSageApp extends State<RoadSageApp>
         Routes.preferences: (context) => const PreferencesScreen(),
         Routes.profile: (context) => const ProfileScreen(),
       },
-      initialRoute: isLoggedIn ? Routes.home : Routes.home,
+      initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
     );
   }
 }
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  ConsumerState<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-  int _selectedIndex = 0;
+  // default - 2 - HomeScreen
+  int _selectedIndex = 2;
 
   // Tuple2(<Screen widget>, <App bar title>)
   static const _bottomNavItems = [
@@ -190,6 +192,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final displayModel = ref.watch(displayModelProvider);
+
     AppBar appBar = AppBar(
       title: Text(_bottomNavItems.elementAt(_selectedIndex).item2),
       titleTextStyle: const TextStyle(fontSize: 32, shadows: [
@@ -209,8 +213,10 @@ class _MainScreenState extends State<MainScreen> {
                       MaterialStateProperty.all(RoadSageColours.lightBlue),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)))),
-              child: const Text(Constants.connected),
-              onPressed: () {},
+              child: Text(displayModel.displayStatus
+                  ? RoadSageStrings.connected
+                  : RoadSageStrings.disconnected),
+              onPressed: () => Navigator.pushNamed(context, Routes.display),
             )),
         IconButton(
           icon: const Icon(Icons.menu),
@@ -255,7 +261,7 @@ class _MainScreenState extends State<MainScreen> {
     // Tuple2(<Item name>, <onClick>)
     final drawerItems = [
       Tuple2(RoadSageStrings.userProfile, () {
-        Navigator.pushNamed(context, Routes.profile);
+        Navigator.popAndPushNamed(context, Routes.profile);
       }),
       Tuple2(RoadSageStrings.activity, () {
         Navigator.pop(context);
@@ -267,7 +273,7 @@ class _MainScreenState extends State<MainScreen> {
         Navigator.pop(context);
       }),
       Tuple2(RoadSageStrings.preferences, () {
-        Navigator.pushNamed(context, Routes.preferences);
+        Navigator.popAndPushNamed(context, Routes.preferences);
       }),
     ];
 
@@ -281,17 +287,21 @@ class _MainScreenState extends State<MainScreen> {
               return Padding(
                 padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
                 child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(RoadSageColours.grey),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)))),
-                  child: const Text(
-                    RoadSageStrings.signOut,
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  onPressed: () => authClass.signOut(context: context),
-                ),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(RoadSageColours.grey),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)))),
+                    child: const Text(
+                      RoadSageStrings.signOut,
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    onPressed: () {
+                      ref
+                          .read(roadSageModelProvider.notifier)
+                          .switchLoggedIn(false);
+                      authClass.signOut(context: context);
+                    }),
               );
             }
             return Column(
