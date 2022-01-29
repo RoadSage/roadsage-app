@@ -1,6 +1,34 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// Display (display.dart)
+// General app model --------------------------------------------------
+
+class RoadSageModel {
+  RoadSageModel({this.loggedIn = true});
+
+  // Status
+  bool loggedIn;
+
+  RoadSageModel copyWith({bool? loggedIn}) {
+    return RoadSageModel(
+      loggedIn: loggedIn ?? this.loggedIn,
+    );
+  }
+}
+
+class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
+  RoadSageModelNotifier() : super(RoadSageModel());
+
+  void switchLoggedIn(bool value) {
+    state = state.copyWith(loggedIn: value);
+  }
+}
+
+final roadSageModelProvider =
+    StateNotifierProvider<RoadSageModelNotifier, RoadSageModel>((ref) {
+  return RoadSageModelNotifier();
+});
+
+// Display (display.dart) -----------------------------------------------
 
 class DisplayModel {
   DisplayModel(
@@ -64,7 +92,7 @@ final displayModelProvider =
   return DisplayModelNotifier();
 });
 
-// Remote (remote.dart)
+// Remote (remote.dart)  -----------------------------------------------
 
 class RemoteModel {
   RemoteModel({this.status = true, this.batteryLevel = 65});

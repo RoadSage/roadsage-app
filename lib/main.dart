@@ -33,14 +33,14 @@ void main() async {
 
 AuthClass authClass = AuthClass();
 
-class RoadSageApp extends StatefulWidget {
+class RoadSageApp extends ConsumerStatefulWidget {
   const RoadSageApp({Key? key}) : super(key: key);
 
   @override
   _RoadSageApp createState() => _RoadSageApp();
 }
 
-class _RoadSageApp extends State<RoadSageApp>
+class _RoadSageApp extends ConsumerState<RoadSageApp>
     with LifecycleAware, LifecycleMixin {
   final SiriSuggestions siri = SiriSuggestions();
 
@@ -49,8 +49,6 @@ class _RoadSageApp extends State<RoadSageApp>
   }
 
   String defaultPage = Routes.root;
-  bool isLoggedIn = false;
-
   static const platform = MethodChannel(Constants.androidMethodChannel);
   String? _assistantQuery;
 
@@ -84,7 +82,7 @@ class _RoadSageApp extends State<RoadSageApp>
   void initState() {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      isLoggedIn = true;
+      ref.read(roadSageModelProvider.notifier).switchLoggedIn(true);
     }
     super.initState();
   }
@@ -139,6 +137,8 @@ class _RoadSageApp extends State<RoadSageApp>
 
   @override
   Widget build(BuildContext context) {
+    final roadSageModel = ref.watch(roadSageModelProvider);
+
     return MaterialApp(
       title: Constants.title,
       theme: ThemeData(
@@ -156,7 +156,7 @@ class _RoadSageApp extends State<RoadSageApp>
         Routes.preferences: (context) => const PreferencesScreen(),
         Routes.profile: (context) => const ProfileScreen(),
       },
-      initialRoute: isLoggedIn ? Routes.home : Routes.home,
+      initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
     );
   }
 }
@@ -216,7 +216,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
               child: Text(displayModel.displayStatus
                   ? RoadSageStrings.connected
                   : RoadSageStrings.disconnected),
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, Routes.display),
             )),
         IconButton(
           icon: const Icon(Icons.menu),
@@ -287,17 +287,21 @@ class _MainScreenState extends ConsumerState<MainScreen> {
               return Padding(
                 padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
                 child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(RoadSageColours.grey),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)))),
-                  child: const Text(
-                    RoadSageStrings.signOut,
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  onPressed: () => authClass.signOut(context: context),
-                ),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(RoadSageColours.grey),
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)))),
+                    child: const Text(
+                      RoadSageStrings.signOut,
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    onPressed: () {
+                      ref
+                          .read(roadSageModelProvider.notifier)
+                          .switchLoggedIn(false);
+                      authClass.signOut(context: context);
+                    }),
               );
             }
             return Column(
