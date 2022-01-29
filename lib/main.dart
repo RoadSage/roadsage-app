@@ -11,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lifecycle/lifecycle.dart';
+import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -160,19 +161,20 @@ class _RoadSageApp extends State<RoadSageApp>
   }
 }
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  ConsumerState<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-  int _selectedIndex = 0;
+  // default - 2 - HomeScreen
+  int _selectedIndex = 2;
 
   // Tuple2(<Screen widget>, <App bar title>)
   static const _bottomNavItems = [
@@ -190,6 +192,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final displayModel = ref.watch(displayModelProvider);
+
     AppBar appBar = AppBar(
       title: Text(_bottomNavItems.elementAt(_selectedIndex).item2),
       titleTextStyle: const TextStyle(fontSize: 32, shadows: [
@@ -209,7 +213,9 @@ class _MainScreenState extends State<MainScreen> {
                       MaterialStateProperty.all(RoadSageColours.lightBlue),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)))),
-              child: const Text(Constants.connected),
+              child: Text(displayModel.displayStatus
+                  ? RoadSageStrings.connected
+                  : RoadSageStrings.disconnected),
               onPressed: () {},
             )),
         IconButton(
@@ -255,7 +261,7 @@ class _MainScreenState extends State<MainScreen> {
     // Tuple2(<Item name>, <onClick>)
     final drawerItems = [
       Tuple2(RoadSageStrings.userProfile, () {
-        Navigator.pushNamed(context, Routes.profile);
+        Navigator.popAndPushNamed(context, Routes.profile);
       }),
       Tuple2(RoadSageStrings.activity, () {
         Navigator.pop(context);
@@ -267,7 +273,7 @@ class _MainScreenState extends State<MainScreen> {
         Navigator.pop(context);
       }),
       Tuple2(RoadSageStrings.preferences, () {
-        Navigator.pushNamed(context, Routes.preferences);
+        Navigator.popAndPushNamed(context, Routes.preferences);
       }),
     ];
 

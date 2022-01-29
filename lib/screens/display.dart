@@ -41,15 +41,19 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                   RoadSageStrings.status,
                   style: TextStyle(fontSize: 20),
                 ),
-                trailing: const Padding(
-                  padding: EdgeInsets.only(right: 10.0),
+                trailing: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
                   child: Icon(
                     Icons.circle,
                     size: 38,
-                    color: Colors.green,
+                    color:
+                        displayModel.displayStatus ? Colors.green : Colors.red,
                   ),
                 ),
                 tileColor: Colors.white,
+                onTap: () => ref
+                    .read(displayModelProvider.notifier)
+                    .switchDisplayStatus(!displayModel.displayStatus),
               ),
               const SizedBox(height: 20),
               const Center(
@@ -63,7 +67,7 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                 max: 100,
                 divisions: 20,
                 activeColor: RoadSageColours.lightBlue,
-                label: displayModel.brightnessLevel.round().toString() + "%",
+                label: "${displayModel.brightnessLevel.round()}%",
                 onChanged: (double value) {
                   setState(() {
                     ref
@@ -84,7 +88,7 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                   setState(() {
                     ref
                         .read(displayModelProvider.notifier)
-                        .toggleAdaptiveBrightness(value);
+                        .switchAdaptiveBrightness(value);
                   });
                 },
               ),
@@ -104,15 +108,19 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                   RoadSageStrings.status,
                   style: TextStyle(fontSize: 20),
                 ),
-                trailing: const Padding(
-                  padding: EdgeInsets.only(right: 10.0),
+                trailing: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
                   child: Icon(
                     Icons.circle,
                     size: 38,
-                    color: Colors.green,
+                    color:
+                        displayModel.sensorStatus ? Colors.green : Colors.red,
                   ),
                 ),
                 tileColor: Colors.white,
+                onTap: () => ref
+                    .read(displayModelProvider.notifier)
+                    .switchSensorStatus(!displayModel.sensorStatus),
               ),
               const SizedBox(height: 20),
               ListTile(
@@ -126,9 +134,9 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                 trailing: SizedBox(
                   width: 80,
                   child: Row(
-                    children: const [
-                      Text('100%'),
-                      Icon(
+                    children: [
+                      Text('${displayModel.batteryLevel}%'),
+                      const Icon(
                         Icons.battery_std_outlined,
                         size: 38,
                         color: Colors.black,

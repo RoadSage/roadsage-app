@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../state/models.dart';
 
-class RemoteScreen extends StatefulWidget {
+class RemoteScreen extends ConsumerStatefulWidget {
   const RemoteScreen({Key? key}) : super(key: key);
 
   @override
-  State<RemoteScreen> createState() => _RemoteScreenState();
+  ConsumerState<RemoteScreen> createState() => _RemoteScreenState();
 }
 
-class _RemoteScreenState extends State<RemoteScreen> {
+class _RemoteScreenState extends ConsumerState<RemoteScreen> {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
@@ -20,6 +22,8 @@ class _RemoteScreenState extends State<RemoteScreen> {
       elevation: 0,
       centerTitle: false,
     );
+
+    final remoteModel = ref.watch(remoteModelProvider);
 
     return Scaffold(
       appBar: appBar,
@@ -37,15 +41,18 @@ class _RemoteScreenState extends State<RemoteScreen> {
                   RoadSageStrings.status,
                   style: TextStyle(fontSize: 20),
                 ),
-                trailing: const Padding(
-                  padding: EdgeInsets.only(right: 10.0),
+                trailing: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
                   child: Icon(
                     Icons.circle,
                     size: 38,
-                    color: Colors.green,
+                    color: remoteModel.status ? Colors.green : Colors.red,
                   ),
                 ),
                 tileColor: Colors.white,
+                onTap: () => ref
+                    .read(remoteModelProvider.notifier)
+                    .switchStatus(!remoteModel.status),
               ),
               const SizedBox(height: 15),
               ListTile(
@@ -59,9 +66,9 @@ class _RemoteScreenState extends State<RemoteScreen> {
                 trailing: SizedBox(
                   width: 80,
                   child: Row(
-                    children: const [
-                      Text('100%'),
-                      Icon(
+                    children: [
+                      Text('${remoteModel.batteryLevel}%'),
+                      const Icon(
                         Icons.battery_std_outlined,
                         size: 38,
                         color: Colors.black,
