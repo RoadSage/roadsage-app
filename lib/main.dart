@@ -141,9 +141,14 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
 
     return MaterialApp(
       title: Constants.title,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.grey.shade300,
+        primaryColor: Colors.grey.shade500,
+        primaryColorLight: Colors.white,
+        primaryColorDark: Colors.grey.shade700,
       ),
+      darkTheme: ThemeData.dark(),
+      themeMode: ThemeMode.system,
       navigatorObservers: [defaultLifecycleObserver],
       routes: {
         Routes.root: (context) =>
@@ -200,7 +205,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
       ]),
       titleSpacing: 20,
-      backgroundColor: RoadSageColours.lightGrey,
+      backgroundColor: Colors.transparent,
       toolbarHeight: 75,
       elevation: 0,
       centerTitle: false,
@@ -209,8 +214,6 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
             child: ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(RoadSageColours.lightBlue),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)))),
               child: Text(displayModel.displayStatus
@@ -250,9 +253,9 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       ],
       currentIndex: _selectedIndex,
       iconSize: 26,
-      type: BottomNavigationBarType.fixed,
+      backgroundColor: Theme.of(context).primaryColor,
       selectedItemColor: RoadSageColours.lightBlue,
-      unselectedItemColor: Colors.grey,
+      type: BottomNavigationBarType.fixed,
       showSelectedLabels: false,
       showUnselectedLabels: false,
       onTap: _onBottomNavItemTapped,
@@ -278,53 +281,49 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     ];
 
     final Drawer drawer = Drawer(
-        backgroundColor: RoadSageColours.lightGrey,
         child: ListView.builder(
-          padding: const EdgeInsets.only(top: 150),
-          itemCount: drawerItems.length + 1,
-          itemBuilder: (context, index) {
-            if (index == drawerItems.length) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(RoadSageColours.grey),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)))),
-                    child: const Text(
-                      RoadSageStrings.signOut,
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    onPressed: () {
-                      ref
-                          .read(roadSageModelProvider.notifier)
-                          .switchLoggedIn(false);
-                      authClass.signOut(context: context);
-                    }),
-              );
-            }
-            return Column(
-              children: [
-                ListTile(
-                    title: Text(
-                      drawerItems[index].item1,
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    onTap: drawerItems[index].item2),
-                const Divider(
-                  color: Colors.black,
+      padding: const EdgeInsets.only(top: 150),
+      itemCount: drawerItems.length + 1,
+      itemBuilder: (context, index) {
+        if (index == drawerItems.length) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)))),
+                child: const Text(
+                  RoadSageStrings.signOut,
+                  style: TextStyle(fontSize: 14),
                 ),
-              ],
-            );
-          },
-        ));
+                onPressed: () {
+                  ref
+                      .read(roadSageModelProvider.notifier)
+                      .switchLoggedIn(false);
+                  authClass.signOut(context: context);
+                }),
+          );
+        }
+        return Column(
+          children: [
+            ListTile(
+                title: Text(
+                  drawerItems[index].item1,
+                  style: const TextStyle(fontSize: 16),
+                ),
+                onTap: drawerItems[index].item2),
+            const Divider(
+              color: Colors.black,
+            ),
+          ],
+        );
+      },
+    ));
 
     return Scaffold(
         key: _key,
         appBar: appBar,
         body: _bottomNavItems.elementAt(_selectedIndex).item1,
-        backgroundColor: RoadSageColours.lightGrey,
         bottomNavigationBar: bottomNavBar,
         endDrawer: drawer);
   }

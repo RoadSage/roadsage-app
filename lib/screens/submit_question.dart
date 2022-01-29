@@ -29,7 +29,6 @@ class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
                         " ",
                         style: TextStyle(
                             fontSize: 34.0,
-                            color: Color(0xFFffffff),
                             fontWeight: FontWeight.w400,
                             fontFamily: "Roboto"),
                       ),
@@ -104,13 +103,13 @@ class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFF0AC0FF),
                             textStyle: const TextStyle(fontSize: 20)),
                         onPressed: () => Navigator.pop(context),
-                        child: const Text('Submit'),
+                        child: const Text(
+                          'Submit',
+                        ),
                       ))),
             ]),
-        color: const Color(0xFFDCDCDC),
         padding: const EdgeInsets.all(0.0),
         alignment: Alignment.center,
       ),

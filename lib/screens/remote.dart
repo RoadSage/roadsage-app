@@ -15,9 +15,8 @@ class _RemoteScreenState extends ConsumerState<RemoteScreen> {
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
       title: const Text(RoadSageStrings.remote),
-      titleTextStyle: const TextStyle(fontSize: 28, color: Colors.black),
+      titleTextStyle: const TextStyle(fontSize: 28),
       titleSpacing: 20,
-      backgroundColor: RoadSageColours.lightGrey,
       toolbarHeight: 75,
       elevation: 0,
       centerTitle: false,
@@ -27,7 +26,6 @@ class _RemoteScreenState extends ConsumerState<RemoteScreen> {
 
     return Scaffold(
       appBar: appBar,
-      backgroundColor: RoadSageColours.lightGrey,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -49,7 +47,7 @@ class _RemoteScreenState extends ConsumerState<RemoteScreen> {
                     color: remoteModel.status ? Colors.green : Colors.red,
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
                 onTap: () => ref
                     .read(remoteModelProvider.notifier)
                     .switchStatus(!remoteModel.status),
@@ -76,7 +74,7 @@ class _RemoteScreenState extends ConsumerState<RemoteScreen> {
                     ],
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
               ),
             ],
           ),

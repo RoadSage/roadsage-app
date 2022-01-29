@@ -15,9 +15,8 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
       title: const Text(RoadSageStrings.display),
-      titleTextStyle: const TextStyle(fontSize: 28, color: Colors.black),
+      titleTextStyle: const TextStyle(fontSize: 28),
       titleSpacing: 20,
-      backgroundColor: RoadSageColours.lightGrey,
       toolbarHeight: 75,
       elevation: 0,
       centerTitle: false,
@@ -27,7 +26,6 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
 
     return Scaffold(
       appBar: appBar,
-      backgroundColor: RoadSageColours.lightGrey,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -50,7 +48,7 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                         displayModel.displayStatus ? Colors.green : Colors.red,
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
                 onTap: () => ref
                     .read(displayModelProvider.notifier)
                     .switchDisplayStatus(!displayModel.displayStatus),
@@ -117,7 +115,7 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                         displayModel.sensorStatus ? Colors.green : Colors.red,
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
                 onTap: () => ref
                     .read(displayModelProvider.notifier)
                     .switchSensorStatus(!displayModel.sensorStatus),
@@ -144,7 +142,7 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                     ],
                   ),
                 ),
-                tileColor: Colors.white,
+                tileColor: Theme.of(context).primaryColorLight,
               ),
               const SizedBox(height: 20),
               const Center(
