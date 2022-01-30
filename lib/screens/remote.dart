@@ -15,7 +15,6 @@ class _RemoteScreenState extends ConsumerState<RemoteScreen> {
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
       title: const Text(RoadSageStrings.remote),
-      titleTextStyle: const TextStyle(fontSize: 28),
       titleSpacing: 20,
       toolbarHeight: 75,
       elevation: 0,

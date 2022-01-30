@@ -142,13 +142,47 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
     return MaterialApp(
       title: Constants.title,
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.grey.shade300,
-        primaryColor: Colors.grey.shade500,
-        primaryColorLight: Colors.white,
-        primaryColorDark: Colors.grey.shade700,
+          scaffoldBackgroundColor: RoadSageColours.lightGrey,
+          primaryColor: RoadSageColours.lightGrey,
+          primaryColorLight: Colors.white,
+          primaryColorDark: Colors.grey.shade700,
+          colorScheme: const ColorScheme.light()
+              .copyWith(secondary: Colors.lightBlue, primary: Colors.lightBlue),
+          textTheme: ThemeData.light().textTheme.copyWith(
+                button: const TextStyle(color: Colors.black),
+              ),
+          bottomNavigationBarTheme:
+              const BottomNavigationBarThemeData(backgroundColor: Colors.white),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: RoadSageColours.lightGrey,
+              iconTheme: IconThemeData(color: Colors.black),
+              titleTextStyle: TextStyle(color: Colors.black, fontSize: 28)),
+          drawerTheme:
+              const DrawerThemeData(backgroundColor: RoadSageColours.lightGrey),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(RoadSageColours.lightBlue)))),
+      darkTheme: ThemeData.dark().copyWith(
+        primaryColor: RoadSageColours.darkGrey,
+        primaryColorLight: Colors.black,
+        colorScheme: const ColorScheme.dark()
+            .copyWith(secondary: Colors.lightBlue, primary: Colors.lightBlue),
+        textTheme: ThemeData.dark().textTheme.copyWith(
+              button: const TextStyle(color: Colors.white),
+            ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: RoadSageColours.darkGrey),
+        appBarTheme: const AppBarTheme(
+            backgroundColor: RoadSageColours.darkGrey,
+            titleTextStyle: TextStyle(color: Colors.white, fontSize: 28)),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                backgroundColor:
+                    MaterialStateProperty.all(RoadSageColours.lightBlue))),
       ),
-      darkTheme: ThemeData.dark(),
-      themeMode: ThemeMode.system,
+      themeMode: roadSageModel.themeMode,
       navigatorObservers: [defaultLifecycleObserver],
       routes: {
         Routes.root: (context) =>
@@ -253,7 +287,6 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       ],
       currentIndex: _selectedIndex,
       iconSize: 26,
-      backgroundColor: Theme.of(context).primaryColor,
       selectedItemColor: RoadSageColours.lightBlue,
       type: BottomNavigationBarType.fixed,
       showSelectedLabels: false,

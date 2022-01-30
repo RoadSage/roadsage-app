@@ -45,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     (Platform.isAndroid)
                         ? RoadSageStrings.homeAndroidTrySayingEntries[index]
                         : RoadSageStrings.homeIOSTrySayingEntries[index],
-                    style: const TextStyle(color: Colors.black),
                   ),
                   tileColor: Theme.of(context).primaryColorLight,
                 );

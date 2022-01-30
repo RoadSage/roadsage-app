@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:roadsage/state/models.dart';
+import 'package:roadsage/utils.dart';
 
 class PreferencesScreen extends ConsumerStatefulWidget {
   const PreferencesScreen({Key? key}) : super(key: key);
@@ -16,7 +17,6 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
       title: const Text(RoadSageStrings.preferences),
-      titleTextStyle: const TextStyle(fontSize: 28, color: Colors.black),
       titleSpacing: 20,
       toolbarHeight: 75,
       elevation: 0,
@@ -27,9 +27,9 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
 
     return Scaffold(
       appBar: appBar,
-      backgroundColor: RoadSageColours.lightGrey,
       body: Center(
           child: SettingsList(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         contentPadding: const EdgeInsets.all(16),
         sections: [
           SettingsSection(
@@ -41,7 +41,18 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
               ),
               SettingsTile(
                 title: 'Colour theme',
-                subtitle: 'System Theme',
+                subtitle: roadSageModel.themeMode
+                    .toString()
+                    .substring(10)
+                    .capitalize(),
+                onPressed: (BuildContext context) async {
+                  var result = await _chooseColourTheme();
+                  if (result != null) {
+                    ref
+                        .watch(roadSageModelProvider.notifier)
+                        .switchThemeMode(result);
+                  }
+                },
               ),
               SettingsTile(
                 title: 'Time zone',
@@ -85,5 +96,30 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
         ],
       )),
     );
+  }
+
+  Future<ThemeMode?> _chooseColourTheme() async {
+    return showDialog<ThemeMode>(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Select colour theme'),
+            contentPadding: const EdgeInsets.all(20),
+            children: [
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(context, ThemeMode.system),
+                child: const Text('System'),
+              ),
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(context, ThemeMode.light),
+                child: const Text('Light'),
+              ),
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(context, ThemeMode.dark),
+                child: const Text('Dark'),
+              )
+            ],
+          );
+        });
   }
 }

@@ -1,16 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // General app model --------------------------------------------------
 
 class RoadSageModel {
-  RoadSageModel({this.loggedIn = true});
+  RoadSageModel({this.loggedIn = true, this.themeMode = ThemeMode.system});
 
   // Status
   bool loggedIn;
+  ThemeMode themeMode;
 
-  RoadSageModel copyWith({bool? loggedIn}) {
+  RoadSageModel copyWith({bool? loggedIn, ThemeMode? themeMode}) {
     return RoadSageModel(
       loggedIn: loggedIn ?? this.loggedIn,
+      themeMode: themeMode ?? this.themeMode,
     );
   }
 }
@@ -20,6 +23,10 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
 
   void switchLoggedIn(bool value) {
     state = state.copyWith(loggedIn: value);
+  }
+
+  void switchThemeMode(ThemeMode value) {
+    state = state.copyWith(themeMode: value);
   }
 }
 

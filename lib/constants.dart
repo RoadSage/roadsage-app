@@ -118,6 +118,7 @@ class RoadSageIcons {
 class RoadSageColours {
   static const Color lightBlue = Color(0xFF0AC0FF);
   static const Color lightGrey = Color(0xFFDCDCDC);
+  static const Color darkGrey = Color(0xFF303030);
   static const Color grey = Color(0xFFC4C4C4);
 }
 
