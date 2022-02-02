@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:roadsage/state/models.dart';
@@ -32,7 +33,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
-      title: const Text(RoadSageStrings.preferences),
+      title: Text(translate(RoadSageStrings.preferences)),
       titleSpacing: 20,
       backgroundColor: Colors.transparent,
       toolbarHeight: 75,
@@ -53,8 +54,18 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
             title: 'General',
             tiles: [
               SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
+                title: translate("prefs.language.lang"),
+                subtitle: translate(
+                    "prefs.language.name.${roadSageModel.languageCode}"),
+                onPressed: (BuildContext context) async {
+                  var result = await _chooseLanguage();
+                  if (result != null) {
+                    changeLocale(context, result);
+                    ref
+                        .read(roadSageModelProvider.notifier)
+                        .switchLanguage(result);
+                  }
+                },
               ),
               SettingsTile(
                 title: 'Colour theme',
@@ -135,6 +146,27 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 onPressed: () => Navigator.pop(context, ThemeMode.dark),
                 child: const Text('Dark'),
               )
+            ],
+          );
+        });
+  }
+
+  Future<String?> _chooseLanguage() async {
+    return showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: Text(translate('prefs.language.select_prompt')),
+            contentPadding: const EdgeInsets.all(20),
+            children: [
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(context, 'en'),
+                child: Text(translate('prefs.language.name.en')),
+              ),
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(context, 'fr'),
+                child: Text(translate('prefs.language.name.fr')),
+              ),
             ],
           );
         });

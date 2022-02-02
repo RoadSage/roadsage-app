@@ -20,10 +20,10 @@ class Constants {
   static const String byUnitic = "By Unitic";
   static const String troubleSigning = "Trouble Signing in?";
 
-  static const String help = "Help & Feedback";
-  static const String devices = "Devices";
-  static const String home = "Home";
-  static const String recents = "Recents";
+  static const String help = "app_bar.titles.help_and_feedback";
+  static const String devices = "app_bar.titles.devices";
+  static const String home = "app_bar.titles.home";
+  static const String recents = "app_bar.titles.recents";
 
   static const String siriSuggestionKey = "key";
   static const String androidMethodChannel =
@@ -39,7 +39,7 @@ class RoadSageStrings {
   static const String activity = 'Activity';
   static const String buyRoadSage = 'Buy RoadSage';
   static const String referAFriend = 'Refer a Friend';
-  static const String preferences = 'Preferences';
+  static const String preferences = 'prefs.title';
   static const String signOut = 'Sign Out';
   static const String faqs = 'FAQs';
   static const String rateUs = 'Rate Us';

@@ -1,0 +1,21 @@
+{
+    "app_bar": {
+        "titles": {
+            "home": "Home",
+            "devices": "Devices",
+            "recents": "Recents",
+            "help_and_feedback": "Help & Feedback"
+        }
+    },
+    "prefs": {
+        "title": "Preferences",
+        "language": {
+            "lang": "Language",
+            "select_prompt": "Select the language",
+            "name": {
+                "en": "English",
+                "fr": "French"
+            }
+        }
+    }
+}

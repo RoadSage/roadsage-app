@@ -4,17 +4,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // General app model --------------------------------------------------
 
 class RoadSageModel {
-  RoadSageModel({this.loggedIn = true, this.themeMode = ThemeMode.system});
+  RoadSageModel(
+      {this.loggedIn = true,
+      this.themeMode = ThemeMode.system,
+      this.languageCode = "en"});
 
   // Status
   bool loggedIn;
   ThemeMode themeMode;
+  String languageCode;
 
-  RoadSageModel copyWith({bool? loggedIn, ThemeMode? themeMode}) {
+  RoadSageModel copyWith(
+      {bool? loggedIn, ThemeMode? themeMode, String? languageCode}) {
     return RoadSageModel(
-      loggedIn: loggedIn ?? this.loggedIn,
-      themeMode: themeMode ?? this.themeMode,
-    );
+        loggedIn: loggedIn ?? this.loggedIn,
+        themeMode: themeMode ?? this.themeMode,
+        languageCode: languageCode ?? this.languageCode);
   }
 }
 
@@ -27,6 +32,10 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
 
   void switchThemeMode(ThemeMode value) {
     state = state.copyWith(themeMode: value);
+  }
+
+  void switchLanguage(String lang) {
+    state = state.copyWith(languageCode: lang);
   }
 }
 
