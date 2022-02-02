@@ -15,6 +15,7 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
       title: const Text(RoadSageStrings.display),
+      backgroundColor: Colors.transparent,
       titleSpacing: 20,
       toolbarHeight: 75,
       elevation: 0,
@@ -129,14 +130,14 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                   style: TextStyle(fontSize: 20),
                 ),
                 trailing: SizedBox(
-                  width: 80,
+                  width: 70,
                   child: Row(
                     children: [
                       Text('${displayModel.batteryLevel}%'),
-                      const Icon(
+                      Icon(
                         Icons.battery_std_outlined,
                         size: 38,
-                        color: Colors.black,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                     ],
                   ),

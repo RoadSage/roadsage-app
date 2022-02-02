@@ -120,6 +120,7 @@ class RoadSageColours {
   static const Color lightGrey = Color(0xFFDCDCDC);
   static const Color darkGrey = Color(0xFF303030);
   static const Color grey = Color(0xFFC4C4C4);
+  static const Color darkBg = Color(0xFF121212);
 }
 
 class Fonts {

@@ -66,29 +66,19 @@ class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
                                   "Enter your question here:",
                                   style: TextStyle(
                                       fontSize: 16.0,
-                                      color: Colors.black,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: "Roboto"),
                                 )
                               ]),
-                          Padding(
-                              child: Container(
-                                color: const Color.fromARGB(60, 220, 220, 220),
-                                child: const TextField(
-                                  style: TextStyle(
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w200,
-                                      color: Colors.black,
-                                      fontFamily: "Roboto"),
-                                  maxLines: 15,
-                                  decoration: InputDecoration.collapsed(
-                                      hintText: "Enter your question here"),
-                                ),
+                          const Padding(
+                              child: TextField(
+                                maxLines: 10,
+                                decoration: InputDecoration(
+                                    hintText: "Enter your question here"),
                               ),
-                              padding:
-                                  const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0))
+                              padding: EdgeInsets.fromLTRB(20, 1.0, 20, 10.0))
                         ]),
-                        color: const Color(0xFFfafafa),
+                        color: Theme.of(context).primaryColorLight,
                         padding: const EdgeInsets.all(0.0),
                         alignment: Alignment.center,
                       ),

@@ -142,30 +142,37 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
     return MaterialApp(
       title: Constants.title,
       theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: RoadSageColours.lightGrey,
-          primaryColor: RoadSageColours.lightGrey,
-          primaryColorLight: Colors.white,
-          primaryColorDark: Colors.grey.shade700,
-          colorScheme: const ColorScheme.light()
-              .copyWith(secondary: Colors.lightBlue, primary: Colors.lightBlue),
-          textTheme: ThemeData.light().textTheme.copyWith(
-                button: const TextStyle(color: Colors.black),
-              ),
-          bottomNavigationBarTheme:
-              const BottomNavigationBarThemeData(backgroundColor: Colors.white),
-          appBarTheme: const AppBarTheme(
-              backgroundColor: RoadSageColours.lightGrey,
-              iconTheme: IconThemeData(color: Colors.black),
-              titleTextStyle: TextStyle(color: Colors.black, fontSize: 28)),
-          drawerTheme:
-              const DrawerThemeData(backgroundColor: RoadSageColours.lightGrey),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(RoadSageColours.lightBlue)))),
+        scaffoldBackgroundColor: RoadSageColours.lightGrey,
+        primaryColor: RoadSageColours.lightGrey,
+        primaryColorLight: Colors.white,
+        primaryColorDark: Colors.grey.shade700,
+        colorScheme: const ColorScheme.light()
+            .copyWith(secondary: Colors.lightBlue, primary: Colors.lightBlue),
+        textTheme: ThemeData.light().textTheme.copyWith(
+              button: const TextStyle(color: Colors.black),
+            ),
+        bottomNavigationBarTheme:
+            const BottomNavigationBarThemeData(backgroundColor: Colors.white),
+        appBarTheme: const AppBarTheme(
+            backgroundColor: RoadSageColours.lightGrey,
+            iconTheme: IconThemeData(color: Colors.black),
+            titleTextStyle: TextStyle(color: Colors.black, fontSize: 28)),
+        drawerTheme:
+            const DrawerThemeData(backgroundColor: RoadSageColours.lightGrey),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all(RoadSageColours.lightBlue)),
+        ),
+        dialogBackgroundColor: RoadSageColours.lightGrey,
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
+      ),
       darkTheme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: RoadSageColours.darkBg,
         primaryColor: RoadSageColours.darkGrey,
-        primaryColorLight: Colors.black,
+        primaryColorLight: RoadSageColours.darkGrey,
         colorScheme: const ColorScheme.dark()
             .copyWith(secondary: Colors.lightBlue, primary: Colors.lightBlue),
         textTheme: ThemeData.dark().textTheme.copyWith(
@@ -181,6 +188,10 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
                 foregroundColor: MaterialStateProperty.all(Colors.white),
                 backgroundColor:
                     MaterialStateProperty.all(RoadSageColours.lightBlue))),
+        dialogBackgroundColor: RoadSageColours.darkBg,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
       ),
       themeMode: roadSageModel.themeMode,
       navigatorObservers: [defaultLifecycleObserver],
@@ -314,44 +325,45 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     ];
 
     final Drawer drawer = Drawer(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         child: ListView.builder(
-      padding: const EdgeInsets.only(top: 150),
-      itemCount: drawerItems.length + 1,
-      itemBuilder: (context, index) {
-        if (index == drawerItems.length) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-            child: ElevatedButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)))),
-                child: const Text(
-                  RoadSageStrings.signOut,
-                  style: TextStyle(fontSize: 14),
+          padding: const EdgeInsets.only(top: 150),
+          itemCount: drawerItems.length + 1,
+          itemBuilder: (context, index) {
+            if (index == drawerItems.length) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)))),
+                    child: const Text(
+                      RoadSageStrings.signOut,
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    onPressed: () {
+                      ref
+                          .read(roadSageModelProvider.notifier)
+                          .switchLoggedIn(false);
+                      authClass.signOut(context: context);
+                    }),
+              );
+            }
+            return Column(
+              children: [
+                ListTile(
+                    title: Text(
+                      drawerItems[index].item1,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    onTap: drawerItems[index].item2),
+                const Divider(
+                  color: Colors.black,
                 ),
-                onPressed: () {
-                  ref
-                      .read(roadSageModelProvider.notifier)
-                      .switchLoggedIn(false);
-                  authClass.signOut(context: context);
-                }),
-          );
-        }
-        return Column(
-          children: [
-            ListTile(
-                title: Text(
-                  drawerItems[index].item1,
-                  style: const TextStyle(fontSize: 16),
-                ),
-                onTap: drawerItems[index].item2),
-            const Divider(
-              color: Colors.black,
-            ),
-          ],
-        );
-      },
-    ));
+              ],
+            );
+          },
+        ));
 
     return Scaffold(
         key: _key,

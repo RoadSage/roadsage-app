@@ -25,7 +25,7 @@ class _HelpScreenState extends State<HelpScreen> {
             // TODO: possibly convert to TextFormFields?
             Padding(
                 child: Container(
-                  color: const Color.fromARGB(60, 220, 220, 220),
+                  color: Theme.of(context).primaryColorLight,
                   child: const TextField(
                     maxLines: 1,
                     decoration: InputDecoration(
@@ -37,7 +37,7 @@ class _HelpScreenState extends State<HelpScreen> {
                 padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
             Padding(
                 child: Container(
-                  color: const Color.fromARGB(60, 220, 220, 220),
+                  color: Theme.of(context).primaryColorLight,
                   child: const TextField(
                     maxLines: 1,
                     decoration: InputDecoration(
@@ -58,7 +58,7 @@ class _HelpScreenState extends State<HelpScreen> {
 
             Padding(
                 child: Container(
-                  color: const Color.fromARGB(60, 220, 220, 220),
+                  color: Theme.of(context).primaryColorLight,
                   child: const TextField(
                     maxLines: 13,
                     decoration: InputDecoration(

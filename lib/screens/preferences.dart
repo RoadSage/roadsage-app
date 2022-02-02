@@ -4,6 +4,7 @@ import 'package:roadsage/constants.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:roadsage/utils.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class PreferencesScreen extends ConsumerStatefulWidget {
   const PreferencesScreen({Key? key}) : super(key: key);
@@ -13,11 +14,27 @@ class PreferencesScreen extends ConsumerStatefulWidget {
 }
 
 class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
+  String _appVersion = "";
+
+  @override
+  void initState() {
+    initPlatformInfo();
+    super.initState();
+  }
+
+  void initPlatformInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      _appVersion = packageInfo.version;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
       title: const Text(RoadSageStrings.preferences),
       titleSpacing: 20,
+      backgroundColor: Colors.transparent,
       toolbarHeight: 75,
       elevation: 0,
       centerTitle: false,
@@ -80,7 +97,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
             tiles: [
               SettingsTile(
                 title: 'App version',
-                subtitle: '0.3.0',
+                subtitle: _appVersion,
               )
             ],
           ),

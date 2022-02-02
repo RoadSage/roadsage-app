@@ -14,6 +14,7 @@ class _FAQScreenState extends State<FAQScreen> {
     AppBar appBar = AppBar(
       title: const Text(RoadSageStrings.faqs),
       titleSpacing: 20,
+      backgroundColor: Colors.transparent,
       toolbarHeight: 75,
       elevation: 0,
       centerTitle: false,
@@ -68,7 +69,7 @@ class _FAQScreenState extends State<FAQScreen> {
                                     "How do I display custom messages?",
                                     style: TextStyle(
                                         fontSize: 16.0,
-                                        color: Colors.black,
+                                        // color: Colors.black,
                                         fontWeight: FontWeight.w300,
                                         fontFamily: "Roboto"),
                                   )
@@ -79,7 +80,7 @@ class _FAQScreenState extends State<FAQScreen> {
                               color: RoadSageColours.lightBlue,
                             ),
                           ]),
-                          color: RoadSageColours.lightGrey,
+                          color: Theme.of(context).primaryColorLight,
                           padding: const EdgeInsets.all(0.0),
                           alignment: Alignment.center,
                         ),
