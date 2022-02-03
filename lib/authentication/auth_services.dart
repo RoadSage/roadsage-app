@@ -6,7 +6,6 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:roadsage/main.dart';
-import 'package:roadsage/constants.dart';
 import 'package:roadsage/screens/login.dart';
 
 // Small class to do some handling of the data from facebook
