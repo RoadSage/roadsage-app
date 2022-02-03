@@ -15,6 +15,9 @@ import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+
 import 'package:roadsage/authentication/auth_services.dart';
 import 'constants.dart';
 import 'siri_suggestions.dart';
@@ -28,7 +31,11 @@ import 'screens/remote.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const ProviderScope(child: RoadSageApp()));
+
+  var delegate = await LocalizationDelegate.create(
+      fallbackLocale: 'en_GB', supportedLocales: ['en_GB', 'en_US', 'fr']);
+
+  runApp(LocalizedApp(delegate, const ProviderScope(child: RoadSageApp())));
 }
 
 AuthClass authClass = AuthClass();
@@ -139,82 +146,92 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
   Widget build(BuildContext context) {
     final roadSageModel = ref.watch(roadSageModelProvider);
 
-    return MaterialApp(
-      title: Constants.title,
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: RoadSageColours.lightGrey,
-        primaryColor: RoadSageColours.lightGrey,
-        primaryColorLight: Colors.white,
-        primaryColorDark: Colors.grey.shade700,
-        colorScheme: const ColorScheme.light()
-            .copyWith(secondary: Colors.lightBlue, primary: Colors.lightBlue),
-        textTheme: ThemeData.light().textTheme.copyWith(
-              button: const TextStyle(color: Colors.black),
-            ),
-        bottomNavigationBarTheme:
-            const BottomNavigationBarThemeData(backgroundColor: Colors.white),
-        appBarTheme: const AppBarTheme(
-            backgroundColor: RoadSageColours.lightGrey,
-            iconTheme: IconThemeData(color: Colors.black),
-            titleTextStyle: TextStyle(color: Colors.black, fontSize: 28)),
-        drawerTheme:
-            const DrawerThemeData(backgroundColor: RoadSageColours.lightGrey),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(RoadSageColours.lightBlue)),
-        ),
-        dialogBackgroundColor: RoadSageColours.lightGrey,
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
-      ),
-      darkTheme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: RoadSageColours.darkBg,
-        primaryColor: RoadSageColours.darkGrey,
-        primaryColorLight: RoadSageColours.darkGrey,
-        colorScheme: const ColorScheme.dark()
-            .copyWith(secondary: Colors.lightBlue, primary: Colors.lightBlue),
-        textTheme: ThemeData.dark().textTheme.copyWith(
-              button: const TextStyle(color: Colors.white),
-            ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor: RoadSageColours.darkGrey),
-        appBarTheme: const AppBarTheme(
-            backgroundColor: RoadSageColours.darkGrey,
-            titleTextStyle: TextStyle(color: Colors.white, fontSize: 28)),
-        elevatedButtonTheme: ElevatedButtonThemeData(
+    var localizationDelegate = LocalizedApp.of(context).delegate;
+
+    return LocalizationProvider(
+      state: LocalizationProvider.of(context).state,
+      child: MaterialApp(
+        title: RoadSageStrings.title,
+        theme: ThemeData.light().copyWith(
+          scaffoldBackgroundColor: RoadSageColours.lightGrey,
+          primaryColor: RoadSageColours.lightGrey,
+          primaryColorLight: Colors.white,
+          primaryColorDark: Colors.grey.shade700,
+          colorScheme: const ColorScheme.light()
+              .copyWith(secondary: Colors.lightBlue, primary: Colors.lightBlue),
+          textTheme: ThemeData.light().textTheme.copyWith(
+                button: const TextStyle(color: Colors.black),
+              ),
+          bottomNavigationBarTheme:
+              const BottomNavigationBarThemeData(backgroundColor: Colors.white),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: RoadSageColours.lightGrey,
+              iconTheme: IconThemeData(color: Colors.black),
+              titleTextStyle: TextStyle(color: Colors.black, fontSize: 28)),
+          drawerTheme:
+              const DrawerThemeData(backgroundColor: RoadSageColours.lightGrey),
+          elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(Colors.white),
                 backgroundColor:
-                    MaterialStateProperty.all(RoadSageColours.lightBlue))),
-        dialogBackgroundColor: RoadSageColours.darkBg,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
+                    MaterialStateProperty.all(RoadSageColours.lightBlue)),
+          ),
+          dialogBackgroundColor: RoadSageColours.lightGrey,
+          iconTheme: const IconThemeData(
+            color: Colors.black,
+          ),
         ),
+        darkTheme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: RoadSageColours.darkBg,
+          primaryColor: RoadSageColours.darkGrey,
+          primaryColorLight: RoadSageColours.darkGrey,
+          colorScheme: const ColorScheme.dark()
+              .copyWith(secondary: Colors.lightBlue, primary: Colors.lightBlue),
+          textTheme: ThemeData.dark().textTheme.copyWith(
+                button: const TextStyle(color: Colors.white),
+              ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: RoadSageColours.darkGrey),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: RoadSageColours.darkGrey,
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 28)),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all(RoadSageColours.lightBlue))),
+          dialogBackgroundColor: RoadSageColours.darkBg,
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+        ),
+        themeMode: roadSageModel.themeMode,
+        navigatorObservers: [defaultLifecycleObserver],
+        routes: {
+          Routes.root: (context) => const LoginScreen(),
+          Routes.home: (context) => const MainScreen(),
+          Routes.remote: (context) => const RemoteScreen(),
+          Routes.display: (context) => const DisplayScreen(),
+          Routes.faq: (context) => const FAQScreen(),
+          Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
+          Routes.preferences: (context) => const PreferencesScreen(),
+          Routes.profile: (context) => const ProfileScreen(),
+        },
+        initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          localizationDelegate
+        ],
+        supportedLocales: localizationDelegate.supportedLocales,
+        locale: localizationDelegate.currentLocale,
       ),
-      themeMode: roadSageModel.themeMode,
-      navigatorObservers: [defaultLifecycleObserver],
-      routes: {
-        Routes.root: (context) =>
-            const LoginScreen(title: Constants.loginPageTitle),
-        Routes.home: (context) => const MainScreen(title: Constants.homePage),
-        Routes.remote: (context) => const RemoteScreen(),
-        Routes.display: (context) => const DisplayScreen(),
-        Routes.faq: (context) => const FAQScreen(),
-        Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
-        Routes.preferences: (context) => const PreferencesScreen(),
-        Routes.profile: (context) => const ProfileScreen(),
-      },
-      initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
     );
   }
 }
 
 class MainScreen extends ConsumerStatefulWidget {
-  const MainScreen({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   ConsumerState<MainScreen> createState() => _MainScreenState();
@@ -228,10 +245,10 @@ class _MainScreenState extends ConsumerState<MainScreen> {
 
   // Tuple2(<Screen widget>, <App bar title>)
   static const _bottomNavItems = [
-    Tuple2(HelpScreen(), Constants.help),
-    Tuple2(DevicesScreen(), Constants.devices),
-    Tuple2(HomeScreen(), Constants.home),
-    Tuple2(RecentsScreen(), Constants.recents),
+    Tuple2(HelpScreen(), RoadSageStrings.help),
+    Tuple2(DevicesScreen(), RoadSageStrings.devices),
+    Tuple2(HomeScreen(), RoadSageStrings.home),
+    Tuple2(RecentsScreen(), RoadSageStrings.recents),
   ];
 
   void _onBottomNavItemTapped(int index) {
@@ -245,7 +262,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     final displayModel = ref.watch(displayModelProvider);
 
     AppBar appBar = AppBar(
-      title: Text(_bottomNavItems.elementAt(_selectedIndex).item2),
+      title: Text(translate(_bottomNavItems.elementAt(_selectedIndex).item2)),
       titleTextStyle: const TextStyle(fontSize: 32, shadows: [
         Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
       ]),
@@ -281,19 +298,19 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.help_outline),
-          label: Constants.help,
+          label: RoadSageStrings.help,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.phone_android_outlined),
-          label: Constants.devices,
+          label: RoadSageStrings.devices,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
-          label: Constants.home,
+          label: RoadSageStrings.home,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.message_outlined),
-          label: Constants.recents,
+          label: RoadSageStrings.recents,
         ),
       ],
       currentIndex: _selectedIndex,
@@ -353,7 +370,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
               children: [
                 ListTile(
                     title: Text(
-                      drawerItems[index].item1,
+                      translate(drawerItems[index].item1),
                       style: const TextStyle(fontSize: 16),
                     ),
                     onTap: drawerItems[index].item2),
