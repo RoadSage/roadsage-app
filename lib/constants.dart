@@ -12,7 +12,20 @@ class Routes {
 }
 
 class Constants {
+  static const String siriSuggestionKey = "key";
+  static const String androidMethodChannel =
+      "io.unitic.roadsage/google_assistant";
+  static const String getAssistantMethod = "getAssistantQuery";
+}
+
+class RoadSageStrings {
+  static const String help = "app_bar.titles.help_and_feedback";
+  static const String devices = "app_bar.titles.devices";
+  static const String home = "app_bar.titles.home";
+  static const String recents = "app_bar.titles.recents";
+
   static const String title = "RoadSage";
+
   static const String loginPageTitle = "RoadSage Home Page";
   static const String homePage = "Home Page";
   static const String tncAgreement =
@@ -20,21 +33,7 @@ class Constants {
   static const String byUnitic = "By Unitic";
   static const String troubleSigning = "Trouble Signing in?";
 
-  static const String help = "app_bar.titles.help_and_feedback";
-  static const String devices = "app_bar.titles.devices";
-  static const String home = "app_bar.titles.home";
-  static const String recents = "app_bar.titles.recents";
-
-  static const String siriSuggestionKey = "key";
-  static const String androidMethodChannel =
-      "io.unitic.roadsage/google_assistant";
-  static const String getAssistantMethod = "getAssistantQuery";
-}
-
-// TODO: move some of the strings from Constants here
-class RoadSageStrings {
   static const String signInWithGoogle = 'Sign in with Google';
-
   static const String userProfile = 'User Profile';
   static const String activity = 'Activity';
   static const String buyRoadSage = 'Buy RoadSage';
@@ -121,24 +120,4 @@ class RoadSageColours {
   static const Color darkGrey = Color(0xFF303030);
   static const Color grey = Color(0xFFC4C4C4);
   static const Color darkBg = Color(0xFF121212);
-}
-
-class Fonts {
-  static const bigFont = TextStyle(
-      fontSize: 22.0,
-      color: Colors.black,
-      fontWeight: FontWeight.w400,
-      fontFamily: "Roboto");
-
-  static const middleFont = TextStyle(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w300,
-      color: Colors.black,
-      fontFamily: "Roboto");
-
-  static const smallFont = TextStyle(
-      fontSize: 12.0,
-      fontWeight: FontWeight.w200,
-      color: Colors.black,
-      fontFamily: "Roboto");
 }

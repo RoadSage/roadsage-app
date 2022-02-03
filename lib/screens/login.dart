@@ -7,8 +7,7 @@ import 'package:roadsage/constants.dart';
 import 'package:roadsage/authentication/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -34,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
-                      Constants.title,
+                      RoadSageStrings.title,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.mukta(
                         fontSize: 48,
@@ -60,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            Constants.byUnitic,
+                            RoadSageStrings.byUnitic,
                             textAlign: TextAlign.right,
                             style: GoogleFonts.mukta(
                                 fontSize: 18,
@@ -89,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               width: 325,
               child: Text(
-                Constants.tncAgreement,
+                RoadSageStrings.tncAgreement,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.mukta(
                   fontSize: 14,
@@ -135,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextButton(
                   onPressed: () => Navigator.pushNamed(context, Routes.home),
                   child: Text(
-                    Constants.troubleSigning,
+                    RoadSageStrings.troubleSigning,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.mukta(
                       fontSize: 14,

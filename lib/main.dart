@@ -151,7 +151,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
     return LocalizationProvider(
       state: LocalizationProvider.of(context).state,
       child: MaterialApp(
-        title: Constants.title,
+        title: RoadSageStrings.title,
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: RoadSageColours.lightGrey,
           primaryColor: RoadSageColours.lightGrey,
@@ -207,9 +207,8 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
         themeMode: roadSageModel.themeMode,
         navigatorObservers: [defaultLifecycleObserver],
         routes: {
-          Routes.root: (context) =>
-              const LoginScreen(title: Constants.loginPageTitle),
-          Routes.home: (context) => const MainScreen(title: Constants.homePage),
+          Routes.root: (context) => const LoginScreen(),
+          Routes.home: (context) => const MainScreen(),
           Routes.remote: (context) => const RemoteScreen(),
           Routes.display: (context) => const DisplayScreen(),
           Routes.faq: (context) => const FAQScreen(),
@@ -232,9 +231,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
 }
 
 class MainScreen extends ConsumerStatefulWidget {
-  const MainScreen({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   ConsumerState<MainScreen> createState() => _MainScreenState();
@@ -248,10 +245,10 @@ class _MainScreenState extends ConsumerState<MainScreen> {
 
   // Tuple2(<Screen widget>, <App bar title>)
   static const _bottomNavItems = [
-    Tuple2(HelpScreen(), Constants.help),
-    Tuple2(DevicesScreen(), Constants.devices),
-    Tuple2(HomeScreen(), Constants.home),
-    Tuple2(RecentsScreen(), Constants.recents),
+    Tuple2(HelpScreen(), RoadSageStrings.help),
+    Tuple2(DevicesScreen(), RoadSageStrings.devices),
+    Tuple2(HomeScreen(), RoadSageStrings.home),
+    Tuple2(RecentsScreen(), RoadSageStrings.recents),
   ];
 
   void _onBottomNavItemTapped(int index) {
@@ -301,19 +298,19 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.help_outline),
-          label: Constants.help,
+          label: RoadSageStrings.help,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.phone_android_outlined),
-          label: Constants.devices,
+          label: RoadSageStrings.devices,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined),
-          label: Constants.home,
+          label: RoadSageStrings.home,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.message_outlined),
-          label: Constants.recents,
+          label: RoadSageStrings.recents,
         ),
       ],
       currentIndex: _selectedIndex,
