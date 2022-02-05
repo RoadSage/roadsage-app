@@ -14,6 +14,8 @@
             "select_prompt": "Choisir la langue",
             "name": {
                 "en": "Anglais",
+                "en_US": "Anglais",
+                "en_GB": "Anglais",
                 "fr": "Français"
             }
         }

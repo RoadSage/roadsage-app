@@ -16,6 +16,8 @@ class Constants {
   static const String androidMethodChannel =
       "io.unitic.roadsage/google_assistant";
   static const String getAssistantMethod = "getAssistantQuery";
+
+  static const String prefsLocale = "sharedprefs.selected.locale";
 }
 
 class RoadSageStrings {
