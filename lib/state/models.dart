@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:roadsage/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// SharedPreferences
+final sharedPrefs = FutureProvider<SharedPreferences>(
+    (_) async => await SharedPreferences.getInstance());
 
 // General app model --------------------------------------------------
 
@@ -24,7 +31,23 @@ class RoadSageModel {
 }
 
 class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
-  RoadSageModelNotifier() : super(RoadSageModel());
+  final SharedPreferences? prefs;
+
+  RoadSageModelNotifier(this.prefs) : super(RoadSageModel()) {
+    _initPrefs();
+  }
+
+  void _initPrefs() async {
+    String? lang = prefs?.getString(Constants.prefsLocale);
+    if (lang != null) {
+      switchLanguage(lang);
+    }
+
+    int? themeIndex = prefs?.getInt(Constants.prefsTheme);
+    if (themeIndex != null) {
+      switchThemeMode(ThemeMode.values[themeIndex]);
+    }
+  }
 
   void switchLoggedIn(bool value) {
     state = state.copyWith(loggedIn: value);
@@ -32,8 +55,10 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
 
   void switchThemeMode(ThemeMode value) {
     state = state.copyWith(themeMode: value);
+    prefs?.setInt(Constants.prefsTheme, value.index);
   }
 
+  // No need to directly change prefs - handled by TranslatePreferences
   void switchLanguage(String lang) {
     state = state.copyWith(languageCode: lang);
   }
@@ -41,7 +66,13 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
 
 final roadSageModelProvider =
     StateNotifierProvider<RoadSageModelNotifier, RoadSageModel>((ref) {
-  return RoadSageModelNotifier();
+  final prefs = ref.watch(sharedPrefs).maybeWhen(
+        data: (value) => value,
+        orElse: () => null,
+      );
+
+  if (prefs != null) {}
+  return RoadSageModelNotifier(prefs);
 });
 
 // Display (display.dart) -----------------------------------------------
@@ -140,3 +171,20 @@ final remoteModelProvider =
     StateNotifierProvider<RemoteModelNotifier, RemoteModel>((ref) {
   return RemoteModelNotifier();
 });
+
+// TranslatePreferences (for persistent locale switching)
+class TranslatePreferences implements ITranslatePreferences {
+  @override
+  Future<Locale?> getPreferredLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey(Constants.prefsLocale)) return null;
+    var locale = prefs.getString(Constants.prefsLocale);
+    return localeFromString(locale!);
+  }
+
+  @override
+  Future savePreferredLocale(Locale locale) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(Constants.prefsLocale, localeToString(locale));
+  }
+}

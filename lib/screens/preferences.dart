@@ -6,6 +6,7 @@ import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:roadsage/utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesScreen extends ConsumerStatefulWidget {
   const PreferencesScreen({Key? key}) : super(key: key);
@@ -16,11 +17,17 @@ class PreferencesScreen extends ConsumerStatefulWidget {
 
 class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
   String _appVersion = "";
+  late SharedPreferences prefs;
 
   @override
   void initState() {
     initPlatformInfo();
+    initSharedPreferences();
     super.initState();
+  }
+
+  void initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
   }
 
   void initPlatformInfo() async {

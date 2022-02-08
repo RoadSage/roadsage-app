@@ -33,7 +33,9 @@ void main() async {
   await Firebase.initializeApp();
 
   var delegate = await LocalizationDelegate.create(
-      fallbackLocale: 'en_GB', supportedLocales: ['en_GB', 'en_US', 'fr']);
+      fallbackLocale: 'en_GB',
+      supportedLocales: ['en_GB', 'en_US', 'fr'],
+      preferences: TranslatePreferences());
 
   runApp(LocalizedApp(delegate, const ProviderScope(child: RoadSageApp())));
 }
