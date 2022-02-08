@@ -18,6 +18,7 @@ class Constants {
   static const String getAssistantMethod = "getAssistantQuery";
 
   static const String prefsLocale = "sharedprefs.selected.locale";
+  static const String prefsTheme = "sharedprefs.selected.theme";
 }
 
 class RoadSageStrings {

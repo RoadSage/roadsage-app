@@ -38,11 +38,14 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
   }
 
   void _initPrefs() async {
-    if (prefs != null) {
-      String? lang = prefs?.getString(Constants.prefsLocale);
-      if (lang != null) {
-        switchLanguage(lang);
-      }
+    String? lang = prefs?.getString(Constants.prefsLocale);
+    if (lang != null) {
+      switchLanguage(lang);
+    }
+
+    int? themeIndex = prefs?.getInt(Constants.prefsTheme);
+    if (themeIndex != null) {
+      switchThemeMode(ThemeMode.values[themeIndex]);
     }
   }
 
@@ -52,8 +55,10 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
 
   void switchThemeMode(ThemeMode value) {
     state = state.copyWith(themeMode: value);
+    prefs?.setInt(Constants.prefsTheme, value.index);
   }
 
+  // No need to directly change prefs - handled by TranslatePreferences
   void switchLanguage(String lang) {
     state = state.copyWith(languageCode: lang);
   }
