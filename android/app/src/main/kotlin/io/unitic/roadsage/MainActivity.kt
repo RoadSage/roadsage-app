@@ -19,12 +19,12 @@ class MainActivity: FlutterActivity() {
         logIntent(intent)
     }
 
-    private fun logIntent(intent: Intent) {
-        if (intent.action != null) {
-            Log.d(TAG, "Got intent");
-            Log.d(TAG, intent.action!!);
-        }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        logIntent(intent)
+    }
 
+    private fun logIntent(intent: Intent) {
         val bundle: Bundle = intent.extras ?: return
 
         Log.d(TAG, "======= logIntent ========= %s")
@@ -34,16 +34,15 @@ class MainActivity: FlutterActivity() {
             Log.d(TAG, "[$key=${bundle.get(key)}]");
         }
 
-        // TODO: refactor this
-        if (bundle.keySet().contains("articleBody")) {
-            Log.d(TAG, "Setting query..")
-            assistantQuery = bundle.get("articleBody").toString()
+        if (bundle.keySet().contains("phraseType")) {
+            Log.d(TAG, "Setting assistant query..")
+            assistantQuery = bundle.get("phraseType").toString();
             if (assistantQuery != null) {
                 Log.d(TAG, assistantQuery!!)
             }
         }
 
-        Log.d(TAG, "Logging intent data complete")
+        Log.d(TAG, "=== Logging intent data complete ===")
     }
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {

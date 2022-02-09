@@ -50,7 +50,7 @@ android {
 
     defaultConfig {
         applicationId "io.unitic.roadsage"
-        minSdkVersion 18
+        minSdkVersion 25
         targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

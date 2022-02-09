@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,10 +12,10 @@ import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:lifecycle/lifecycle.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:receive_intent/receive_intent.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -49,17 +51,27 @@ class RoadSageApp extends ConsumerStatefulWidget {
   _RoadSageApp createState() => _RoadSageApp();
 }
 
-class _RoadSageApp extends ConsumerState<RoadSageApp>
-    with LifecycleAware, LifecycleMixin {
+class _RoadSageApp extends ConsumerState<RoadSageApp> {
   final SiriSuggestions siri = SiriSuggestions();
 
   _RoadSageApp() : super() {
     initSiriSuggestions();
+    _initReceiveIntent();
   }
 
   String defaultPage = Routes.root;
   static const platform = MethodChannel(Constants.androidMethodChannel);
+  StreamSubscription? _intentStream;
   String? _assistantQuery;
+
+  Future<void> _initReceiveIntent() async {
+    _intentStream = ReceiveIntent.receivedIntentStream.listen((event) async {
+      await getAssistantQuery();
+      debugPrint('Assistant query is $_assistantQuery');
+      Fluttertoast.showToast(msg: "Query is $_assistantQuery");
+      _assistantQuery = null;
+    }, onError: (err) {});
+  }
 
   // Get Google Assistant query from the Android platform
   Future<void> getAssistantQuery() async {
@@ -73,27 +85,18 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
   }
 
   @override
-  void onLifecycleEvent(LifecycleEvent event) async {
-    // Push event is triggered when a Google Assistant request is received
-    if (event == LifecycleEvent.push) {
-      // Get the query from Android through the method channel
-      await getAssistantQuery();
-      // If a query was received, show a toast, log it and clear the field
-      if (_assistantQuery != null) {
-        debugPrint('Assistant query is $_assistantQuery');
-        Fluttertoast.showToast(msg: "Query is $_assistantQuery");
-        _assistantQuery = null;
-      }
-    }
-  }
-
-  @override
   void initState() {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       ref.read(roadSageModelProvider.notifier).switchLoggedIn(true);
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _intentStream?.cancel();
+    super.dispose();
   }
 
   void initSiriSuggestions() async {
@@ -207,7 +210,6 @@ class _RoadSageApp extends ConsumerState<RoadSageApp>
           ),
         ),
         themeMode: roadSageModel.themeMode,
-        navigatorObservers: [defaultLifecycleObserver],
         routes: {
           Routes.root: (context) => const LoginScreen(),
           Routes.home: (context) => const MainScreen(),
