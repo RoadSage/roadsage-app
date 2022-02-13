@@ -59,7 +59,6 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
     _initReceiveIntent();
   }
 
-  String defaultPage = Routes.root;
   static const platform = MethodChannel(Constants.androidMethodChannel);
   StreamSubscription? _intentStream;
   String? _assistantQuery;
