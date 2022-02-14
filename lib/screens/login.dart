@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -5,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/authentication/auth_services.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -104,18 +107,37 @@ class _LoginScreenState extends State<LoginScreen> {
               // Needed so that there's no back button after login
               // Fine for now because testing and stuff
               children: [
-                SignInButtonBuilder(
-                    text: RoadSageStrings.signInWithGoogle,
-                    textColor: Colors.black54,
-                    image: Image.asset(
-                      RoadSageIcons.googleIcon,
-                      height: 20,
-                    ),
-                    backgroundColor: Colors.white,
-                    // innerPadding: EdgeInsets.only(left: 10),
-                    onPressed: () => authClass.signInWithGoogle(context),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                Platform.isIOS
+                    ? SignInButton(
+                        Buttons.Apple,
+                        onPressed: () async {
+                          await SignInWithApple.getAppleIDCredential(
+                            scopes: [
+                              AppleIDAuthorizationScopes.email,
+                              AppleIDAuthorizationScopes.fullName,
+                            ],
+                          );
+                              Navigator.pushReplacementNamed(context, Routes.home);
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                      )
+                    : const SizedBox(),
+                Platform.isIOS
+                    ? const SizedBox()
+                    : SignInButtonBuilder(
+                        text: RoadSageStrings.signInWithGoogle,
+                        textColor: Colors.black54,
+                        image: Image.asset(
+                          RoadSageIcons.googleIcon,
+                          height: 20,
+                        ),
+                        backgroundColor: Colors.white,
+                        // innerPadding: EdgeInsets.only(left: 10),
+                        onPressed: () => authClass.signInWithGoogle(context),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                      ),
                 SignInButton(
                   Buttons.Facebook,
                   onPressed: () => authClass.signInWithFacebook(context),

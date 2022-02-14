@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../constants.dart';
 
 class SubmitQuestionScreen extends StatefulWidget {
@@ -94,7 +95,9 @@ class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 20)),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: ()  {Navigator.pop(context);
+                        Fluttertoast.showToast(msg: "Thank you for submitting your question, a member will get back to you as soon as possible");
+                        },
                         child: const Text(
                           'Submit',
                         ),
