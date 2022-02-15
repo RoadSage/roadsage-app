@@ -12,7 +12,7 @@ final sharedPrefs = FutureProvider<SharedPreferences>(
 
 class RoadSageModel {
   RoadSageModel(
-      {this.loggedIn = true,
+      {this.loggedIn = false,
       this.themeMode = ThemeMode.system,
       this.languageCode = "en"});
 
