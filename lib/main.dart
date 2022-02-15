@@ -267,7 +267,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     final displayModel = ref.watch(displayModelProvider);
 
     AppBar appBar = AppBar(
-      title: Text(translate(_bottomNavItems.elementAt(_selectedIndex).item2)),
+      title: Text(_bottomNavItems.elementAt(_selectedIndex).item2),
       titleTextStyle: const TextStyle(fontSize: 32, shadows: [
         Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.6, 0.6)),
       ]),
