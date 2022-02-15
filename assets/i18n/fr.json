@@ -1,5 +1,5 @@
 {
-    "title" : "French",
+    "title": "French",
     "app_bar": {
         "titles": {
             "home": "Accueil",
@@ -33,26 +33,23 @@
     },
     "login_page": {
         "title": "Page d'accueil RoadSage",
-        "tncAgreement":  "en cliquant sur connexion, vous acceptez nos termes et conditions. découvrez comment nous traitons vos données dans notre...",
-        "byUnitic":  "par unitaire",
-        "troubleSigning":  "difficultés à se connecter?"
+        "tncAgreement": "en cliquant sur connexion, vous acceptez nos termes et conditions. découvrez comment nous traitons vos données dans notre...",
+        "byUnitic": "par unitaire",
+        "troubleSigning": "difficultés à se connecter?"
     },
-
     "menu_titles": {
         "userProfile": "profil de l'utilisateur",
         "activity": "activité",
         "buyRoadSage": "acheter sauge de route",
         "referAFriend": "référez un ami",
-        "preferences": "préférences",
+        "preferences": "Préférences",
         "signOut": "se déconnecter",
         "faqs": "FAQ",
         "rateUs": "évaluez nous",
         "contactUs": "Nous contacter"
     },
-
     "connected": "lié",
     "disconnected": "débranché",
-
     "form_strings": {
         "formName": "Nom",
         "formFirstName": "Prénom",
@@ -65,12 +62,10 @@
         "formPhoneExample": "téléphoner",
         "formSubmit": "nous faire parvenir"
     },
-
     "device_list": {
         "remote": "à distance",
         "display": "affichage"
     },
-
     "device_info": {
         "status": "statut",
         "batteryLevel": "niveau de batterie",
@@ -79,40 +74,32 @@
         "sensor": "capteur",
         "stoppingDistance": "distance d'arrêt"
     },
-
     "control_strings": {
         "openRoadsage": "Open_Roadsage",
         "openRoadsageDesc": "ouvre l'application",
         "launchRoadsage": "Launch Roadsage",
         "startRoadsage": "Start Roadsage",
-
         "thanksRoadsage": "Thanks_Roadsage",
-        "thanksRoadsageDesc":  "dit merci à la voiture derrière toi",
+        "thanksRoadsageDesc": "dit merci à la voiture derrière toi",
         "thanksRoadsagePhrase": "dire merci sur Roadsage",
-
         "cheersRoadsage": "Cheers_Roadsage",
         "cheersRoadsageDesc": "dit bravo à la voiture derrière toi",
         "cheersRoadsagePhrase": "dire bravo sur Roadsage",
-
         "beamRoadsage": "Beam_Roadsage",
         "beamRoadsageDesc": "demande à la voiture derrière vous d'éteindre les feux de route",
         "beamRoadsagePhrase": "dire éteindre les feux de route sur RRoadsage",
-
         "trySaying": "essayez de dire",
-
         "helpAndFeedback": "aide et commentaires",
         "helpAndFeedbackDesc": "vos commentaires sont importants pour nous aider à améliorer nos produits.",
         "feedbackHint": "écrivez vos commentaires ici",
         "giveFeedback": "donner votre avis"
     },
-
     "android_try_saying": {
         "1": "hey google, dis merci sur RoadSage",
         "2": "hey google, dis bravo à RoadSage",
         "3": "hey google, dis éteindre les feux de route sur RoadSage",
         "4": "hey google, dis bravo sur RoadSage"
     },
-
     "ios_try_saying": {
         "1": "hey siri, dis merci sur RoadSage",
         "2": "hey siri, dis bravo sur RoadSage",

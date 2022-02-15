@@ -89,7 +89,8 @@ class _HelpScreenState extends State<HelpScreen> {
                       },
                       maxLines: 13,
                       decoration: InputDecoration(
-                          filled: true, hintText: translate(RoadSageStrings.feedbackHint)),
+                          filled: true,
+                          hintText: translate(RoadSageStrings.feedbackHint)),
                     ),
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
@@ -125,10 +126,11 @@ class _HelpScreenState extends State<HelpScreen> {
           icon:
               const Icon(Icons.info_outline, color: RoadSageColours.lightBlue),
           style: ButtonStyle(
-              padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 8)),
-              backgroundColor: MaterialStateProperty.all(
-                  Theme.of(context).primaryColorLight)),
+            padding: MaterialStateProperty.all(
+                const EdgeInsets.symmetric(vertical: 8)),
+            backgroundColor:
+                MaterialStateProperty.all(Theme.of(context).primaryColorLight),
+          ),
           label: Text(
             text,
             style: Theme.of(context).textTheme.button,
@@ -137,7 +139,7 @@ class _HelpScreenState extends State<HelpScreen> {
   }
 
   static void submit(GlobalKey<FormState> formKey) {
-    formKey.currentState!.save();
+    // formKey.currentState!.save();
     if (formKey.currentState!.validate()) {
       Fluttertoast.showToast(msg: "Feedback submitted!");
     }

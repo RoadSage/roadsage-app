@@ -25,9 +25,9 @@ import Flutter
             }
         })
 
-        FlutterMethodChannel(name: android_plugin_name, binaryMessenger: controller.binaryMessenger)?.setMethodCallHandler({
-            [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
-        })
+        // FlutterMethodChannel(name: android_plugin_name, binaryMessenger: controller.binaryMessenger)?.setMethodCallHandler({
+        //     [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
+        // })
         
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)

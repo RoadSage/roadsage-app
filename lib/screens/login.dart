@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -5,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/authentication/auth_services.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
 
@@ -106,18 +109,38 @@ class _LoginScreenState extends State<LoginScreen> {
               // Needed so that there's no back button after login
               // Fine for now because testing and stuff
               children: [
-                SignInButtonBuilder(
-                    text: translate(RoadSageStrings.signInWithGoogle),
-                    textColor: Colors.black54,
-                    image: Image.asset(
-                      RoadSageIcons.googleIcon,
-                      height: 20,
-                    ),
-                    backgroundColor: Colors.white,
-                    // innerPadding: EdgeInsets.only(left: 10),
-                    onPressed: () => authClass.signInWithGoogle(context),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                Platform.isIOS
+                    ? SignInButton(
+                        Buttons.Apple,
+                        onPressed: () async {
+                          await SignInWithApple.getAppleIDCredential(
+                            scopes: [
+                              AppleIDAuthorizationScopes.email,
+                              AppleIDAuthorizationScopes.fullName,
+                            ],
+                          );
+                          Navigator.pushReplacementNamed(
+                              context, Routes.permission);
+                        },
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                      )
+                    : const SizedBox(),
+                Platform.isIOS
+                    ? const SizedBox()
+                    : SignInButtonBuilder(
+                        text: RoadSageStrings.signInWithGoogle,
+                        textColor: Colors.black54,
+                        image: Image.asset(
+                          RoadSageIcons.googleIcon,
+                          height: 20,
+                        ),
+                        backgroundColor: Colors.white,
+                        // innerPadding: EdgeInsets.only(left: 10),
+                        onPressed: () => authClass.signInWithGoogle(context),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                      ),
                 SignInButton(
                   Buttons.Facebook,
                   onPressed: () => authClass.signInWithFacebook(context),
@@ -127,14 +150,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 SignInButton(
                   Buttons.Email,
                   text: "Login / Sign up",
-                  onPressed: () =>
-                      Navigator.pushReplacementNamed(context, Routes.home),
+                  onPressed: () {
+                    // TODO: actually check for permissions on iOS
+                    var route =
+                        Platform.isIOS ? Routes.permission : Routes.home;
+                    Navigator.pushReplacementNamed(context, route);
+                  },
                   // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
                 TextButton(
-                  onPressed: () => Navigator.pushNamed(context, Routes.home),
+                  onPressed: () {
+                    var route =
+                        Platform.isIOS ? Routes.permission : Routes.home;
+                    Navigator.pushReplacementNamed(context, route);
+                  },
                   child: Text(
                     translate(RoadSageStrings.troubleSigning),
                     textAlign: TextAlign.center,
