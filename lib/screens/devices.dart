@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class DevicesScreen extends StatefulWidget {
   const DevicesScreen({Key? key}) : super(key: key);
@@ -23,9 +24,9 @@ class _DevicesScreenState extends State<DevicesScreen> {
                 contentPadding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
-                title: const Text(
-                  RoadSageStrings.remote,
-                  style: TextStyle(fontSize: 20),
+                title: Text(
+                  translate(RoadSageStrings.remote),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 leading: const Icon(
                   Icons.gamepad,
@@ -42,9 +43,9 @@ class _DevicesScreenState extends State<DevicesScreen> {
                 contentPadding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
-                title: const Text(
-                  RoadSageStrings.display,
-                  style: TextStyle(fontSize: 20),
+                title: Text(
+                  translate(RoadSageStrings.display),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 leading: const Icon(
                   Icons.smart_display_outlined,

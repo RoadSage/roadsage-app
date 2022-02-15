@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/models.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class DisplayScreen extends ConsumerStatefulWidget {
   const DisplayScreen({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
-      title: const Text(RoadSageStrings.display),
+      title: Text(translate(RoadSageStrings.display)),
       backgroundColor: Colors.transparent,
       titleSpacing: 20,
       toolbarHeight: 75,
@@ -35,9 +36,9 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                 contentPadding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
-                title: const Text(
-                  RoadSageStrings.status,
-                  style: TextStyle(fontSize: 20),
+                title: Text(
+                  translate(RoadSageStrings.status),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 trailing: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
@@ -54,10 +55,10 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                     .switchDisplayStatus(!displayModel.displayStatus),
               ),
               const SizedBox(height: 20),
-              const Center(
+              Center(
                 child: Text(
-                  RoadSageStrings.brightnessLevel,
-                  style: TextStyle(fontSize: 20),
+                  translate(RoadSageStrings.brightnessLevel),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
               Slider(
@@ -76,9 +77,9 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
               ),
               const SizedBox(height: 20),
               SwitchListTile(
-                title: const Text(
-                  RoadSageStrings.adaptiveBrightness,
-                  style: TextStyle(fontSize: 20),
+                title: Text(
+                  translate(RoadSageStrings.adaptiveBrightness),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 value: displayModel.adaptiveBrightness,
                 activeColor: RoadSageColours.lightBlue,
@@ -91,10 +92,10 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                 },
               ),
               const SizedBox(height: 40),
-              const Center(
+              Center(
                 child: Text(
-                  RoadSageStrings.sensor,
-                  style: TextStyle(fontSize: 26),
+                  translate(RoadSageStrings.sensor),
+                  style: const TextStyle(fontSize: 26),
                 ),
               ),
               const SizedBox(height: 20),
@@ -102,9 +103,9 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                 contentPadding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
-                title: const Text(
-                  RoadSageStrings.status,
-                  style: TextStyle(fontSize: 20),
+                title: Text(
+                  translate(RoadSageStrings.status),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 trailing: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
@@ -125,9 +126,9 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                 contentPadding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
-                title: const Text(
-                  RoadSageStrings.batteryLevel,
-                  style: TextStyle(fontSize: 20),
+                title: Text(
+                  translate(RoadSageStrings.batteryLevel),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 trailing: SizedBox(
                   width: 70,
@@ -145,10 +146,10 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                 tileColor: Theme.of(context).primaryColorLight,
               ),
               const SizedBox(height: 20),
-              const Center(
+              Center(
                 child: Text(
-                  RoadSageStrings.stoppingDistance,
-                  style: TextStyle(fontSize: 20),
+                  translate(RoadSageStrings.stoppingDistance),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
               Slider(

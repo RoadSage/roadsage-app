@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
 import 'dart:io' show Platform;
+import 'package:flutter_translate/flutter_translate.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,11 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             padding: const EdgeInsets.only(top: 20),
             height: 150,
-            child: Column(children: const <Widget>[
-              Icon(Icons.mic_none, size: 60),
+            child: Column(children: <Widget>[
+              const Icon(Icons.mic_none, size: 60),
               Text(
-                RoadSageStrings.trySaying,
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                translate(RoadSageStrings.trySaying),
+                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
               ),
             ]),
           ),
@@ -43,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {},
                   title: Text(
                     (Platform.isAndroid)
-                        ? RoadSageStrings.homeAndroidTrySayingEntries[index]
-                        : RoadSageStrings.homeIOSTrySayingEntries[index],
+                        ? translate(RoadSageStrings.homeAndroidTrySayingEntries[index])
+                        : translate(RoadSageStrings.homeIOSTrySayingEntries[index]),
                   ),
                   tileColor: Theme.of(context).primaryColorLight,
                 );
