@@ -75,7 +75,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 },
               ),
               SettingsTile(
-                title: 'Colour theme',
+                title: (translate("prefs.color")),
                 subtitle: roadSageModel.themeMode
                     .toString()
                     .substring(10)
@@ -90,19 +90,19 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 },
               ),
               SettingsTile(
-                title: 'Time zone',
-                subtitle: 'GMT (London)',
+                title: translate("prefs.time_zone"),
+                subtitle: "GMT (London)",
               ),
               SettingsTile(
-                title: 'Temperature unit',
-                subtitle: 'Celsius',
+                title: translate("prefs.temp"),
+                subtitle: "Celsius",
               ),
               SettingsTile(
-                title: 'Distance unit',
-                subtitle: 'Kilometers',
+                title: translate("prefs.dist"),
+                subtitle: "Kilometers",
               ),
               SettingsTile(
-                title: 'Login status',
+                title: translate("prefs.login_status"),
                 subtitle: roadSageModel.loggedIn ? "Logged in" : "Logged out",
                 onPressed: (BuildContext context) => ref
                     .read(roadSageModelProvider.notifier)
@@ -111,20 +111,20 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
             ],
           ),
           SettingsSection(
-            title: 'About App',
+            title: translate("prefs.about_app"),
             tiles: [
               SettingsTile(
-                title: 'App version',
+                title: translate("prefs.version"),
                 subtitle: _appVersion,
               )
             ],
           ),
           SettingsSection(
-            title: 'About RoadSage',
+            title: translate("prefs.about_roadsage"),
             tiles: [
               SettingsTile(
-                title: 'Product info',
-                subtitle: 'RoadSage for cars',
+                title: translate("prefs.prod_info"),
+                subtitle: translate("prefs.prod_info_sub"),
               )
             ],
           )

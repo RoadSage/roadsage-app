@@ -20,6 +20,8 @@ import 'package:receive_intent/receive_intent.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
+
+
 import 'package:roadsage/authentication/auth_services.dart';
 import 'constants.dart';
 import 'siri_suggestions.dart';
@@ -104,7 +106,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
     siri.configure(onLaunch: (Map<String, dynamic> message) async {
       //print("Siri Suggestion called to perform ${message['key']}");
 
-      switch (message[Constants.siriSuggestionKey]) {
+			switch (message[Constants.siriSuggestionKey]) {
         case RoadSageStrings.openRoadsage:
           // Launch main page
           break;
@@ -124,25 +126,25 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
     });
 
     for (String phrase in [
-      RoadSageStrings.launchRoadsage,
-      RoadSageStrings.startRoadsage
+      translate(RoadSageStrings.launchRoadsage),
+      translate(RoadSageStrings.startRoadsage)
     ]) {
-      siri.addEzSuggestion(RoadSageStrings.openRoadsage,
-          RoadSageStrings.openRoadsageDesc, phrase);
+      siri.addEzSuggestion(translate(RoadSageStrings.openRoadsage),
+          translate(RoadSageStrings.openRoadsageDesc), phrase);
     }
 
     siri.addEzSuggestion(
-        RoadSageStrings.thanksRoadsage,
-        RoadSageStrings.thanksRoadsageDesc,
-        RoadSageStrings.thanksRoadsagePhrase);
+        translate(RoadSageStrings.thanksRoadsage),
+        translate(RoadSageStrings.thanksRoadsageDesc),
+        translate(RoadSageStrings.thanksRoadsagePhrase));
 
     siri.addEzSuggestion(
-        RoadSageStrings.cheersRoadsage,
-        RoadSageStrings.cheersRoadsageDesc,
-        RoadSageStrings.cheersRoadsagePhrase);
+        translate(RoadSageStrings.cheersRoadsage),
+        translate(RoadSageStrings.cheersRoadsageDesc),
+        translate(RoadSageStrings.cheersRoadsagePhrase));
 
-    siri.addEzSuggestion(RoadSageStrings.beamRoadsage,
-        RoadSageStrings.beamRoadsageDesc, RoadSageStrings.beamRoadsagePhrase);
+    siri.addEzSuggestion(translate(RoadSageStrings.beamRoadsage),
+        translate(RoadSageStrings.beamRoadsageDesc), translate(RoadSageStrings.beamRoadsagePhrase));
     //print("Initialized Siri Successfully!");
   }
 
@@ -155,7 +157,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
     return LocalizationProvider(
       state: LocalizationProvider.of(context).state,
       child: MaterialApp(
-        title: RoadSageStrings.title,
+        title: translate(RoadSageStrings.title),
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: RoadSageColours.lightGrey,
           primaryColor: RoadSageColours.lightGrey,
@@ -247,11 +249,11 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   int _selectedIndex = 2;
 
   // Tuple2(<Screen widget>, <App bar title>)
-  static const _bottomNavItems = [
-    Tuple2(HelpScreen(), RoadSageStrings.help),
-    Tuple2(DevicesScreen(), RoadSageStrings.devices),
-    Tuple2(HomeScreen(), RoadSageStrings.home),
-    Tuple2(RecentsScreen(), RoadSageStrings.recents),
+  static final _bottomNavItems = [
+    Tuple2(const HelpScreen(), translate(RoadSageStrings.help)),
+    Tuple2(const DevicesScreen(), translate(RoadSageStrings.devices)),
+    Tuple2(const HomeScreen(), translate(RoadSageStrings.home)),
+    Tuple2(const RecentsScreen(), translate(RoadSageStrings.recents)),
   ];
 
   void _onBottomNavItemTapped(int index) {
@@ -282,8 +284,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)))),
               child: Text(displayModel.displayStatus
-                  ? RoadSageStrings.connected
-                  : RoadSageStrings.disconnected),
+                  ? translate(RoadSageStrings.connected)
+                  : translate(RoadSageStrings.disconnected)),
               onPressed: () => Navigator.pushNamed(context, Routes.display),
             )),
         IconButton(
@@ -298,22 +300,22 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     );
 
     final BottomNavigationBar bottomNavBar = BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.help_outline),
-          label: RoadSageStrings.help,
+          icon: const Icon(Icons.help_outline),
+          label: translate(RoadSageStrings.help),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.phone_android_outlined),
-          label: RoadSageStrings.devices,
+          icon: const Icon(Icons.phone_android_outlined),
+          label: translate(RoadSageStrings.devices),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          label: RoadSageStrings.home,
+          icon: const Icon(Icons.home_outlined),
+          label: translate(RoadSageStrings.home),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.message_outlined),
-          label: RoadSageStrings.recents,
+          icon: const Icon(Icons.message_outlined),
+          label: translate(RoadSageStrings.recents),
         ),
       ],
       currentIndex: _selectedIndex,
@@ -327,19 +329,19 @@ class _MainScreenState extends ConsumerState<MainScreen> {
 
     // Tuple2(<Item name>, <onClick>)
     final drawerItems = [
-      Tuple2(RoadSageStrings.userProfile, () {
+      Tuple2(translate(RoadSageStrings.userProfile), () {
         Navigator.popAndPushNamed(context, Routes.profile);
       }),
-      Tuple2(RoadSageStrings.activity, () {
+      Tuple2(translate(RoadSageStrings.activity), () {
         Navigator.pop(context);
       }),
-      Tuple2(RoadSageStrings.buyRoadSage, () {
+      Tuple2(translate(RoadSageStrings.buyRoadSage), () {
         Navigator.pop(context);
       }),
-      Tuple2(RoadSageStrings.referAFriend, () {
+      Tuple2(translate(RoadSageStrings.referAFriend), () {
         Navigator.pop(context);
       }),
-      Tuple2(RoadSageStrings.preferences, () {
+      Tuple2(translate(RoadSageStrings.preferences), () {
         Navigator.popAndPushNamed(context, Routes.preferences);
       }),
     ];
@@ -357,9 +359,9 @@ class _MainScreenState extends ConsumerState<MainScreen> {
                     style: ButtonStyle(
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)))),
-                    child: const Text(
-                      RoadSageStrings.signOut,
-                      style: TextStyle(fontSize: 14),
+                    child: Text(
+                      translate(RoadSageStrings.signOut),
+                      style: const TextStyle(fontSize: 14),
                     ),
                     onPressed: () {
                       ref

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
 
+import 'package:flutter_translate/flutter_translate.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -12,7 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
-      title: const Text(RoadSageStrings.userProfile),
+      title: Text(translate(RoadSageStrings.userProfile)),
       titleSpacing: 20,
       backgroundColor: Colors.transparent,
       toolbarHeight: 75,
@@ -31,57 +33,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: <Widget>[
                 Padding(
                     child: Text(
-                      RoadSageStrings.formFirstName,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      translate(RoadSageStrings.formFirstName),
+                      style: Theme.of(context).textTheme.bodyText1,
                       textAlign: TextAlign.left,
                     ),
                     padding: const EdgeInsets.all(20.0)),
                 Padding(
                     child: Text(
-                      RoadSageStrings.formFirstNameExample,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      translate(RoadSageStrings.formFirstNameExample),
+                      style: Theme.of(context).textTheme.headline4,
                       textAlign: TextAlign.left,
                     ),
                     padding: const EdgeInsets.all(20.0)),
                 Padding(
                     child: Text(
-                      RoadSageStrings.formLastName,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      translate(RoadSageStrings.formLastName),
+                      style: Theme.of(context).textTheme.bodyText1,
                       textAlign: TextAlign.left,
                     ),
                     padding: const EdgeInsets.all(20.0)),
                 Padding(
                     child: Text(
-                      RoadSageStrings.formLastNameExample,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      translate(RoadSageStrings.formLastNameExample),
+                      style: Theme.of(context).textTheme.headline4,
                       textAlign: TextAlign.left,
                     ),
                     padding: const EdgeInsets.all(20.0)),
                 Padding(
                     child: Text(
-                      RoadSageStrings.formEmail,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      translate(RoadSageStrings.formEmail),
+                      style: Theme.of(context).textTheme.bodyText1,
                       textAlign: TextAlign.left,
                     ),
                     padding: const EdgeInsets.all(20.0)),
                 Padding(
                     child: Text(
-                      RoadSageStrings.formEmailExample,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      translate(RoadSageStrings.formEmailExample),
+                      style: Theme.of(context).textTheme.headline4,
                       textAlign: TextAlign.left,
                     ),
                     padding: const EdgeInsets.all(20.0)),
                 Padding(
                     child: Text(
-                      RoadSageStrings.formPhone,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      translate(RoadSageStrings.formPhone),
+                      style: Theme.of(context).textTheme.bodyText1,
                       textAlign: TextAlign.left,
                     ),
                     padding: const EdgeInsets.all(20.0)),
                 Padding(
                     child: Text(
-                      RoadSageStrings.formPhoneExample,
-                      style: Theme.of(context).textTheme.titleLarge,
+                      translate(RoadSageStrings.formPhoneExample),
+                      style: Theme.of(context).textTheme.headline4,
                       textAlign: TextAlign.left,
                     ),
                     padding: const EdgeInsets.all(20.0)),

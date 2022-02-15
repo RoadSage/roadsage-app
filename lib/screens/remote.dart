@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/models.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class RemoteScreen extends ConsumerStatefulWidget {
   const RemoteScreen({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _RemoteScreenState extends ConsumerState<RemoteScreen> {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
-      title: const Text(RoadSageStrings.remote),
+      title: Text(translate(RoadSageStrings.remote)),
       backgroundColor: Colors.transparent,
       titleSpacing: 20,
       toolbarHeight: 75,
@@ -35,9 +36,9 @@ class _RemoteScreenState extends ConsumerState<RemoteScreen> {
                 contentPadding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
-                title: const Text(
-                  RoadSageStrings.status,
-                  style: TextStyle(fontSize: 20),
+                title: Text(
+                  translate(RoadSageStrings.status),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 trailing: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
@@ -57,9 +58,9 @@ class _RemoteScreenState extends ConsumerState<RemoteScreen> {
                 contentPadding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
-                title: const Text(
-                  RoadSageStrings.batteryLevel,
-                  style: TextStyle(fontSize: 20),
+                title: Text(
+                  translate(RoadSageStrings.batteryLevel),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 trailing: SizedBox(
                   width: 70,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class FAQScreen extends StatefulWidget {
   const FAQScreen({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class _FAQScreenState extends State<FAQScreen> {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
-      title: const Text(RoadSageStrings.faqs),
+      title: Text(translate(RoadSageStrings.faqs)),
       titleSpacing: 20,
       backgroundColor: Colors.transparent,
       toolbarHeight: 75,

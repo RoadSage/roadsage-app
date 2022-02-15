@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:roadsage/constants.dart';
 
+import 'package:flutter_translate/flutter_translate.dart';
+
 class HelpScreen extends StatefulWidget {
   const HelpScreen({Key? key}) : super(key: key);
 
@@ -19,12 +21,12 @@ class _HelpScreenState extends State<HelpScreen> {
         child: Padding(
             padding: const EdgeInsets.only(top: 28.0),
             child: ListView(children: <Widget>[
-              const Padding(
+              Padding(
                   child: Text(
-                    RoadSageStrings.helpAndFeedbackDesc,
+                    translate(RoadSageStrings.helpAndFeedbackDesc),
                     textAlign: TextAlign.center,
                   ),
-                  padding: EdgeInsets.all(20.0)),
+                  padding: const EdgeInsets.all(20.0)),
 
               Padding(
                   child: Container(
@@ -37,8 +39,8 @@ class _HelpScreenState extends State<HelpScreen> {
                         return null;
                       },
                       maxLines: 1,
-                      decoration: const InputDecoration(
-                        hintText: RoadSageStrings.formName,
+                      decoration: InputDecoration(
+                        hintText: translate(RoadSageStrings.formName),
                         filled: true,
                       ),
                     ),
@@ -59,21 +61,21 @@ class _HelpScreenState extends State<HelpScreen> {
                         return null;
                       },
                       maxLines: 1,
-                      decoration: const InputDecoration(
-                        hintText: RoadSageStrings.formEmail,
+                      decoration: InputDecoration(
+                        hintText: translate(RoadSageStrings.formEmail),
                         filled: true,
                       ),
                     ),
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
 
-              const Padding(
+              Padding(
                   child: Text(
-                    RoadSageStrings.giveFeedback,
+                    translate(RoadSageStrings.giveFeedback),
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
-                  padding: EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
+                  padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
 
               Padding(
                   child: Container(
@@ -86,8 +88,8 @@ class _HelpScreenState extends State<HelpScreen> {
                         return null;
                       },
                       maxLines: 13,
-                      decoration: const InputDecoration(
-                          filled: true, hintText: RoadSageStrings.feedbackHint),
+                      decoration: InputDecoration(
+                          filled: true, hintText: translate(RoadSageStrings.feedbackHint)),
                     ),
                   ),
                   padding: const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0)),
@@ -101,13 +103,13 @@ class _HelpScreenState extends State<HelpScreen> {
                         style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 20)),
                         onPressed: () => submit(_formKey),
-                        child: const Text(RoadSageStrings.formSubmit),
+                        child: Text(translate(RoadSageStrings.formSubmit)),
                       ))),
 
               // Contact us
-              getButtonContainer(RoadSageStrings.contactUs, ""),
-              getButtonContainer(RoadSageStrings.faqs, Routes.faq),
-              getButtonContainer(RoadSageStrings.rateUs, "")
+              getButtonContainer(translate(RoadSageStrings.contactUs), ""),
+              getButtonContainer(translate(RoadSageStrings.faqs), Routes.faq),
+              getButtonContainer(translate(RoadSageStrings.rateUs), "")
             ])),
         padding: const EdgeInsets.all(0.0),
         alignment: Alignment.center,

@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/authentication/auth_services.dart';
 
+import 'package:flutter_translate/flutter_translate.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -33,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Text(
-                      RoadSageStrings.title,
+                      translate(RoadSageStrings.title),
                       textAlign: TextAlign.center,
                       style: GoogleFonts.mukta(
                         fontSize: 48,
@@ -59,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            RoadSageStrings.byUnitic,
+                            translate(RoadSageStrings.byUnitic),
                             textAlign: TextAlign.right,
                             style: GoogleFonts.mukta(
                                 fontSize: 18,
@@ -88,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               width: 325,
               child: Text(
-                RoadSageStrings.tncAgreement,
+                translate(RoadSageStrings.tncAgreement),
                 textAlign: TextAlign.center,
                 style: GoogleFonts.mukta(
                   fontSize: 14,
@@ -105,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // Fine for now because testing and stuff
               children: [
                 SignInButtonBuilder(
-                    text: RoadSageStrings.signInWithGoogle,
+                    text: translate(RoadSageStrings.signInWithGoogle),
                     textColor: Colors.black54,
                     image: Image.asset(
                       RoadSageIcons.googleIcon,
@@ -134,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextButton(
                   onPressed: () => Navigator.pushNamed(context, Routes.home),
                   child: Text(
-                    RoadSageStrings.troubleSigning,
+                    translate(RoadSageStrings.troubleSigning),
                     textAlign: TextAlign.center,
                     style: GoogleFonts.mukta(
                       fontSize: 14,
