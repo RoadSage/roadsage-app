@@ -117,7 +117,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               AppleIDAuthorizationScopes.fullName,
                             ],
                           );
-                              Navigator.pushReplacementNamed(context, Routes.permission);
+                          Navigator.pushReplacementNamed(
+                              context, Routes.permission);
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
@@ -147,14 +148,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 SignInButton(
                   Buttons.Email,
                   text: "Login / Sign up",
-                  onPressed: () =>
-                      Navigator.pushReplacementNamed(context, Routes.permission),
+                  onPressed: () {
+                    // TODO: actually check for permissions on iOS
+                    var route =
+                        Platform.isIOS ? Routes.permission : Routes.home;
+                    Navigator.pushReplacementNamed(context, route);
+                  },
                   // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
                 TextButton(
-                  onPressed: () => Navigator.pushNamed(context, Routes.permission),
+                  onPressed: () {
+                    var route =
+                        Platform.isIOS ? Routes.permission : Routes.home;
+                    Navigator.pushReplacementNamed(context, route);
+                  },
                   child: Text(
                     RoadSageStrings.troubleSigning,
                     textAlign: TextAlign.center,
