@@ -10,7 +10,6 @@ class Routes {
   static const String faq = "/faq";
   static const String profile = "/profile";
   static const String faqSubmitQuestion = "/faq/submit_question";
-
 }
 
 class Constants {
@@ -21,6 +20,7 @@ class Constants {
 
   static const String prefsLocale = "sharedprefs.selected.locale";
   static const String prefsTheme = "sharedprefs.selected.theme";
+  static const String prefsLoggedIn = "sharedprefs.logged_in";
 }
 
 class RoadSageStrings {
@@ -55,7 +55,8 @@ class RoadSageStrings {
   static const String formName = 'form_strings.formName';
   static const String formFirstName = 'form_strings.formFirstName';
   static const String formLastName = 'form_strings.formLastName';
-  static const String formFirstNameExample = 'form_strings.formFirstNameExample';
+  static const String formFirstNameExample =
+      'form_strings.formFirstNameExample';
   static const String formLastNameExample = 'form_strings.formLastNameExample';
   static const String formEmail = 'form_strings.formEmail';
   static const String formEmailExample = 'form_strings.formEmailExample';
@@ -80,11 +81,13 @@ class RoadSageStrings {
 
   static const String thanksRoadsage = "control_strings.thanksRoadsage";
   static const String thanksRoadsageDesc = "control_strings.thanksRoadsageDesc";
-  static const String thanksRoadsagePhrase = "control_strings.thanksRoadsagePhrase";
+  static const String thanksRoadsagePhrase =
+      "control_strings.thanksRoadsagePhrase";
 
   static const String cheersRoadsage = "control_strings.cheersRoadsage";
   static const String cheersRoadsageDesc = "control_strings.cheersRoadsageDesc";
-  static const String cheersRoadsagePhrase = "control_strings.cheersRoadsagePhrase";
+  static const String cheersRoadsagePhrase =
+      "control_strings.cheersRoadsagePhrase";
 
   static const String beamRoadsage = "control_strings.beamRoadsage";
   static const String beamRoadsageDesc = "control_strings.beamRoadsageDesc";
@@ -93,7 +96,8 @@ class RoadSageStrings {
   static const String trySaying = "control_strings.trySaying";
 
   static const String helpAndFeedback = "control_strings.helpAndFeedback";
-  static const String helpAndFeedbackDesc = "control_strings.helpAndFeedbackDesc";
+  static const String helpAndFeedbackDesc =
+      "control_strings.helpAndFeedbackDesc";
   static const String feedbackHint = "control_strings.feedbackHint";
   static const String giveFeedback = "control_strings.giveFeedback";
 

@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
@@ -16,12 +13,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:receive_intent/receive_intent.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-
-
 
 import 'package:roadsage/authentication/auth_services.dart';
 import 'constants.dart';
@@ -59,31 +53,6 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
 
   _RoadSageApp() : super() {
     initSiriSuggestions();
-    _initReceiveIntent();
-  }
-
-  static const platform = MethodChannel(Constants.androidMethodChannel);
-  StreamSubscription? _intentStream;
-  String? _assistantQuery;
-
-  Future<void> _initReceiveIntent() async {
-    _intentStream = ReceiveIntent.receivedIntentStream.listen((event) async {
-      await getAssistantQuery();
-      debugPrint('Assistant query is $_assistantQuery');
-      Fluttertoast.showToast(msg: "Query is $_assistantQuery");
-      _assistantQuery = null;
-    }, onError: (err) {});
-  }
-
-  // Get Google Assistant query from the Android platform
-  Future<void> getAssistantQuery() async {
-    var assistantQuery =
-        await platform.invokeMethod(Constants.getAssistantMethod);
-    if (assistantQuery != null) {
-      setState(() {
-        _assistantQuery = assistantQuery;
-      });
-    }
   }
 
   @override
@@ -97,7 +66,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
 
   @override
   void dispose() {
-    _intentStream?.cancel();
+    // _intentStream?.cancel();
     super.dispose();
   }
 
@@ -107,7 +76,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
     siri.configure(onLaunch: (Map<String, dynamic> message) async {
       //print("Siri Suggestion called to perform ${message['key']}");
 
-			switch (message[Constants.siriSuggestionKey]) {
+      switch (message[Constants.siriSuggestionKey]) {
         case RoadSageStrings.openRoadsage:
           // Launch main page
           break;
@@ -144,8 +113,10 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
         translate(RoadSageStrings.cheersRoadsageDesc),
         translate(RoadSageStrings.cheersRoadsagePhrase));
 
-    siri.addEzSuggestion(translate(RoadSageStrings.beamRoadsage),
-        translate(RoadSageStrings.beamRoadsageDesc), translate(RoadSageStrings.beamRoadsagePhrase));
+    siri.addEzSuggestion(
+        translate(RoadSageStrings.beamRoadsage),
+        translate(RoadSageStrings.beamRoadsageDesc),
+        translate(RoadSageStrings.beamRoadsagePhrase));
     //print("Initialized Siri Successfully!");
   }
 
@@ -221,9 +192,21 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
           Routes.preferences: (context) => const PreferencesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
-          Routes.permission:(context)=> const PermissionScreen(),
+          Routes.permission: (context) => const PermissionScreen(),
         },
         initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
+        onGenerateRoute: (settings) {
+          String? path = settings.name;
+          if (path != null && path.contains("phraseType")) {
+            String query = path.substring(path.indexOf("phraseType=") + 11);
+            Fluttertoast.showToast(msg: "Query is $query");
+            return MaterialPageRoute(builder: (_) => const MainScreen());
+          }
+          return null;
+        },
+        onUnknownRoute: (_) {
+          return MaterialPageRoute(builder: (_) => const MainScreen());
+        },
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -238,7 +221,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
 }
 
 class MainScreen extends ConsumerStatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({Key? key, String? query}) : super(key: key);
 
   @override
   ConsumerState<MainScreen> createState() => _MainScreenState();

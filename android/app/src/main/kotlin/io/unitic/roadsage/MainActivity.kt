@@ -12,7 +12,6 @@ class MainActivity: FlutterActivity() {
     private val CHANNEL = "siri_suggestions"
     private val CHANNEL_ANDROID = "io.unitic.roadsage/google_assistant"
     private val TAG = "RoadSageMainActivity"
-    private var assistantQuery: String? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +33,6 @@ class MainActivity: FlutterActivity() {
             Log.d(TAG, "[$key=${bundle.get(key)}]");
         }
 
-        if (bundle.keySet().contains("phraseType")) {
-            Log.d(TAG, "Setting assistant query..")
-            assistantQuery = bundle.get("phraseType").toString();
-            if (assistantQuery != null) {
-                Log.d(TAG, assistantQuery!!)
-            }
-        }
-
         Log.d(TAG, "=== Logging intent data complete ===")
     }
 
@@ -49,12 +40,7 @@ class MainActivity: FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
         // Android method channel
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL_ANDROID).setMethodCallHandler {
-            call, result ->
-            if (call.method!!.contentEquals("getAssistantQuery")) {
-                result.success(assistantQuery);
-                assistantQuery = null;
-            }
-        }
+            call, result -> }
 
         // No-op for the iOS method channel
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {

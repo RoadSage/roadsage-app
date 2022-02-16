@@ -2,50 +2,47 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<capability android:name="actions.intent.OPEN_APP_FEATURE">
-    <intent
-        android:targetPackage="io.unitic.roadsage"
-        android:targetClass="io.unitic.roadsage.MainActivity">
-        <parameter
-            android:name="feature"
-            android:key="phraseType"/>
-    </intent>
-</capability>
+    <capability android:name="actions.intent.OPEN_APP_FEATURE">
+        <intent>
+            <url-template android:value="roadsage://app/home{?phraseType}" />
+            <parameter android:name="feature" android:key="phraseType" />
+        </intent>
+    </capability>
 
-<shortcut
-    android:shortcutId="THANK_YOU"
-    android:enabled="true"
-    android:shortcutShortLabel="@string/thankYou">
+    <shortcut
+        android:shortcutId="THANK_YOU"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/thankYou">
 
-    <capability-binding android:key="actions.intent.OPEN_APP_FEATURE">
-        <parameter-binding
-            android:value="thank you"
-            android:key="feature"/>
-    </capability-binding>
-</shortcut>
+        <capability-binding android:key="actions.intent.OPEN_APP_FEATURE">
+            <parameter-binding
+                android:value="thank you"
+                android:key="feature"/>
+        </capability-binding>
+    </shortcut>
 
-<shortcut
-    android:shortcutId="CHEERS"
-    android:enabled="true"
-    android:shortcutShortLabel="@string/cheers">
+    <shortcut
+        android:shortcutId="CHEERS"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/cheers">
 
-    <capability-binding android:key="actions.intent.OPEN_APP_FEATURE">
-        <parameter-binding
-            android:value="cheers"
-            android:key="feature"/>
-    </capability-binding>
-</shortcut>
+        <capability-binding android:key="actions.intent.OPEN_APP_FEATURE">
+            <parameter-binding
+                android:value="cheers"
+                android:key="feature"/>
+        </capability-binding>
+    </shortcut>
 
-<shortcut
-    android:shortcutId="TURN_OFF_HIGH_BEAM"
-    android:enabled="true"
-    android:shortcutShortLabel="@string/turnOffHighBeam">
+    <shortcut
+        android:shortcutId="TURN_OFF_HIGH_BEAM"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/turnOffHighBeam">
 
-    <capability-binding android:key="actions.intent.OPEN_APP_FEATURE">
-        <parameter-binding
-            android:value="turn off high beam"
-            android:key="feature"/>
-    </capability-binding>
-</shortcut>
+        <capability-binding android:key="actions.intent.OPEN_APP_FEATURE">
+            <parameter-binding
+                android:value="turn off high beam"
+                android:key="feature"/>
+        </capability-binding>
+    </shortcut>
 
 </shortcuts>

@@ -47,10 +47,16 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
     if (themeIndex != null) {
       switchThemeMode(ThemeMode.values[themeIndex]);
     }
+
+    bool? loggedIn = prefs?.getBool(Constants.prefsLoggedIn);
+    if (loggedIn != null) {
+      switchLoggedIn(loggedIn);
+    }
   }
 
   void switchLoggedIn(bool value) {
     state = state.copyWith(loggedIn: value);
+    prefs?.setBool(Constants.prefsLoggedIn, value);
   }
 
   void switchThemeMode(ThemeMode value) {
