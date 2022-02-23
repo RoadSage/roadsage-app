@@ -7,8 +7,8 @@
 <string name="cheers">Cheers</string>
 <string name="cheersLabel">Cheers label</string>
 <string name="turnOffHighBeam">Turn off high beam</string>
-<string name="facebook_app_id">1002206970334208</string>
-<string name="fb_login_protocol_scheme">fb1002206970334208</string>
+<string name="facebook_app_id">677765780246587</string>
+<string name="facebook_client_token">00848c02e16665482853ac5a2ce1fe17</string>
 
 <string-array name="sayRoadSage">
     <item>show $message</item>
