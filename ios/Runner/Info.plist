@@ -26,6 +26,22 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+<string>You are about to use location!</string>
+
+<key>NSLocationAlwaysUsageDescription</key>
+<string>This will be called if location is used behind the scenes</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>This will be called if location is used behind the scenes</string>
+
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>This will be called if location is used behind the scenes</string>
+
+<key>NSMicrophoneUsageDescription</key>
+<string>This will be called if mic is used </string>
+<key>NSContactsUsageDescription</key>
+    <string>You have to describe the real usage for a human.</string>
+
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

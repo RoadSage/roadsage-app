@@ -60,6 +60,7 @@ dependencies:
   flutter_translate: ^3.0.1
   shared_preferences: ^2.0.13
   receive_intent: ^0.2.0
+  permission_handler: ^9.2.0
 
 dev_dependencies:
   flutter_test:
