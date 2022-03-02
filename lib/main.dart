@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:roadsage/authentication/auth_services.dart';
 
 import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
@@ -15,7 +16,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
-import 'package:roadsage/authentication/auth_services.dart';
 import 'constants.dart';
 import 'siri_suggestions.dart';
 
@@ -36,8 +36,6 @@ void main() async {
 
   runApp(LocalizedApp(delegate, const ProviderScope(child: RoadSageApp())));
 }
-
-AuthClass authClass = AuthClass();
 
 class RoadSageApp extends ConsumerStatefulWidget {
   const RoadSageApp({Key? key}) : super(key: key);
@@ -229,6 +227,7 @@ class MainScreen extends ConsumerStatefulWidget {
 
 class _MainScreenState extends ConsumerState<MainScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+  final AuthClass authClass = AuthClass();
 
   // default - 2 - HomeScreen
   int _selectedIndex = 2;

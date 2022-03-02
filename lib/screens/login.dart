@@ -22,8 +22,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthClass authClass = AuthClass();
+
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
-  AuthClass authClass = AuthClass();
 
   @override
   Widget build(BuildContext context) {
