@@ -152,9 +152,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: "Login / Sign up",
                   onPressed: () {
                     // TODO: actually check for permissions on iOS
-                    var route =
-                        Platform.isIOS ? Routes.permission : Routes.home;
-                    Navigator.pushReplacementNamed(context, route);
+                    // var route =
+                    //     Platform.isIOS ? Routes.permission : Routes.home;
+                    // Navigator.pushReplacementNamed(context, route);
+
+                    Navigator.of(context).pushNamed(Routes.signUpWithEmail);
                   },
                   // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(

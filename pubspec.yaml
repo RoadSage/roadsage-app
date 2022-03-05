@@ -61,6 +61,7 @@ dependencies:
   shared_preferences: ^2.0.13
   receive_intent: ^0.2.0
   flutter_native_splash: ^2.0.5
+  pin_code_fields: ^7.3.0
 
 dev_dependencies:
   flutter_test:

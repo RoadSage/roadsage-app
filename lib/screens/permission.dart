@@ -40,48 +40,59 @@ class PermissionScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       contentPadding: const EdgeInsets.all(18),
-                      leading: const Icon(Icons.location_on,
-                          size: 28, color: RoadSageColours.lightBlue,),
+                      leading: const Icon(
+                        Icons.location_on,
+                        size: 28,
+                        color: RoadSageColours.lightBlue,
+                      ),
                       onTap: () {},
                       title: const Text("Location Access"),
                       subtitle: const Text(
                           "Required 'Always' to get Alexa accurate location related answers"),
                       tileColor: Theme.of(context).primaryColorLight,
                     ),
-                     
-                     const SizedBox(height:10),
-                     ListTile(
+                    const SizedBox(height: 10),
+                    ListTile(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       contentPadding: const EdgeInsets.all(18),
-                      leading: const Icon(Icons.mic,
-                          size: 28, color: RoadSageColours.lightBlue,),
+                      leading: const Icon(
+                        Icons.mic,
+                        size: 28,
+                        color: RoadSageColours.lightBlue,
+                      ),
                       onTap: () {},
                       title: const Text("Microphone Access"),
                       subtitle: const Text(
                           "Required to make your call audio hearable by the other side while calling"),
                       tileColor: Theme.of(context).primaryColorLight,
-                    ), 
-                    const SizedBox(height:10),
+                    ),
+                    const SizedBox(height: 10),
                     ListTile(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       contentPadding: const EdgeInsets.all(18),
-                      leading: const Icon(Icons.person,
-                          size: 28, color: RoadSageColours.lightBlue,),
+                      leading: const Icon(
+                        Icons.person,
+                        size: 28,
+                        color: RoadSageColours.lightBlue,
+                      ),
                       onTap: () {},
                       title: const Text("Contact Access"),
                       subtitle: const Text(
                           "Required to make voice activate calls with contacts from your phone"),
                       tileColor: Theme.of(context).primaryColorLight,
-                    ), 
-                    const SizedBox(height:10),
+                    ),
+                    const SizedBox(height: 10),
                     ListTile(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       contentPadding: const EdgeInsets.all(18),
-                      leading: const Icon(Icons.notifications,
-                          size: 28, color: RoadSageColours.lightBlue,),
+                      leading: const Icon(
+                        Icons.notifications,
+                        size: 28,
+                        color: RoadSageColours.lightBlue,
+                      ),
                       onTap: () {},
                       title: const Text("Notification Access"),
                       subtitle: const Text(

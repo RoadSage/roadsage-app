@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:roadsage/screens/display.dart';
+import 'package:roadsage/screens/email_otp_verify_for_login.dart';
+import 'package:roadsage/screens/email_otp_verify_screen.dart';
 import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/help.dart';
+import 'package:roadsage/screens/login_with_email.dart';
 import 'package:roadsage/screens/permission.dart';
 import 'package:roadsage/screens/preferences.dart';
 import 'package:roadsage/screens/profile.dart';
+import 'package:roadsage/screens/register_with_email.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -182,7 +186,8 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
             color: Colors.white,
           ),
         ),
-        themeMode: roadSageModel.themeMode,
+        // themeMode: roadSageModel.themeMode,
+        themeMode: ThemeMode.light,
         routes: {
           Routes.root: (context) => const LoginScreen(),
           Routes.home: (context) => const MainScreen(),
@@ -193,6 +198,11 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           Routes.preferences: (context) => const PreferencesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
           Routes.permission: (context) => const PermissionScreen(),
+          Routes.signUpWithEmail: (context) => const RegisterWithEmailScreen(),
+          Routes.verifyEmailScreen: (context) => const EmailVerifyScreen(),
+          Routes.loginEmail: (context) => const LoginWithEmailScreen(),
+          Routes.verifyEmailScreenForLogin: (context) =>
+              const EmailVerifyScreenLogin(),
         },
         initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
         onGenerateRoute: (settings) {

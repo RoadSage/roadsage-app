@@ -10,6 +10,10 @@ class Routes {
   static const String faq = "/faq";
   static const String profile = "/profile";
   static const String faqSubmitQuestion = "/faq/submit_question";
+  static const String signUpWithEmail = "/signupwithemail";
+  static const String verifyEmailScreen = "/verifyEmailScreen";
+  static const String loginEmail = "/loginEmail";
+  static const String verifyEmailScreenForLogin = "/verifyEmailScreenForLogin";
 }
 
 class Constants {
