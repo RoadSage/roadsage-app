@@ -14,6 +14,9 @@ class Routes {
   static const String verifyEmailScreen = "/verifyEmailScreen";
   static const String loginEmail = "/loginEmail";
   static const String verifyEmailScreenForLogin = "/verifyEmailScreenForLogin";
+  static const String registerMobile = "/registerMobile";
+  static const String loginMobile = "/loginMobile";
+  static const String verifyMobile = "/verifyMobile";
 }
 
 class Constants {

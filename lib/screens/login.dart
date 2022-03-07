@@ -150,13 +150,35 @@ class _LoginScreenState extends State<LoginScreen> {
                 SignInButton(
                   Buttons.Email,
                   text: "Login / Sign up",
-                  onPressed: () {
+                  onPressed: () async {
                     // TODO: actually check for permissions on iOS
                     // var route =
                     //     Platform.isIOS ? Routes.permission : Routes.home;
                     // Navigator.pushReplacementNamed(context, route);
-
-                    Navigator.of(context).pushNamed(Routes.signUpWithEmail);
+                    await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text("Login / Sign up Using"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(Routes.registerMobile);
+                              },
+                              child: const Text("Mobile"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(Routes.signUpWithEmail);
+                              },
+                              child: const Text("Email"),
+                            )
+                          ],
+                        );
+                      },
+                    );
                   },
                   // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
