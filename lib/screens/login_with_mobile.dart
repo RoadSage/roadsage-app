@@ -11,7 +11,7 @@ class LoginWithMobileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Log In"),
+        title: const Text(RoadSageStrings.login),
         centerTitle: true,
         backgroundColor: RoadSageColours.lightGrey,
         actions: const [
@@ -30,10 +30,10 @@ class LoginWithMobileScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 20, bottom: 20),
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
-            child: const Center(
+            child: Center(
               child: Text(
-                "PHONE",
-                style: TextStyle(
+                RoadSageStrings.mobile.toUpperCase(),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -45,7 +45,9 @@ class LoginWithMobileScreen extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                _buildTextField(label: "Phone Number"),
+                _buildTextField(
+                  label: RoadSageStrings.phoneNumber,
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -56,7 +58,7 @@ class LoginWithMobileScreen extends StatelessWidget {
                     Navigator.pushNamedAndRemoveUntil(
                         context, route, (r) => false);
                   },
-                  title: "SEND CODE",
+                  title: RoadSageStrings.sendCode,
                 )
               ],
             ),

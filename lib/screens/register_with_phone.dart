@@ -9,7 +9,7 @@ class RegisterWithMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign up"),
+        title: const Text(RoadSageStrings.signUp),
         centerTitle: true,
         backgroundColor: RoadSageColours.lightGrey,
         actions: const [
@@ -28,10 +28,10 @@ class RegisterWithMobile extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 20, bottom: 20),
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
-            child: const Center(
+            child: Center(
               child: Text(
-                "PHONE",
-                style: TextStyle(
+                RoadSageStrings.mobile.toUpperCase(),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -43,12 +43,14 @@ class RegisterWithMobile extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                _buildTextField(label: "Phone number"),
+                _buildTextField(
+                  label: RoadSageStrings.phoneNumber,
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text(
-                  "By Continuing you agree to our Terms of Service and confirm that you read our privacy policy",
+                  RoadSageStrings.byContinuing,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -58,7 +60,7 @@ class RegisterWithMobile extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, Routes.verifyMobile);
                   },
-                  title: "SEND CODE",
+                  title: RoadSageStrings.sendCode,
                 )
               ],
             ),

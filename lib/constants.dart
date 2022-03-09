@@ -43,6 +43,22 @@ class RoadSageStrings {
   static const String tncAgreement = "login_page.tncAgreement";
   static const String byUnitic = "login_page.byUnitic";
   static const String troubleSigning = "login_page.troubleSigning";
+  static const String login = "login_page.login";
+  static const String signUp = "login_page.signUp";
+  static const String loginSignUpUsing = "login_page.loginSignUpUsing";
+  static const String mobile = "login_page.mobile";
+  static const String email = "login_page.email";
+  static const String enter6DigitCode = "login_page.enter6DigitCode";
+  static const String checkYourEmailInbox = "login_page.checkYourEmailInbox";
+  static const String checkYourMessages = "login_page.checkYourMessages";
+  static const String resendCode = "login_page.resendCode";
+  static const String emailAddress = "login_page.emailAddress";
+  static const String byContinuing = "login_page.byContinuing";
+  static const String phoneNumber = "login_page.phoneNumber";
+  static const String sendCode = "login_page.sendCode";
+  static const String firstName = "login_page.firstName";
+  static const String lastName = "login_page.lastName";
+  static const String dateOfBirth = "login_page.dateOfBirth";
 
   static const String signInWithGoogle = 'Sign in with Google';
 

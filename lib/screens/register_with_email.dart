@@ -9,7 +9,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign up"),
+        title: const Text(RoadSageStrings.signUp),
         centerTitle: true,
         backgroundColor: RoadSageColours.lightGrey,
         actions: const [
@@ -30,7 +30,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
             child: const Center(
               child: Text(
-                "Email",
+                RoadSageStrings.email,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -43,15 +43,15 @@ class RegisterWithEmailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                _buildTextField(label: "First Name"),
-                _buildTextField(label: "Last Name"),
-                _buildTextField(label: "Email Address"),
-                _buildTextField(label: "Date Of Birth"),
+                _buildTextField(label: RoadSageStrings.firstName),
+                _buildTextField(label: RoadSageStrings.lastName),
+                _buildTextField(label: RoadSageStrings.emailAddress),
+                _buildTextField(label: RoadSageStrings.dateOfBirth),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text(
-                  "By Continuing you agree to our Terms of Service and confirm that you read our privacy policy",
+                  RoadSageStrings.byContinuing,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -61,7 +61,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, Routes.verifyEmailScreen);
                   },
-                  title: "SIGN UP",
+                  title: RoadSageStrings.signUp,
                 )
               ],
             ),

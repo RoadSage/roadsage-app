@@ -9,7 +9,7 @@ class LoginWithEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Log In"),
+        title: const Text(RoadSageStrings.login),
         centerTitle: true,
         backgroundColor: RoadSageColours.lightGrey,
         actions: const [
@@ -30,7 +30,7 @@ class LoginWithEmailScreen extends StatelessWidget {
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
             child: const Center(
               child: Text(
-                "Email",
+                RoadSageStrings.email,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -43,12 +43,14 @@ class LoginWithEmailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                _buildTextField(label: "Email Address"),
+                _buildTextField(
+                  label: RoadSageStrings.emailAddress,
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 const Text(
-                  "By Continuing you agree to our Terms of Service and confirm that you read our privacy policy",
+                  RoadSageStrings.byContinuing,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -59,7 +61,7 @@ class LoginWithEmailScreen extends StatelessWidget {
                     Navigator.pushNamed(
                         context, Routes.verifyEmailScreenForLogin);
                   },
-                  title: "LOGIN",
+                  title: RoadSageStrings.login.toUpperCase(),
                 )
               ],
             ),

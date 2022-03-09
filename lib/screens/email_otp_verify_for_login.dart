@@ -11,7 +11,7 @@ class EmailVerifyScreenLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Log In"),
+        title: const Text(RoadSageStrings.login),
         centerTitle: true,
         backgroundColor: RoadSageColours.lightGrey,
         actions: const [
@@ -32,7 +32,7 @@ class EmailVerifyScreenLogin extends StatelessWidget {
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
             child: const Center(
               child: Text(
-                "Enter 6-Digit Code",
+                RoadSageStrings.enter6DigitCode,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -51,7 +51,7 @@ class EmailVerifyScreenLogin extends StatelessWidget {
                   height: 10,
                 ),
                 const Text(
-                  "Check your email inbox",
+                  RoadSageStrings.checkYourEmailInbox,
                 ),
                 const SizedBox(
                   height: 10,
@@ -74,7 +74,7 @@ class EmailVerifyScreenLogin extends StatelessWidget {
                   height: 10,
                 ),
                 const Text(
-                  "Resend code 55s",
+                  RoadSageStrings.resendCode,
                 ),
               ],
             ),

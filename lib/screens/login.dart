@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SignInButton(
                   Buttons.Email,
-                  text: "Login / Sign up",
+                  text: "${RoadSageStrings.login} / ${RoadSageStrings.signUp}",
                   onPressed: () async {
                     // TODO: actually check for permissions on iOS
                     // var route =
@@ -159,21 +159,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: const Text("Login / Sign up Using"),
+                          title: const Text(RoadSageStrings.loginSignUpUsing),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context)
                                     .pushNamed(Routes.registerMobile);
                               },
-                              child: const Text("Mobile"),
+                              child: const Text(RoadSageStrings.mobile),
                             ),
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context)
                                     .pushNamed(Routes.signUpWithEmail);
                               },
-                              child: const Text("Email"),
+                              child: const Text(RoadSageStrings.email),
                             )
                           ],
                         );
