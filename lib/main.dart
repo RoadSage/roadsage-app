@@ -277,6 +277,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
           icon: const Icon(Icons.menu),
           iconSize: 36,
           color: RoadSageColours.lightBlue,
+          // color: Colors.red,
           onPressed: () {
             _key.currentState!.openEndDrawer();
           },
