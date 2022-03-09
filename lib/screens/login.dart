@@ -24,13 +24,14 @@ class _LoginScreenState extends State<LoginScreen> {
   AuthClass authClass = AuthClass();
 
   _checkPermission() async {
-      await [
+    await [
       Permission.location,
       Permission.microphone,
       Permission.contacts,
       Permission.notification,
     ].request();
 
+    // TODO: check if the permission was actually granted before going to home
     Navigator.pushReplacementNamed(context, Routes.home);
   }
 
