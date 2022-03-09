@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/help.dart';
-import 'package:roadsage/screens/permission.dart';
 import 'package:roadsage/screens/preferences.dart';
 import 'package:roadsage/screens/profile.dart';
 import 'package:roadsage/screens/submit_question.dart';
@@ -192,7 +191,6 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
           Routes.preferences: (context) => const PreferencesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
-          Routes.permission: (context) => const PermissionScreen(),
         },
         initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
         onGenerateRoute: (settings) {

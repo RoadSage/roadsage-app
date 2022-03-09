@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Routes {
   static const String root = "/";
   static const String home = "/home";
-  static const String permission = "/permission";
+  // static const String permission = "/permission";
   static const String preferences = "/preferences";
   static const String remote = "/devices/remote";
   static const String display = "/devices/display";

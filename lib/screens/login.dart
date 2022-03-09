@@ -12,7 +12,6 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -24,14 +23,17 @@ class _LoginScreenState extends State<LoginScreen> {
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   AuthClass authClass = AuthClass();
 
+  _checkPermission() async {
+      await [
+      Permission.location,
+      Permission.microphone,
+      Permission.contacts,
+      Permission.notification,
+    ].request();
 
-  _checkPermission()async{
-     await Permission.location.request();
-     await Permission.microphone.request();
-     await Permission.contacts.request();
-     await Permission.notification.request();
-     Navigator.pushReplacementNamed(context, Routes.home);
+    Navigator.pushReplacementNamed(context, Routes.home);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               AppleIDAuthorizationScopes.fullName,
                             ],
                           );
-                            _checkPermission();
+                          _checkPermission();
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
@@ -153,9 +155,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                 SignInButton(
                   Buttons.Facebook,
-                  onPressed: ()async{await authClass.signInWithFacebook(context);
+                  onPressed: () async {
+                    await authClass.signInWithFacebook(context);
 
-                  _checkPermission();
+                    _checkPermission();
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
@@ -165,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: "Login / Sign up",
                   onPressed: () {
                     // TODO: actually check for permissions on iOS
-                  _checkPermission();
+                    _checkPermission();
                   },
                   // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
@@ -173,8 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                  _checkPermission();
-                  
+                    _checkPermission();
                   },
                   child: Text(
                     translate(RoadSageStrings.troubleSigning),
