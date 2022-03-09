@@ -27,8 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
     await [
       Permission.location,
       Permission.microphone,
-      Permission.contacts,
-      Permission.notification,
     ].request();
 
     // TODO: check if the permission was actually granted before going to home
@@ -157,9 +155,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 SignInButton(
                   Buttons.Facebook,
                   onPressed: () async {
-                    await authClass.signInWithFacebook(context);
-
-                    _checkPermission();
+                    Resource? loginStatus =
+                        await authClass.signInWithFacebook(context);
+                    if (loginStatus != null &&
+                        loginStatus.status == Status.success) {
+                      _checkPermission();
+                    }
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
