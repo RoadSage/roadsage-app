@@ -13,7 +13,6 @@ class EmailVerifyScreenLogin extends StatelessWidget {
       appBar: AppBar(
         title: const Text(RoadSageStrings.login),
         centerTitle: true,
-        backgroundColor: RoadSageColours.lightGrey,
         actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
