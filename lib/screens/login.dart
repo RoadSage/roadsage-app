@@ -144,8 +144,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 SignInButton(
                   Buttons.Facebook,
                   onPressed: () async {
-                    await authClass.signInWithFacebook(context);
-                    Navigator.pushReplacementNamed(context, Routes.permission);
+                    Resource? loginStatus =
+                        await authClass.signInWithFacebook(context);
+                    if (loginStatus != null &&
+                        loginStatus.status == Status.success) {
+                      Navigator.pushReplacementNamed(
+                          context, Routes.permission);
+                    }
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
