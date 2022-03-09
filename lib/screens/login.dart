@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/authentication/auth_services.dart';
+import 'package:roadsage/screens/register_with_email.dart';
+import 'package:roadsage/screens/register_with_phone.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
@@ -163,15 +165,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           actions: [
                             TextButton(
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(Routes.registerMobile);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisterWithMobile(),
+                                  ),
+                                );
                               },
                               child: const Text(RoadSageStrings.mobile),
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(Routes.signUpWithEmail);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisterWithEmailScreen(),
+                                  ),
+                                );
                               },
                               child: const Text(RoadSageStrings.email),
                             )

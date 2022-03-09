@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/screens/email_otp_verify_screen.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
 class RegisterWithEmailScreen extends StatelessWidget {
@@ -58,7 +59,11 @@ class RegisterWithEmailScreen extends StatelessWidget {
                 ),
                 CustomButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, Routes.verifyEmailScreen);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const EmailVerifyScreen(),
+                      ),
+                    );
                   },
                   title: RoadSageStrings.signUp,
                 )

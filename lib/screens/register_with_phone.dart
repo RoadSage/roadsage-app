@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/screens/verify_mobile.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
 class RegisterWithMobile extends StatelessWidget {
@@ -57,7 +58,11 @@ class RegisterWithMobile extends StatelessWidget {
                 ),
                 CustomButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, Routes.verifyMobile);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const VerifyMobileScreen(),
+                      ),
+                    );
                   },
                   title: RoadSageStrings.sendCode,
                 )

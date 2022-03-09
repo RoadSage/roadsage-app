@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/screens/email_otp_verify_for_login.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
 class LoginWithEmailScreen extends StatelessWidget {
@@ -57,8 +58,11 @@ class LoginWithEmailScreen extends StatelessWidget {
                 ),
                 CustomButton(
                   onPressed: () {
-                    Navigator.pushNamed(
-                        context, Routes.verifyEmailScreenForLogin);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const EmailVerifyScreenLogin(),
+                      ),
+                    );
                   },
                   title: RoadSageStrings.login.toUpperCase(),
                 )

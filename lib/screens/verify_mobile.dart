@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/screens/email_otp_verify_for_login.dart';
 
 class VerifyMobileScreen extends StatelessWidget {
   const VerifyMobileScreen({Key? key}) : super(key: key);
@@ -60,7 +61,11 @@ class VerifyMobileScreen extends StatelessWidget {
                   animationType: AnimationType.fade,
                   animationDuration: const Duration(milliseconds: 300),
                   onCompleted: (v) {
-                    Navigator.of(context).pushNamed(Routes.loginMobile);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const EmailVerifyScreenLogin(),
+                      ),
+                    );
                   },
                   onChanged: (String value) {},
                 ),

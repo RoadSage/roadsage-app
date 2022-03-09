@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/screens/login_with_email.dart';
 
 class EmailVerifyScreen extends StatelessWidget {
   const EmailVerifyScreen({Key? key}) : super(key: key);
@@ -60,7 +61,11 @@ class EmailVerifyScreen extends StatelessWidget {
                   animationType: AnimationType.fade,
                   animationDuration: const Duration(milliseconds: 300),
                   onCompleted: (v) {
-                    Navigator.of(context).pushNamed(Routes.loginEmail);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginWithEmailScreen(),
+                      ),
+                    );
                   },
                   onChanged: (String value) {},
                 ),
