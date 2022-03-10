@@ -182,8 +182,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
             color: Colors.white,
           ),
         ),
-        // themeMode: roadSageModel.themeMode,
-        themeMode: ThemeMode.light,
+        themeMode: roadSageModel.themeMode,
         routes: {
           Routes.root: (context) => const LoginScreen(),
           Routes.home: (context) => const MainScreen(),

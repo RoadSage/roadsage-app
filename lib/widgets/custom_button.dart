@@ -12,7 +12,6 @@ class CustomButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
       child: SizedBox(
-        width: double.infinity,
         height: 50,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
