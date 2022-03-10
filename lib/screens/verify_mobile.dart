@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/screens/email_otp_verify_for_login.dart';
@@ -10,7 +11,7 @@ class VerifyMobileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(RoadSageStrings.signUp),
+        title: Text(translate(RoadSageStrings.signUp)),
         centerTitle: true,
         actions: const [
           Padding(
@@ -28,10 +29,10 @@ class VerifyMobileScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 20, bottom: 20),
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
-            child: const Center(
+            child: Center(
               child: Text(
-                RoadSageStrings.enter6DigitCode,
-                style: TextStyle(
+                translate(RoadSageStrings.enter6DigitCode),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -48,8 +49,8 @@ class VerifyMobileScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
-                  RoadSageStrings.checkYourMessages,
+                Text(
+                  translate(RoadSageStrings.checkYourMessages),
                 ),
                 const SizedBox(
                   height: 10,
@@ -72,8 +73,8 @@ class VerifyMobileScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
-                  RoadSageStrings.resendCode,
+                Text(
+                  translate(RoadSageStrings.resendCode),
                 ),
               ],
             ),

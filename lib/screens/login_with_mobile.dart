@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
@@ -11,7 +12,7 @@ class LoginWithMobileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(RoadSageStrings.login),
+        title: Text(translate(RoadSageStrings.login)),
         centerTitle: true,
         actions: const [
           Padding(
@@ -31,7 +32,7 @@ class LoginWithMobileScreen extends StatelessWidget {
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
             child: Center(
               child: Text(
-                RoadSageStrings.mobile.toUpperCase(),
+                translate(RoadSageStrings.mobile).toUpperCase(),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -45,7 +46,7 @@ class LoginWithMobileScreen extends StatelessWidget {
             child: Column(
               children: [
                 _buildTextField(
-                  label: RoadSageStrings.phoneNumber,
+                  label: translate(RoadSageStrings.phoneNumber),
                 ),
                 const SizedBox(
                   height: 10,
@@ -57,7 +58,7 @@ class LoginWithMobileScreen extends StatelessWidget {
                     Navigator.pushNamedAndRemoveUntil(
                         context, route, (r) => false);
                   },
-                  title: RoadSageStrings.sendCode,
+                  title: translate(RoadSageStrings.sendCode),
                 )
               ],
             ),

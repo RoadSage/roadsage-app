@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/screens/verify_mobile.dart';
 import 'package:roadsage/widgets/custom_button.dart';
@@ -10,7 +11,7 @@ class RegisterWithMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(RoadSageStrings.signUp),
+        title: Text(translate(RoadSageStrings.signUp)),
         centerTitle: true,
         actions: const [
           Padding(
@@ -30,7 +31,7 @@ class RegisterWithMobile extends StatelessWidget {
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
             child: Center(
               child: Text(
-                RoadSageStrings.mobile.toUpperCase(),
+                translate(RoadSageStrings.mobile).toUpperCase(),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -44,13 +45,13 @@ class RegisterWithMobile extends StatelessWidget {
             child: Column(
               children: [
                 _buildTextField(
-                  label: RoadSageStrings.phoneNumber,
+                  label: translate(RoadSageStrings.phoneNumber),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
-                  RoadSageStrings.byContinuing,
+                Text(
+                  translate(RoadSageStrings.byContinuing),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -64,7 +65,7 @@ class RegisterWithMobile extends StatelessWidget {
                       ),
                     );
                   },
-                  title: RoadSageStrings.sendCode,
+                  title: translate(RoadSageStrings.sendCode),
                 )
               ],
             ),

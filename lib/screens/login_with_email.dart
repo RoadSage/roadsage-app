@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/screens/email_otp_verify_for_login.dart';
 import 'package:roadsage/widgets/custom_button.dart';
@@ -10,7 +11,7 @@ class LoginWithEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(RoadSageStrings.login),
+        title: Text(translate(RoadSageStrings.login)),
         centerTitle: true,
         actions: const [
           Padding(
@@ -28,10 +29,10 @@ class LoginWithEmailScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 20, bottom: 20),
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
-            child: const Center(
+            child: Center(
               child: Text(
-                RoadSageStrings.email,
-                style: TextStyle(
+                translate(RoadSageStrings.email),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -44,13 +45,13 @@ class LoginWithEmailScreen extends StatelessWidget {
             child: Column(
               children: [
                 _buildTextField(
-                  label: RoadSageStrings.emailAddress,
+                  label: translate(RoadSageStrings.emailAddress),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
-                  RoadSageStrings.byContinuing,
+                Text(
+                  translate(RoadSageStrings.byContinuing),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -64,7 +65,7 @@ class LoginWithEmailScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  title: RoadSageStrings.login.toUpperCase(),
+                  title: translate(RoadSageStrings.login).toUpperCase(),
                 )
               ],
             ),

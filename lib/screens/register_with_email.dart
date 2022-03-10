@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/screens/email_otp_verify_screen.dart';
 import 'package:roadsage/widgets/custom_button.dart';
@@ -10,7 +11,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(RoadSageStrings.signUp),
+        title: Text(translate(RoadSageStrings.signUp)),
         centerTitle: true,
         actions: const [
           Padding(
@@ -28,10 +29,10 @@ class RegisterWithEmailScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(top: 20, bottom: 20),
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
-            child: const Center(
+            child: Center(
               child: Text(
-                RoadSageStrings.email,
-                style: TextStyle(
+                translate(RoadSageStrings.email),
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -43,15 +44,15 @@ class RegisterWithEmailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                _buildTextField(label: RoadSageStrings.firstName),
-                _buildTextField(label: RoadSageStrings.lastName),
-                _buildTextField(label: RoadSageStrings.emailAddress),
-                _buildTextField(label: RoadSageStrings.dateOfBirth),
+                _buildTextField(label: translate(RoadSageStrings.firstName)),
+                _buildTextField(label: translate(RoadSageStrings.lastName)),
+                _buildTextField(label: translate(RoadSageStrings.emailAddress)),
+                _buildTextField(label: translate(RoadSageStrings.dateOfBirth)),
                 const SizedBox(
                   height: 10,
                 ),
-                const Text(
-                  RoadSageStrings.byContinuing,
+                Text(
+                  translate(RoadSageStrings.byContinuing),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
@@ -65,7 +66,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  title: RoadSageStrings.signUp,
+                  title: translate(RoadSageStrings.signUp),
                 )
               ],
             ),
