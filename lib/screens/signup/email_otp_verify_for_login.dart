@@ -1,18 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roadsage/constants.dart';
-import 'package:roadsage/screens/email_otp_verify_for_login.dart';
 
-class VerifyMobileScreen extends StatelessWidget {
-  const VerifyMobileScreen({Key? key}) : super(key: key);
+class EmailVerifyScreenLogin extends StatelessWidget {
+  const EmailVerifyScreenLogin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(translate(RoadSageStrings.signUp)),
-        centerTitle: true,
+        title: Text(translate(RoadSageStrings.login)),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -50,7 +51,7 @@ class VerifyMobileScreen extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  translate(RoadSageStrings.checkYourMessages),
+                  translate(RoadSageStrings.checkYourEmailInbox),
                 ),
                 const SizedBox(
                   height: 10,
@@ -62,11 +63,10 @@ class VerifyMobileScreen extends StatelessWidget {
                   animationType: AnimationType.fade,
                   animationDuration: const Duration(milliseconds: 300),
                   onCompleted: (v) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const EmailVerifyScreenLogin(),
-                      ),
-                    );
+                    var route =
+                        Platform.isIOS ? Routes.permission : Routes.home;
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, route, (r) => false);
                   },
                   onChanged: (String value) {},
                 ),

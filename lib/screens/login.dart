@@ -7,8 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/authentication/auth_services.dart';
-import 'package:roadsage/screens/register_with_email.dart';
-import 'package:roadsage/screens/register_with_phone.dart';
+import 'package:roadsage/screens/signup/login_with_email.dart';
+import 'package:roadsage/screens/signup/login_with_mobile.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
@@ -151,7 +151,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SignInButton(
                   Buttons.Email,
-                  text: "${RoadSageStrings.login} / ${RoadSageStrings.signUp}",
+                  text:
+                      "${translate(RoadSageStrings.login)} / ${translate(RoadSageStrings.signUp)}",
                   onPressed: () async {
                     // TODO: actually check for permissions on iOS
                     // var route =
@@ -161,29 +162,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: const Text(RoadSageStrings.loginSignUpUsing),
+                          title:
+                              Text(translate(RoadSageStrings.loginSignUpUsing)),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const RegisterWithMobile(),
+                                        const LoginWithMobileScreen(),
                                   ),
                                 );
                               },
-                              child: const Text(RoadSageStrings.mobile),
+                              child: Text(translate(RoadSageStrings.mobile)),
                             ),
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const RegisterWithEmailScreen(),
+                                        const LoginWithEmailScreen(),
                                   ),
                                 );
                               },
-                              child: const Text(RoadSageStrings.email),
+                              child: Text(translate(RoadSageStrings.email)),
                             )
                           ],
                         );

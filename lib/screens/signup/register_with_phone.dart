@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
-import 'package:roadsage/screens/email_otp_verify_screen.dart';
+import 'package:roadsage/screens/signup/verify_mobile.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
-class RegisterWithEmailScreen extends StatelessWidget {
-  const RegisterWithEmailScreen({Key? key}) : super(key: key);
+class RegisterWithMobile extends StatelessWidget {
+  const RegisterWithMobile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(translate(RoadSageStrings.signUp)),
-        centerTitle: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -31,7 +31,7 @@ class RegisterWithEmailScreen extends StatelessWidget {
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
             child: Center(
               child: Text(
-                translate(RoadSageStrings.email),
+                translate(RoadSageStrings.mobile).toUpperCase(),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -44,10 +44,9 @@ class RegisterWithEmailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                _buildTextField(label: translate(RoadSageStrings.firstName)),
-                _buildTextField(label: translate(RoadSageStrings.lastName)),
-                _buildTextField(label: translate(RoadSageStrings.emailAddress)),
-                _buildTextField(label: translate(RoadSageStrings.dateOfBirth)),
+                _buildTextField(
+                  label: translate(RoadSageStrings.phoneNumber),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -62,11 +61,11 @@ class RegisterWithEmailScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const EmailVerifyScreen(),
+                        builder: (context) => const VerifyMobileScreen(),
                       ),
                     );
                   },
-                  title: translate(RoadSageStrings.signUp),
+                  title: translate(RoadSageStrings.sendCode),
                 )
               ],
             ),
@@ -86,12 +85,11 @@ class RegisterWithEmailScreen extends StatelessWidget {
         ),
         Text(
           label,
-          style: const TextStyle(
-            color: RoadSageColours.darkGrey,
-          ),
           textScaleFactor: 1.1,
         ),
-        TextFormField(),
+        TextFormField(
+          keyboardType: TextInputType.phone,
+        ),
       ],
     );
   }

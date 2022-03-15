@@ -36,16 +36,14 @@
     "tncAgreement": "By clicking Login, you agree to our terms and conditions. Learn how we process your data in our ...",
     "byUnitic": "By Unitic",
     "troubleSigning": "Trouble Signing in?",
-    "login": "Log In",
-    "signUp": "Sign Up",
+    "login": "Log in",
+    "signUp": "Sign up",
     "loginSignUpUsing": "Login / Sign up Using",
-
     "mobile": "Mobile",
     "email": "Email",
     "enter6DigitCode": "Enter 6-Digit Code",
     "checkYourEmailInbox": "Check your email inbox",
     "resendCode": "Resend code 55s",
-
     "emailAddress": "Email Address",
     "byContinuing": "By Continuing you agree to our Terms of Service and confirm that you read our privacy policy",
     "phoneNumber": "Phone Number",
@@ -55,7 +53,6 @@
     "dateOfBirth": "Date Of Birth",
     "checkYourMessages": "Check Your Messages"
   },
-
   "menu_titles": {
     "userProfile": "User Profile",
     "activity": "Activity",
@@ -67,10 +64,8 @@
     "rateUs": "Rate Us",
     "contactUs": "Contact Us"
   },
-
   "connected": "Connected",
   "disconnected": "Disconnected",
-
   "form_strings": {
     "formName": "Name",
     "formFirstName": "First Name",
@@ -83,12 +78,10 @@
     "formPhoneExample": "phone",
     "formSubmit": "Submit"
   },
-
   "device_list": {
     "remote": "Remote",
     "display": "Display"
   },
-
   "device_info": {
     "status": "Status",
     "batteryLevel": "Battery level",
@@ -97,40 +90,32 @@
     "sensor": "Sensor",
     "stoppingDistance": "Stopping distance"
   },
-
   "control_strings": {
     "openRoadsage": "Open_Roadsage",
     "openRoadsageDesc": "Opens the application",
     "launchRoadsage": "Launch Roadsage",
     "startRoadsage": "Start Roadsage",
-
     "thanksRoadsage": "Thanks_Roadsage",
     "thanksRoadsageDesc": "Says thank you to the car behind you",
     "thanksRoadsagePhrase": "Say Thank you on Roadsage",
-
     "cheersRoadsage": "Cheers_Roadsage",
     "cheersRoadsageDesc": "Says cheers to the car behind you",
     "cheersRoadsagePhrase": "Say Cheers on Roadsage",
-
     "beamRoadsage": "Beam_Roadsage",
     "beamRoadsageDesc": "Asks car behind you to turn off high beam",
     "beamRoadsagePhrase": "Say turn off high beam on Roadsage",
-
     "trySaying": "Try Saying",
-
     "helpAndFeedback": "Help & Feedback",
     "helpAndFeedbackDesc": "Your  feedback is important to help us improve our products.",
     "feedbackHint": "Write your feedback here",
     "giveFeedback": "Give Feedback"
   },
-
   "android_try_saying": {
     "1": "Hey Google, Say Thank you on RoadSage",
     "2": "Hey Google, Say Cheers on RoadSage",
     "3": "Hey Google, Say Turn off High Beam on RoadSage",
     "4": "Hey Google, Say Cheers on RoadSage"
   },
-
   "ios_try_saying": {
     "1": "Hey Siri, Say Thank you on RoadSage",
     "2": "Hey Siri, Say Cheers on RoadSage",

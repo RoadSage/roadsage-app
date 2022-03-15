@@ -1,19 +1,17 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roadsage/constants.dart';
 
-class EmailVerifyScreenLogin extends StatelessWidget {
-  const EmailVerifyScreenLogin({Key? key}) : super(key: key);
+class EmailVerifyScreen extends StatelessWidget {
+  const EmailVerifyScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(translate(RoadSageStrings.login)),
-        centerTitle: true,
+        title: Text(translate(RoadSageStrings.signUp)),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -63,10 +61,8 @@ class EmailVerifyScreenLogin extends StatelessWidget {
                   animationType: AnimationType.fade,
                   animationDuration: const Duration(milliseconds: 300),
                   onCompleted: (v) {
-                    var route =
-                        Platform.isIOS ? Routes.permission : Routes.home;
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, route, (r) => false);
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil(Routes.home, (route) => false);
                   },
                   onChanged: (String value) {},
                 ),

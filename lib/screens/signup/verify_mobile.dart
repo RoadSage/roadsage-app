@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roadsage/constants.dart';
-import 'package:roadsage/screens/verify_mobile.dart';
-import 'package:roadsage/widgets/custom_button.dart';
 
-class RegisterWithMobile extends StatelessWidget {
-  const RegisterWithMobile({Key? key}) : super(key: key);
+class VerifyMobileScreen extends StatelessWidget {
+  const VerifyMobileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(translate(RoadSageStrings.signUp)),
-        centerTitle: true,
+        title: Text(translate(RoadSageStrings.mobile)),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -31,7 +30,7 @@ class RegisterWithMobile extends StatelessWidget {
             decoration: const BoxDecoration(color: RoadSageColours.lightBlue),
             child: Center(
               child: Text(
-                translate(RoadSageStrings.mobile).toUpperCase(),
+                translate(RoadSageStrings.enter6DigitCode),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -43,55 +42,41 @@ class RegisterWithMobile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildTextField(
-                  label: translate(RoadSageStrings.phoneNumber),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  translate(RoadSageStrings.checkYourMessages),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                PinCodeTextField(
+                  length: 6,
+                  appContext: context,
+                  obscureText: false,
+                  animationType: AnimationType.fade,
+                  animationDuration: const Duration(milliseconds: 300),
+                  onCompleted: (v) {
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil(Routes.home, (route) => false);
+                  },
+                  onChanged: (String value) {},
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
-                  translate(RoadSageStrings.byContinuing),
-                  textAlign: TextAlign.center,
+                  translate(RoadSageStrings.resendCode),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const VerifyMobileScreen(),
-                      ),
-                    );
-                  },
-                  title: translate(RoadSageStrings.sendCode),
-                )
               ],
             ),
           )
         ],
       ),
-    );
-  }
-
-  _buildTextField({String label = ""}) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          label,
-          style: const TextStyle(
-            color: RoadSageColours.darkGrey,
-          ),
-          textScaleFactor: 1.1,
-        ),
-        TextFormField(),
-      ],
     );
   }
 }

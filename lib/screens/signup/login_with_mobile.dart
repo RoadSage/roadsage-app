@@ -1,8 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/screens/signup/register_with_phone.dart';
+import 'package:roadsage/screens/signup/verify_mobile.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
 class LoginWithMobileScreen extends StatelessWidget {
@@ -13,7 +13,7 @@ class LoginWithMobileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(translate(RoadSageStrings.login)),
-        centerTitle: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -45,46 +45,52 @@ class LoginWithMobileScreen extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                _buildTextField(
-                  label: translate(RoadSageStrings.phoneNumber),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      translate(RoadSageStrings.phoneNumber),
+                      textScaleFactor: 1.1,
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.phone,
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 CustomButton(
                   onPressed: () {
-                    var route =
-                        Platform.isIOS ? Routes.permission : Routes.home;
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, route, (r) => false);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const VerifyMobileScreen(),
+                      ),
+                    );
                   },
                   title: translate(RoadSageStrings.sendCode),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterWithMobile(),
+                      ),
+                    );
+                  },
+                  child: Text(translate(RoadSageStrings.signUp)),
+                  style: ElevatedButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 17)),
                 )
               ],
             ),
           )
         ],
       ),
-    );
-  }
-
-  _buildTextField({String label = ""}) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          label,
-          style: const TextStyle(
-            color: RoadSageColours.darkGrey,
-          ),
-          textScaleFactor: 1.1,
-        ),
-        TextFormField(),
-      ],
     );
   }
 }

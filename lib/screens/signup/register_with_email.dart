@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
-import 'package:roadsage/screens/email_otp_verify_for_login.dart';
+import 'package:roadsage/screens/signup/email_otp_verify_screen.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
-class LoginWithEmailScreen extends StatelessWidget {
-  const LoginWithEmailScreen({Key? key}) : super(key: key);
+class RegisterWithEmailScreen extends StatelessWidget {
+  const RegisterWithEmailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(translate(RoadSageStrings.login)),
-        centerTitle: true,
+        title: Text(translate(RoadSageStrings.signUp)),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
@@ -44,9 +44,10 @@ class LoginWithEmailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
-                _buildTextField(
-                  label: translate(RoadSageStrings.emailAddress),
-                ),
+                _buildTextField(label: translate(RoadSageStrings.firstName)),
+                _buildTextField(label: translate(RoadSageStrings.lastName)),
+                _buildTextField(label: translate(RoadSageStrings.emailAddress)),
+                _buildTextField(label: translate(RoadSageStrings.dateOfBirth)),
                 const SizedBox(
                   height: 10,
                 ),
@@ -61,11 +62,11 @@ class LoginWithEmailScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const EmailVerifyScreenLogin(),
+                        builder: (context) => const EmailVerifyScreen(),
                       ),
                     );
                   },
-                  title: translate(RoadSageStrings.login).toUpperCase(),
+                  title: translate(RoadSageStrings.signUp),
                 )
               ],
             ),
@@ -85,12 +86,11 @@ class LoginWithEmailScreen extends StatelessWidget {
         ),
         Text(
           label,
-          style: const TextStyle(
-            color: RoadSageColours.darkGrey,
-          ),
           textScaleFactor: 1.1,
         ),
-        TextFormField(),
+        TextFormField(
+          keyboardType: TextInputType.emailAddress,
+        ),
       ],
     );
   }
