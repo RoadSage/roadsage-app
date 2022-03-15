@@ -121,5 +121,8 @@
     "2": "Hey Siri, Say Cheers on RoadSage",
     "3": "Hey Siri, Say Turn off High Beam on RoadSage",
     "4": "Hey Siri, Say Cheers on RoadSage"
+  },
+  "permissions": {
+    "not_granted": "Permissions not granted!"
   }
 }

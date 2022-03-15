@@ -105,5 +105,8 @@
         "2": "hey siri, dis bravo sur RoadSage",
         "3": "hey siri, dis éteindre les feux de route sur RoadSage",
         "4": "hey siri, dis bravo sur RoadSage"
+    },
+    "permissions": {
+        "not_granted": "Permissions not granted!"
     }
 }

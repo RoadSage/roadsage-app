@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -63,10 +61,10 @@ class EmailVerifyScreenLogin extends StatelessWidget {
                   animationType: AnimationType.fade,
                   animationDuration: const Duration(milliseconds: 300),
                   onCompleted: (v) {
-                    var route =
-                        Platform.isIOS ? Routes.permission : Routes.home;
+                    // var route =
+                    // Platform.isIOS ? Routes.permission : Routes.home;
                     Navigator.pushNamedAndRemoveUntil(
-                        context, route, (r) => false);
+                        context, Routes.home, (r) => false);
                   },
                   onChanged: (String value) {},
                 ),

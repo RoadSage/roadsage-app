@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:roadsage/authentication/permissions.dart';
 
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/authentication/auth_services.dart';
@@ -12,7 +13,6 @@ import 'package:roadsage/screens/signup/login_with_mobile.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -24,16 +24,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   AuthClass authClass = AuthClass();
-
-  _checkPermission() async {
-    await [
-      Permission.location,
-      Permission.microphone,
-    ].request();
-
-    // TODO: check if the permission was actually granted before going to home
-    Navigator.pushReplacementNamed(context, Routes.home);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               AppleIDAuthorizationScopes.fullName,
                             ],
                           );
-                          _checkPermission();
+                          navigateOrError(Routes.home,
+                              RoadSageStrings.permissionsFailed, context);
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
@@ -161,7 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         await authClass.signInWithFacebook(context);
                     if (loginStatus != null &&
                         loginStatus.status == Status.success) {
-                      _checkPermission();
+                      navigateOrError(Routes.home,
+                          RoadSageStrings.permissionsFailed, context);
                     }
                   },
                   shape: RoundedRectangleBorder(
@@ -172,8 +164,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   text:
                       "${translate(RoadSageStrings.login)} / ${translate(RoadSageStrings.signUp)}",
                   onPressed: () async {
-                    // TODO: actually check for permissions on iOS
-                    _checkPermission();
+                    navigateOrError(Routes.home,
+                        RoadSageStrings.permissionsFailed, context);
                     await showDialog(
                       context: context,
                       builder: (context) {
@@ -214,7 +206,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    _checkPermission();
+                    navigateOrError(Routes.home,
+                        RoadSageStrings.permissionsFailed, context);
                   },
                   child: Text(
                     translate(RoadSageStrings.troubleSigning),

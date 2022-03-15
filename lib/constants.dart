@@ -130,6 +130,8 @@ class RoadSageStrings {
     "Hey Siri, Say Turn off High Beam on RoadSage",
     "Hey Siri, Say Cheers on RoadSage",
   ];
+
+  static const String permissionsFailed = "permissions.not_granted";
 }
 
 class RoadSageIcons {
