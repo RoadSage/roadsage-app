@@ -17,6 +17,7 @@ class _RecentsScreenState extends State<RecentsScreen> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
+          //This is the heading
           Text(
             translate(RoadSageStrings.communication),
             textScaleFactor: 2,
@@ -25,6 +26,7 @@ class _RecentsScreenState extends State<RecentsScreen> {
           const SizedBox(
             height: 10,
           ),
+          //this is the subheading of the page
           Text(
             translate(RoadSageStrings.checkPreview),
             textScaleFactor: 1.2,
@@ -35,6 +37,7 @@ class _RecentsScreenState extends State<RecentsScreen> {
           const SizedBox(
             height: 20,
           ),
+          //making list tiles for the recent purposes
           ...[0, 1, 2, 3]
               .map((e) => _buildCard(
                   title: Platform.isAndroid
@@ -58,6 +61,7 @@ class _RecentsScreenState extends State<RecentsScreen> {
     required String title,
     required String desc,
   }) {
+    //making a general widget for the display
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
