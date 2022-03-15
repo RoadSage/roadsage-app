@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/authentication/auth_services.dart';
+import 'package:roadsage/screens/signup/login_with_email.dart';
+import 'package:roadsage/screens/signup/login_with_mobile.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
@@ -167,10 +169,44 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SignInButton(
                   Buttons.Email,
-                  text: "Login / Sign up",
-                  onPressed: () {
+                  text:
+                      "${translate(RoadSageStrings.login)} / ${translate(RoadSageStrings.signUp)}",
+                  onPressed: () async {
                     // TODO: actually check for permissions on iOS
                     _checkPermission();
+                    await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title:
+                              Text(translate(RoadSageStrings.loginSignUpUsing)),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const LoginWithMobileScreen(),
+                                  ),
+                                );
+                              },
+                              child: Text(translate(RoadSageStrings.mobile)),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const LoginWithEmailScreen(),
+                                  ),
+                                );
+                              },
+                              child: Text(translate(RoadSageStrings.email)),
+                            )
+                          ],
+                        );
+                      },
+                    );
                   },
                   // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
