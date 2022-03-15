@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/models.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DisplayScreen extends ConsumerStatefulWidget {
   const DisplayScreen({Key? key}) : super(key: key);
@@ -166,6 +171,126 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                         .updateStoppingDistance(value);
                   });
                 },
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(16),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  title: const Text(
+                    'Sign up',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  tileColor: Theme.of(context).primaryColorLight,
+                  onTap: () async {
+                    var url = Uri.http('192.168.1.103:8000', "/signup");
+
+                    Map data = {
+                      "email": "testme2@test.io",
+                      "full_name": "test",
+                      "disabled": "false",
+                      "admin": "false",
+                      "password": "password",
+                    };
+
+                    var response = await http.post(url,
+                        headers: {
+                          HttpHeaders.contentTypeHeader: "application/json"
+                        },
+                        body: json.encode(data));
+
+                    debugPrint('Response status: ${response.statusCode}');
+                    debugPrint('Response body: ${response.body}');
+                    Fluttertoast.showToast(msg: "API response received!");
+                  },
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(16),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  title: const Text(
+                    'Log in',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  tileColor: Theme.of(context).primaryColorLight,
+                  onTap: () async {
+                    var url = Uri.http('192.168.1.103:8000', "/login");
+
+                    var response = await http.post(url, headers: {
+                      HttpHeaders.contentTypeHeader:
+                          "application/x-www-form-urlencoded"
+                    }, body: {
+                      'username': 'testme2@test.io',
+                      'password': 'password',
+                    });
+
+                    debugPrint('Response status: ${response.statusCode}');
+                    debugPrint('Response body: ${response.body}');
+                    Fluttertoast.showToast(msg: "API response received!");
+                  },
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(16),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  title: const Text(
+                    'Get sensor readings',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  tileColor: Theme.of(context).primaryColorLight,
+                  onTap: () async {
+                    var queryParams = {
+                      'from_date': '2019-08-24',
+                      'to_date': '2024-08-24'
+                    };
+
+                    var url = Uri.http(
+                        '192.168.1.103:8000', "/sensor-readings/", queryParams);
+
+                    var response = await http.get(url);
+                    debugPrint('Response status: ${response.statusCode}');
+                    debugPrint('Response body: ${response.body}');
+                    Fluttertoast.showToast(msg: "API response received!");
+                  },
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(16),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
+                  title: const Text(
+                    'Add sensor readings',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  tileColor: Theme.of(context).primaryColorLight,
+                  onTap: () async {
+                    var url =
+                        Uri.http('192.168.1.103:8000', "/sensor-readings/");
+
+                    Map data = {
+                      "text_displayed": "string",
+                    };
+
+                    var response = await http.post(url,
+                        headers: {
+                          HttpHeaders.contentTypeHeader: "application/json"
+                        },
+                        body: json.encode(data));
+
+                    debugPrint('Response status: ${response.statusCode}');
+                    debugPrint('Response body: ${response.body}');
+                    Fluttertoast.showToast(msg: "API response received!");
+                  },
+                ),
               ),
             ],
           ),
