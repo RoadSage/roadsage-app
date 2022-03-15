@@ -5,6 +5,7 @@ import 'package:roadsage/authentication/auth_services.dart';
 import 'dart:convert';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:roadsage/state/api.dart';
 import '../state/models.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:http/http.dart' as http;
@@ -221,31 +222,9 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                   ),
                   tileColor: Theme.of(context).primaryColorLight,
                   onTap: () async {
-                    String? token =
-                        await authClass.tokenStorage.read(key: 'api_token');
-                    debugPrint('token is $token');
-
-                    if (token == null) {
-                      Fluttertoast.showToast(msg: "User is not authenticated");
-                      return;
-                    }
-
-                    var queryParams = {
-                      'from_date': '2019-08-24',
-                      'to_date': '2024-08-24'
-                    };
-
-                    var url = Uri.http(
-                        '192.168.1.103:8000', "/sensor-readings/", queryParams);
-
-                    var response = await http.get(url, headers: {
-                      HttpHeaders.authorizationHeader: "Bearer $token",
-                      HttpHeaders.acceptHeader: "application/json",
-                      HttpHeaders.contentTypeHeader: "application/json",
-                    });
-
-                    debugPrint('Response status: ${response.statusCode}');
-                    debugPrint('Response body: ${response.body}');
+                    var response = getSensorReadings(
+                        '2019-08-24', '2024-08-24', authClass);
+                    debugPrint('Response body: $response');
                     Fluttertoast.showToast(msg: "API response received!");
                   },
                 ),
@@ -262,33 +241,11 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                   ),
                   tileColor: Theme.of(context).primaryColorLight,
                   onTap: () async {
-                    String? token =
-                        await authClass.tokenStorage.read(key: 'api_token');
-                    debugPrint('token is $token');
-
-                    if (token == null) {
-                      Fluttertoast.showToast(msg: "User is not authenticated");
-                      return;
-                    }
-
-                    var url =
-                        Uri.http('192.168.1.103:8000', "/sensor-readings/");
-
-                    // TODO: actually pass useful data
                     Map data = {
                       "text_displayed": "string",
                     };
-
-                    var response = await http.post(url,
-                        headers: {
-                          HttpHeaders.authorizationHeader: "Bearer $token",
-                          HttpHeaders.acceptHeader: "application/json",
-                          HttpHeaders.contentTypeHeader: "application/json"
-                        },
-                        body: json.encode(data));
-
-                    debugPrint('Response status: ${response.statusCode}');
-                    debugPrint('Response body: ${response.body}');
+                    var response = addSensorReadings(data, authClass);
+                    debugPrint('Response body: $response');
                     Fluttertoast.showToast(msg: "API response received!");
                   },
                 ),
