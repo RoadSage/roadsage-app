@@ -124,5 +124,13 @@
   },
   "permissions": {
     "not_granted": "Permissions not granted!"
+  },
+  "recents_screen": {
+    "communication": "Communication",
+    "check_your_previous": "Check your previous recent commands",
+    "google_assistant": "Google Assistant",
+    "siri": "Siri",
+    "asd": "AS&D",
+    "mountain_safe": "Mountain Safe Distance"
   }
 }

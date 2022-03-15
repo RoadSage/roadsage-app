@@ -130,6 +130,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
       child: MaterialApp(
         title: translate(RoadSageStrings.title),
         theme: ThemeData.light().copyWith(
+          listTileTheme: const ListTileThemeData(tileColor: Colors.white),
           scaffoldBackgroundColor: RoadSageColours.lightGrey,
           primaryColor: RoadSageColours.lightGrey,
           primaryColorLight: Colors.white,
@@ -158,6 +159,8 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           ),
         ),
         darkTheme: ThemeData.dark().copyWith(
+          listTileTheme:
+              const ListTileThemeData(tileColor: RoadSageColours.darkGrey),
           scaffoldBackgroundColor: RoadSageColours.darkBg,
           primaryColor: RoadSageColours.darkGrey,
           primaryColorLight: RoadSageColours.darkGrey,
@@ -181,7 +184,8 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
             color: Colors.white,
           ),
         ),
-        themeMode: roadSageModel.themeMode,
+        // themeMode: roadSageModel.themeMode,
+        themeMode: ThemeMode.light,
         routes: {
           Routes.root: (context) => const LoginScreen(),
           Routes.home: (context) => const MainScreen(),

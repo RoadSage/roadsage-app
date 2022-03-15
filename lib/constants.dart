@@ -117,6 +117,13 @@ class RoadSageStrings {
   static const String feedbackHint = "control_strings.feedbackHint";
   static const String giveFeedback = "control_strings.giveFeedback";
 
+  static const String googleAssistant = "recents_screen.google_assistant";
+  static const String siri = "recents_screen.siri";
+  static const String asd = "recents_screen.asd";
+  static const String mountainSafe = "recents_screen.mountain_safe";
+  static const String communication = "recents_screen.communication";
+  static const String checkPreview = "recents_screen.check_your_previous";
+
   static const List<String> homeAndroidTrySayingEntries = <String>[
     "android_try_saying.1",
     "android_try_saying.2",
