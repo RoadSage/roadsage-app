@@ -7,7 +7,7 @@ Future<bool> checkPermissions() async {
   //This is the page related to ask for permission of the applixation
   bool granted = await [
     Permission.location,
-    Permission.microphone,
+    Permission.microphone, //Microphone permission for siri or assistant
   ]
       .request()
       .then((value) => value.values.every((element) => element.isGranted));
