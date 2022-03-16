@@ -8,7 +8,6 @@ import 'package:roadsage/screens/profile.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -122,7 +121,6 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
   @override
   Widget build(BuildContext context) {
     final roadSageModel = ref.watch(roadSageModelProvider);
-
     var localizationDelegate = LocalizedApp.of(context).delegate;
 
     return LocalizationProvider(
@@ -130,7 +128,6 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
       child: MaterialApp(
         title: translate(RoadSageStrings.title),
         theme: ThemeData.light().copyWith(
-          listTileTheme: const ListTileThemeData(tileColor: Colors.white),
           scaffoldBackgroundColor: RoadSageColours.lightGrey,
           primaryColor: RoadSageColours.lightGrey,
           primaryColorLight: Colors.white,
@@ -159,8 +156,6 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           ),
         ),
         darkTheme: ThemeData.dark().copyWith(
-          listTileTheme:
-              const ListTileThemeData(tileColor: RoadSageColours.darkGrey),
           scaffoldBackgroundColor: RoadSageColours.darkBg,
           primaryColor: RoadSageColours.darkGrey,
           primaryColorLight: RoadSageColours.darkGrey,
@@ -184,8 +179,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
             color: Colors.white,
           ),
         ),
-        // themeMode: roadSageModel.themeMode,
-        themeMode: ThemeMode.light,
+        themeMode: roadSageModel.themeMode,
         routes: {
           Routes.root: (context) => const LoginScreen(),
           Routes.home: (context) => const MainScreen(),
@@ -199,9 +193,13 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
         initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
         onGenerateRoute: (settings) {
           String? path = settings.name;
-          if (path != null && path.contains("phraseType")) {
-            String query = path.substring(path.indexOf("phraseType=") + 11);
-            Fluttertoast.showToast(msg: "Query is $query");
+          if (path != null && path.contains(Constants.phraseType)) {
+            String query =
+                path.substring(path.indexOf("${Constants.phraseType}=") + 11);
+            ref.read(recentsModelProvider.notifier).addCommand(
+                RoadSageStrings.googleAssistant,
+                "${RoadSageStrings.voiceCommandsPrefix}.$query",
+                DateTime.now());
             return MaterialPageRoute(builder: (_) => const MainScreen());
           }
           return null;

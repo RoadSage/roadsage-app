@@ -18,6 +18,8 @@ class Constants {
       "io.unitic.roadsage/google_assistant";
   static const String getAssistantMethod = "getAssistantQuery";
 
+  static const String phraseType = "phraseType";
+
   static const String prefsLocale = "sharedprefs.selected.locale";
   static const String prefsTheme = "sharedprefs.selected.theme";
   static const String prefsLoggedIn = "sharedprefs.logged_in";
@@ -123,19 +125,19 @@ class RoadSageStrings {
   static const String mountainSafe = "recents_screen.mountain_safe";
   static const String communication = "recents_screen.communication";
   static const String checkPreview = "recents_screen.check_your_previous";
+  static const String homeScreenButton = "recents_screen.home_screen_button";
 
-  static const List<String> homeAndroidTrySayingEntries = <String>[
-    "android_try_saying.1",
-    "android_try_saying.2",
-    "android_try_saying.3",
-    "android_try_saying.4",
-  ];
+  static const String voiceCommandsPrefix = "voice_commands";
 
-  static const List<String> homeIOSTrySayingEntries = <String>[
-    "Hey Siri, Say Thank you on RoadSage",
-    "Hey Siri, Say Cheers on RoadSage",
-    "Hey Siri, Say Turn off High Beam on RoadSage",
-    "Hey Siri, Say Cheers on RoadSage",
+  static const String androidAssistantPhrase =
+      "voice_commands.android_assistant_phrase";
+  static const String iosAssistantPhrase =
+      "voice_commands.ios_assistant_phrase";
+
+  static const List<String> voiceCommands = <String>[
+    "voice_commands.CHEERS",
+    "voice_commands.THANK_YOU",
+    "voice_commands.TURN_OFF_HIGH_BEAM",
   ];
 
   static const String permissionsFailed = "permissions.not_granted";

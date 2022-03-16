@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/state/data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // SharedPreferences
@@ -176,6 +177,36 @@ class RemoteModelNotifier extends StateNotifier<RemoteModel> {
 final remoteModelProvider =
     StateNotifierProvider<RemoteModelNotifier, RemoteModel>((ref) {
   return RemoteModelNotifier();
+});
+
+// Recents (recents.dart)  -----------------------------------------------
+
+class RecentsList extends StateNotifier<List<RoadSageCommand>> {
+  RecentsList([List<RoadSageCommand>? commands]) : super(commands ?? []);
+
+  void addCommand(String invocation, String query, DateTime timestamp) {
+    state = [
+      ...state,
+      RoadSageCommand(
+        invocation,
+        query,
+        timestamp,
+      )
+    ];
+  }
+
+  List<RoadSageCommand> getCommands() {
+    return state;
+  }
+
+  void clear() {
+    state = [];
+  }
+}
+
+final recentsModelProvider =
+    StateNotifierProvider<RecentsList, List<RoadSageCommand>>((ref) {
+  return RecentsList();
 });
 
 // TranslatePreferences (for persistent locale switching)

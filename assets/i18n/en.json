@@ -110,17 +110,12 @@
     "feedbackHint": "Write your feedback here",
     "giveFeedback": "Give Feedback"
   },
-  "android_try_saying": {
-    "1": "Hey Google, Say Thank you on RoadSage",
-    "2": "Hey Google, Say Cheers on RoadSage",
-    "3": "Hey Google, Say Turn off High Beam on RoadSage",
-    "4": "Hey Google, Say Cheers on RoadSage"
-  },
-  "ios_try_saying": {
-    "1": "Hey Siri, Say Thank you on RoadSage",
-    "2": "Hey Siri, Say Cheers on RoadSage",
-    "3": "Hey Siri, Say Turn off High Beam on RoadSage",
-    "4": "Hey Siri, Say Cheers on RoadSage"
+  "voice_commands": {
+    "android_assistant_phrase": "Hey Google",
+    "ios_assistant_phrase": "Hey Siri",
+    "THANK_YOU": "Say Thank you on RoadSage",
+    "CHEERS": "Say Cheers on RoadSage",
+    "TURN_OFF_HIGH_BEAM": "Say Turn off High Beam on RoadSage"
   },
   "permissions": {
     "not_granted": "Permissions not granted!"
@@ -131,6 +126,7 @@
     "google_assistant": "Google Assistant",
     "siri": "Siri",
     "asd": "AS&D",
-    "mountain_safe": "Mountain Safe Distance"
+    "mountain_safe": "Mountain Safe Distance",
+    "home_screen_button": "Home Screen Button"
   }
 }

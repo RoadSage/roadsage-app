@@ -1,65 +1,64 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/state/models.dart';
 
-class RecentsScreen extends StatefulWidget {
+class RecentsScreen extends ConsumerStatefulWidget {
   const RecentsScreen({Key? key}) : super(key: key);
 
   @override
-  State<RecentsScreen> createState() => _RecentsScreenState();
+  ConsumerState<RecentsScreen> createState() => _RecentsScreenState();
 }
 
-class _RecentsScreenState extends State<RecentsScreen> {
+class _RecentsScreenState extends ConsumerState<RecentsScreen> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          //This is the heading
-          Text(
-            translate(RoadSageStrings.communication),
-            textScaleFactor: 2,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          //this is the subheading of the page
-          Text(
-            translate(RoadSageStrings.checkPreview),
-            textScaleFactor: 1.2,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
+    final recentsModel = ref.watch(recentsModelProvider);
+
+    return ListView(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            //This is the heading
+            Text(
+              translate(RoadSageStrings.communication),
+              textScaleFactor: 2,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          //making list tiles for the recent purposes
-          ...[0, 1, 2, 3]
-              .map((e) => _buildCard(
-                  title: Platform.isAndroid
-                      ? translate(RoadSageStrings.googleAssistant)
-                      : translate(RoadSageStrings.siri),
-                  desc: Platform.isAndroid
-                      ? translate(
-                          RoadSageStrings.homeAndroidTrySayingEntries[e])
-                      : translate(RoadSageStrings.homeIOSTrySayingEntries[e])))
-              .toList(),
-          _buildCard(
-            title: translate(RoadSageStrings.asd),
-            desc: translate(RoadSageStrings.mountainSafe),
-          ),
-        ],
-      ),
+            const SizedBox(
+              height: 10,
+            ),
+            //this is the subheading of the page
+            Text(
+              translate(RoadSageStrings.checkPreview),
+              textScaleFactor: 1.2,
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            //making list tiles for the recent purposes
+            ...recentsModel
+                .map((e) => _buildCard(
+                    title: translate(e.invocationMethod),
+                    desc: translate(e.query),
+                    timestamp: e.timestamp))
+                .toList()
+                .reversed,
+          ],
+        )
+      ],
     );
   }
 
   _buildCard({
     required String title,
     required String desc,
+    required DateTime timestamp,
   }) {
     //making a general widget for the display
     return Padding(
@@ -77,15 +76,16 @@ class _RecentsScreenState extends State<RecentsScreen> {
           desc,
           textScaleFactor: 1.05,
         ),
-        trailing: const Text(
-          "9/20",
-          style: TextStyle(
+        trailing: Text(
+          "${timestamp.day}/${timestamp.month}",
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
+        tileColor: Theme.of(context).primaryColorLight,
       ),
     );
   }
