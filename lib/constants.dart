@@ -17,6 +17,7 @@ class Constants {
   static const String androidMethodChannel =
       "io.unitic.roadsage/google_assistant";
   static const String getAssistantMethod = "getAssistantQuery";
+  static const String webServerAddress = "192.168.1.103:8000";
 
   static const String phraseType = "phraseType";
 
@@ -39,6 +40,7 @@ class RoadSageStrings {
   static const String byUnitic = "login_page.byUnitic";
   static const String troubleSigning = "login_page.troubleSigning";
   static const String login = "login_page.login";
+  static const String password = "login_page.password";
   static const String signUp = "login_page.signUp";
   static const String loginSignUpUsing = "login_page.loginSignUpUsing";
   static const String mobile = "login_page.mobile";

@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:roadsage/constants.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:http/http.dart' as http;
 
@@ -40,7 +41,7 @@ class AuthClass {
   ]);
 
   Future<void> signUpAPI() async {
-    var url = Uri.http('192.168.1.103:8000', "/signup");
+    var url = Uri.http(Constants.webServerAddress, "/signup");
 
     // TODO: obviously have useful values
     Map data = {
@@ -65,32 +66,39 @@ class AuthClass {
     }
   }
 
-  Future<void> signInAPI() async {
-    var url = Uri.http('192.168.1.103:8000', "/login");
+  // TODO: passing informative errors here would help
+  Future<bool> signInAPI(String email, String password) async {
+    var url = Uri.http(Constants.webServerAddress, "/login");
 
-    // TODO: obviously have useful values
-    var response = await http.post(url, headers: {
+    http.Response? response;
+
+    await http.post(url, headers: {
       HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
     }, body: {
-      'username': 'testme2@test.io',
-      'password': 'password',
+      'username': email,
+      'password': password,
+    }).then((value) {
+      response = value;
+    }).onError((error, stackTrace) {
+      response = null;
     });
 
+    if (response == null) {
+      return false;
+    }
+
     // Success, save the login token
-    if (response.statusCode == 200) {
-      String? token = jsonDecode(response.body)['access_token'];
+    if (response!.statusCode == 200) {
+      String? token = jsonDecode(response!.body)['access_token'];
       if (token == null) {
-        Fluttertoast.showToast(msg: "An error has ocurred");
-        return;
+        return false;
       }
 
-      debugPrint('Saving token to secure storage ($token)');
       tokenStorage.write(key: "api_token", value: token);
-
-      Fluttertoast.showToast(msg: "Login successful!");
-    } else {
-      Fluttertoast.showToast(msg: "Network error ocurred");
+      return true;
     }
+
+    return false;
   }
 
   Future<String?> getAuthenticationToken() async {
@@ -248,6 +256,7 @@ class AuthClass {
     await FacebookAuth.instance.logOut();
     await _auth.signOut();
     await tokenStorage.delete(key: "token");
+    await tokenStorage.delete(key: "api_token");
 
     Navigator.pushAndRemoveUntil(
       context,

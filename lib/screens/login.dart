@@ -165,8 +165,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   text:
                       "${translate(RoadSageStrings.login)} / ${translate(RoadSageStrings.signUp)}",
                   onPressed: () async {
-                    navigateOrError(Routes.home,
-                        RoadSageStrings.permissionsFailed, context);
                     await showDialog(
                       context: context,
                       builder: (context) {

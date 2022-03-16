@@ -206,7 +206,7 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                   tileColor: Theme.of(context).primaryColorLight,
                   onTap: () async {
                     // TODO: make it useful
-                    authClass.signInAPI();
+                    authClass.signInAPI('testme2@test.io', 'password');
                   },
                 ),
               ),

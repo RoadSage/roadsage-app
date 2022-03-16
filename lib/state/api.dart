@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:roadsage/authentication/auth_services.dart';
+import 'package:roadsage/constants.dart';
 
 Future<String?> getSensorReadings(
     String from, String to, AuthClass authClass) async {
@@ -14,7 +15,8 @@ Future<String?> getSensorReadings(
   }
 
   var queryParams = {'from_date': from, 'to_date': to};
-  var url = Uri.http('192.168.1.103:8000', "/sensor-readings/", queryParams);
+  var url =
+      Uri.http(Constants.webServerAddress, "/sensor-readings/", queryParams);
 
   var response = await http.get(url, headers: {
     HttpHeaders.authorizationHeader: "Bearer $token",
@@ -33,7 +35,7 @@ Future<String?> addSensorReadings(Map data, AuthClass authClass) async {
     return null;
   }
 
-  var url = Uri.http('192.168.1.103:8000', "/sensor-readings/");
+  var url = Uri.http(Constants.webServerAddress, "/sensor-readings/");
 
   var response = await http.post(url,
       headers: {
