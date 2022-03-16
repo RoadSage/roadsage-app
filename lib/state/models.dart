@@ -44,7 +44,8 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
   RoadSageModelNotifier(this.prefs) : super(RoadSageModel()) {
     _initPrefs();
   }
-//We are initilaizin the hared prefs in this method
+
+  ///We are initilaizin the hared prefs in this method
   void _initPrefs() async {
     String? lang = prefs?.getString(Constants.prefsLocale);
     if (lang != null) {
@@ -82,7 +83,7 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
     prefs?.setInt(Constants.prefsTheme, value.index);
   }
 
-  // No need to directly change prefs - handled by TranslatePreferences
+  /// No need to directly change prefs - handled by TranslatePreferences
   void switchLanguage(String lang) {
     state = state.copyWith(languageCode: lang);
   }

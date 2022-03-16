@@ -10,7 +10,7 @@ class SubmitQuestionScreen extends StatefulWidget {
 }
 
 class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
-  //This page is responsble for submitting a question
+  /// This page is responsble for submitting a question
   @override
   Widget build(BuildContext context) {
     return Scaffold(

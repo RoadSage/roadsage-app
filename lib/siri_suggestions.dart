@@ -10,7 +10,7 @@ https://github.com/myriky/flutter_siri_suggestions/blob/master/lib/flutter_siri_
 typedef MessageHandler = Future<dynamic> Function(Map<String, dynamic> message);
 
 class FlutterSiriActivity {
-  //This is the data model representing the flutter activites of Siri
+  /// This is the data model representing the flutter activites of Siri.
   const FlutterSiriActivity(
     this.title,
     this.key, {
@@ -36,9 +36,9 @@ class SiriSuggestions {
 
   final MethodChannel _channel = const MethodChannel('siri_suggestions');
 
-  // create a suggestion
+  /// Create a suggestion
   Future<String> buildActivity(FlutterSiriActivity activity) async {
-    //This function is used to invoke the native method of the ios for siri enbling
+    ///This function is used to invoke the native method of the ios for Siri enbling.
     return await _channel.invokeMethod('becomeCurrent', <String, Object?>{
       'title': activity.title,
       Constants.siriSuggestionKey: activity.key,
@@ -51,7 +51,7 @@ class SiriSuggestions {
 
   void addSuggestion(String name, String actionKey, bool search, bool predict,
       String desc, String phrase) async {
-    //This function is used to add a suggestion to the backend
+    ///This function is used to add a suggestion to the backend.
     await buildActivity(FlutterSiriActivity(name, actionKey,
         isEligibleForSearch: search,
         isEligibleForPrediction: predict,
@@ -64,7 +64,7 @@ class SiriSuggestions {
         actionKey + " suggestion", actionKey, true, true, desc, phrase);
   }
 
-  // configure the calls for each suggestion
+  /// Configure the calls for each suggestion.
   void configure({required MessageHandler onLaunch}) {
     _onLaunch = onLaunch;
     _channel.setMethodCallHandler(_handleMethod);
@@ -78,7 +78,7 @@ class SiriSuggestions {
   }
 
   Future<dynamic> _handleMethod(MethodCall call) async {
-    //here we have written all the event handlers to handle the evennt when a particular command is said
+    ///Here we have written all the event handlers to handle the evennt when a particular command is said
     switch (call.method) {
       case "onLaunch":
         return _onLaunch!(call.arguments.cast<String, dynamic>());

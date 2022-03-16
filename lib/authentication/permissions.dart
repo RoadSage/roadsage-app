@@ -4,10 +4,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 Future<bool> checkPermissions() async {
-  //This is the page related to ask for permission of the applixation
+  ///This is the page related to ask for permission of the applixation
   bool granted = await [
     Permission.location,
-    Permission.microphone, //Microphone permission for siri or assistant
+    Permission.microphone,
+
+    ///Microphone permission for siri or assistant
   ]
       .request()
       .then((value) => value.values.every((element) => element.isGranted));

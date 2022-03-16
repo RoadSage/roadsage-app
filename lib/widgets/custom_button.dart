@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  //THis is a custom button widget created in order to call it within differrnet pacers
+  ///This is a custom button widget created in order to call it within differrnet pacers
   final String title;
   final Function()? onPressed;
 

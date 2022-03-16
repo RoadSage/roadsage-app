@@ -36,7 +36,7 @@ class Constants {
   static const String prefsFirstLaunch = "sharedprefs.first_launch";
 }
 
-//these are the string constannts used for internationalization
+//These are the String constannts used for internationalization.
 class RoadSageStrings {
   static const String help = "app_bar.titles.help_and_feedback";
   static const String devices = "app_bar.titles.devices";

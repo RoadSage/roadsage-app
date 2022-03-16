@@ -81,16 +81,16 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           // Launch main page
           break;
         case RoadSageStrings.thanksRoadsage:
-          // say thank you
+          // Say thank you
           break;
         case RoadSageStrings.cheersRoadsage:
-          // say cheers
+          // Say cheers
           break;
         case RoadSageStrings.beamRoadsage:
-          // open beam
+          // Open beam
           break;
         default:
-          // suggestion key wasn't added
+          // Suggestion key wasn't added
           break;
       }
     });
@@ -129,7 +129,8 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
       state: LocalizationProvider.of(context).state,
       child: MaterialApp(
         title: translate(RoadSageStrings.title),
-        //Here we are confguring the theme for the app
+
+        /// Here we are confguring the theme for the app
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: RoadSageColours.lightGrey,
           primaryColor: RoadSageColours.lightGrey,
@@ -297,7 +298,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         ),
       ],
     );
-//this is the bottom bar present in the home page
+
+    /// This is the bottom bar present in the home page.
     final BottomNavigationBar bottomNavBar = BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(

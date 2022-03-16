@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:roadsage/main.dart';
 import 'package:roadsage/screens/login.dart';
 
-// Small class to do some handling of the data from facebook
+/// Small class to do some handling of the data from facebook
 class Resource {
   final Status status;
   Resource({required this.status});
@@ -21,7 +21,7 @@ class Resource {
 
 enum Status { success, error, cancelled }
 
-// This is the main class that will handle all signing up, in and out of vairous different services.
+/// This is the main class that will handle all signing up, in and out of vairous different services.
 class AuthClass {
   static final AuthClass _instance = AuthClass._internal();
 
@@ -122,7 +122,7 @@ class AuthClass {
     return await getAuthenticationToken() != null;
   }
 
-  // Handles the signing in via google services
+  /// Handles the signing in via google services
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
       GoogleSignInAccount? gSignInAccount = await _googleSignIn.signIn();
@@ -186,7 +186,7 @@ class AuthClass {
     );
   }
 
-  // Handles signing in via Facebook services
+  /// Handles signing in via Facebook services
   Future<Resource?> signInWithFacebook(BuildContext context) async {
     final LoginResult result = await FacebookAuth.instance.login();
     try {
@@ -224,8 +224,8 @@ class AuthClass {
     }
   }
 
-  // Allows the users to sign up to a RoadSage Account, then logging them in
-  // and redirecting them to the home page
+  /// Allows the users to sign up to a RoadSage Account, then logging them in
+  /// and redirecting them to the home page.
   Future signUp(BuildContext context,
       {required String email, required String password}) async {
     try {
@@ -242,7 +242,7 @@ class AuthClass {
     }
   }
 
-  // Signs the user in and redirects them to the home page
+  /// Signs the user in and redirects them to the home page
   Future signIn(BuildContext context,
       {required String email, required String password}) async {
     try {
@@ -266,8 +266,8 @@ class AuthClass {
     }
   }
 
-  // Sign the current user out of Google/Facebook/Email
-  // Return the user to the login page
+  /// Sign the current user out of Google/Facebook/Email
+  /// Return the user to the login page
   Future<void> signOut({required BuildContext context}) async {
     await _googleSignIn.signOut();
     await FacebookAuth.instance.logOut();
@@ -282,7 +282,7 @@ class AuthClass {
     );
   }
 
-  // Get the token value for the current user
+  /// Get the token value for the current user
   Future<String> getToken() async {
     return (await tokenStorage.read(key: "token")).toString();
   }

@@ -107,7 +107,7 @@ class _HelpScreenState extends State<HelpScreen> {
                         child: Text(translate(RoadSageStrings.formSubmit)),
                       ))),
 
-              // Contact us
+              /// Contact us
               getButtonContainer(translate(RoadSageStrings.contactUs), ""),
               getButtonContainer(translate(RoadSageStrings.faqs), Routes.faq),
               getButtonContainer(translate(RoadSageStrings.rateUs), "")
