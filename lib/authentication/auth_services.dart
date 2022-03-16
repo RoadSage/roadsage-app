@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -40,30 +39,44 @@ class AuthClass {
     // 'https://www.googleapis.com/auth/contacts.readonly'
   ]);
 
-  Future<void> signUpAPI() async {
+  // TODO: passing informative errors here would help
+  Future<bool> signUpAPI(
+      {String? email, String? fullName, String? password}) async {
     var url = Uri.http(Constants.webServerAddress, "/signup");
 
-    // TODO: obviously have useful values
     Map data = {
-      "email": "testme2@test.io",
-      "full_name": "test",
+      "email": email,
+      "full_name": fullName,
       "disabled": "false",
       "admin": "false",
-      "password": "password",
+      "password": password,
     };
 
-    var response = await http.post(url,
-        headers: {HttpHeaders.contentTypeHeader: "application/json"},
-        body: json.encode(data));
+    http.Response? response;
 
-    if (response.statusCode == 200) {
-      debugPrint('Response body: ${response.body}');
-    } else if (response.statusCode == 409) {
-      Fluttertoast.showToast(
-          msg: "User with this email is already registered!");
-    } else {
-      Fluttertoast.showToast(msg: "An error has ocurred!");
+    await http
+        .post(url,
+            headers: {HttpHeaders.contentTypeHeader: "application/json"},
+            body: json.encode(data))
+        .then((value) {
+      response = value;
+    }).onError((error, stackTrace) {
+      response = null;
+    });
+
+    if (response == null) {
+      return false;
     }
+
+    if (response!.statusCode == 200) {
+      debugPrint('Response body: ${response!.body}');
+      return true;
+    }
+    // } else if (response!.statusCode == 409) {
+    // return "User with this email is already registered!";
+    // }
+
+    return false;
   }
 
   // TODO: passing informative errors here would help

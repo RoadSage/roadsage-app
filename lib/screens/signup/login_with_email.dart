@@ -73,6 +73,7 @@ class _LoginWithEmailScreenState extends State<LoginWithEmailScreen> {
                             if (value == null || value.trim().isEmpty) {
                               return 'Email is required';
                             }
+                            return null;
                           },
                           onSaved: (String? value) {
                             email = value;
@@ -96,6 +97,7 @@ class _LoginWithEmailScreenState extends State<LoginWithEmailScreen> {
                             if (value == null || value.trim().isEmpty) {
                               return 'Password is required';
                             }
+                            return null;
                           },
                           onSaved: (String? value) {
                             password = value;

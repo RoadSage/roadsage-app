@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:roadsage/authentication/auth_services.dart';
-import 'dart:convert';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:roadsage/state/api.dart';
 import '../state/models.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
 class DisplayScreen extends ConsumerStatefulWidget {
@@ -175,40 +171,6 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                         .updateStoppingDistance(value);
                   });
                 },
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  title: const Text(
-                    'Sign up',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  tileColor: Theme.of(context).primaryColorLight,
-                  onTap: () async {
-                    // TODO: make it useful
-                    authClass.signUpAPI();
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  title: const Text(
-                    'Log in',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  tileColor: Theme.of(context).primaryColorLight,
-                  onTap: () async {
-                    // TODO: make it useful
-                    authClass.signInAPI('testme2@test.io', 'password');
-                  },
-                ),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
