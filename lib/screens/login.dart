@@ -14,6 +14,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
 
+//In this section we handle all the login activities
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -114,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // Needed so that there's no back button after login
               // Fine for now because testing and stuff
               children: [
+                //Checking the ios or android to show apple signin button
                 Platform.isIOS
                     ? SignInButton(
                         Buttons.Apple,
@@ -131,6 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(15)),
                       )
                     : const SizedBox(),
+                //hiding the google signin button in the ios
                 Platform.isIOS
                     ? const SizedBox()
                     : SignInButtonBuilder(

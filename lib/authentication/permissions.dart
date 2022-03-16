@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 Future<bool> checkPermissions() async {
+  //This is the page related to ask for permission of the applixation
   bool granted = await [
     Permission.location,
     Permission.microphone,

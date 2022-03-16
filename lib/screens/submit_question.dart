@@ -10,6 +10,7 @@ class SubmitQuestionScreen extends StatefulWidget {
 }
 
 class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
+  //This page is responsble for submitting a question
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,8 +96,11 @@ class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 20)),
-                        onPressed: ()  {Navigator.pop(context);
-                        Fluttertoast.showToast(msg: "Thank you for submitting your question, a member will get back to you as soon as possible");
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Fluttertoast.showToast(
+                              msg:
+                                  "Thank you for submitting your question, a member will get back to you as soon as possible");
                         },
                         child: const Text(
                           'Submit',

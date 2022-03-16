@@ -11,6 +11,7 @@ final sharedPrefs = FutureProvider<SharedPreferences>(
 
 // General app model --------------------------------------------------
 
+//This is the omodel of the state of the appllication holding all the data of the current state namely theme mode and login thing
 class RoadSageModel {
   RoadSageModel(
       {this.loggedIn = false,
@@ -43,7 +44,7 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
   RoadSageModelNotifier(this.prefs) : super(RoadSageModel()) {
     _initPrefs();
   }
-
+//We are initilaizin the hared prefs in this method
   void _initPrefs() async {
     String? lang = prefs?.getString(Constants.prefsLocale);
     if (lang != null) {

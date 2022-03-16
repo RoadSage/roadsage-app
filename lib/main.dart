@@ -129,6 +129,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
       state: LocalizationProvider.of(context).state,
       child: MaterialApp(
         title: translate(RoadSageStrings.title),
+        //Here we are confguring the theme for the app
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: RoadSageColours.lightGrey,
           primaryColor: RoadSageColours.lightGrey,
@@ -296,7 +297,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         ),
       ],
     );
-
+//this is the bottom bar present in the home page
     final BottomNavigationBar bottomNavBar = BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
