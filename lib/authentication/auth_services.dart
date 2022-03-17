@@ -118,6 +118,10 @@ class AuthClass {
     return tokenStorage.read(key: 'api_token');
   }
 
+  Future<bool> isSignedInAPI() async {
+    return await getAuthenticationToken() != null;
+  }
+
   // Handles the signing in via google services
   Future<void> signInWithGoogle(BuildContext context) async {
     try {

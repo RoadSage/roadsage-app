@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/state/models.dart';
 
-class WelcomeScreen extends StatefulWidget {
+class WelcomeScreen extends ConsumerStatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
+  ConsumerState<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
   List<Slide> slides = [];
 
   @override
@@ -41,6 +43,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   void onDonePress() {
+    // Mark first launch as done so that the welcome screen doesn't come up again
+    ref.read(roadSageModelProvider.notifier).switchFirstLaunch(false);
+    // Navigate to login screen
     Navigator.pushNamedAndRemoveUntil(context, Routes.root, (route) => false);
   }
 

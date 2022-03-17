@@ -192,7 +192,9 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           Routes.preferences: (context) => const PreferencesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
         },
-        initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
+        initialRoute: roadSageModel.firstLaunch
+            ? Routes.welcome
+            : (roadSageModel.loggedIn ? Routes.home : Routes.root),
         onGenerateRoute: (settings) {
           String? path = settings.name;
           if (path != null && path.contains(Constants.phraseType)) {

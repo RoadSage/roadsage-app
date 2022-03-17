@@ -24,6 +24,7 @@ class Constants {
   static const String prefsLocale = "sharedprefs.selected.locale";
   static const String prefsTheme = "sharedprefs.selected.theme";
   static const String prefsLoggedIn = "sharedprefs.logged_in";
+  static const String prefsFirstLaunch = "sharedprefs.first_launch";
 }
 
 class RoadSageStrings {

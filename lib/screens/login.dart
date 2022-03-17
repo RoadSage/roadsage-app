@@ -204,7 +204,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    navigateOrError(Routes.welcome,
+                    // TODO: this is for testing to bypass API for login
+                    navigateOrError(Routes.home,
                         RoadSageStrings.permissionsFailed, context);
                   },
                   child: Text(

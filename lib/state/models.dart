@@ -14,18 +14,24 @@ final sharedPrefs = FutureProvider<SharedPreferences>(
 class RoadSageModel {
   RoadSageModel(
       {this.loggedIn = false,
+      this.firstLaunch = true,
       this.themeMode = ThemeMode.system,
       this.languageCode = "en"});
 
   // Status
   bool loggedIn;
+  bool firstLaunch;
   ThemeMode themeMode;
   String languageCode;
 
   RoadSageModel copyWith(
-      {bool? loggedIn, ThemeMode? themeMode, String? languageCode}) {
+      {bool? loggedIn,
+      bool? firstLaunch,
+      ThemeMode? themeMode,
+      String? languageCode}) {
     return RoadSageModel(
         loggedIn: loggedIn ?? this.loggedIn,
+        firstLaunch: firstLaunch ?? this.firstLaunch,
         themeMode: themeMode ?? this.themeMode,
         languageCode: languageCode ?? this.languageCode);
   }
@@ -53,11 +59,21 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
     if (loggedIn != null) {
       switchLoggedIn(loggedIn);
     }
+
+    bool? firstLaunch = prefs?.getBool(Constants.prefsFirstLaunch);
+    if (firstLaunch != null) {
+      switchFirstLaunch(firstLaunch);
+    }
   }
 
   void switchLoggedIn(bool value) {
     state = state.copyWith(loggedIn: value);
     prefs?.setBool(Constants.prefsLoggedIn, value);
+  }
+
+  void switchFirstLaunch(bool value) {
+    state = state.copyWith(firstLaunch: value);
+    prefs?.setBool(Constants.prefsFirstLaunch, value);
   }
 
   void switchThemeMode(ThemeMode value) {
