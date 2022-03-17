@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:roadsage/authentication/auth_services.dart';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:roadsage/state/api.dart';
 import '../state/models.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class DisplayScreen extends ConsumerStatefulWidget {
   const DisplayScreen({Key? key}) : super(key: key);
@@ -171,46 +169,6 @@ class _DisplayScreenState extends ConsumerState<DisplayScreen> {
                         .updateStoppingDistance(value);
                   });
                 },
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  title: const Text(
-                    'Get sensor readings',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  tileColor: Theme.of(context).primaryColorLight,
-                  onTap: () async {
-                    var response = getSensorReadings(
-                        '2019-08-24', '2024-08-24', authClass);
-                    debugPrint('Response body: $response');
-                    Fluttertoast.showToast(msg: "API response received!");
-                  },
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(16),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  title: const Text(
-                    'Add sensor readings',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  tileColor: Theme.of(context).primaryColorLight,
-                  onTap: () async {
-                    Map data = {
-                      "text_displayed": "string",
-                    };
-                    var response = addSensorReadings(data, authClass);
-                    debugPrint('Response body: $response');
-                    Fluttertoast.showToast(msg: "API response received!");
-                  },
-                ),
               ),
             ],
           ),

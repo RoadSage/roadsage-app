@@ -9,6 +9,7 @@ import 'package:roadsage/screens/profile.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:roadsage/state/api.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,6 +47,7 @@ class RoadSageApp extends ConsumerStatefulWidget {
 
 class _RoadSageApp extends ConsumerState<RoadSageApp> {
   final SiriSuggestions siri = SiriSuggestions();
+  final AuthClass authClass = AuthClass();
 
   _RoadSageApp() : super() {
     initSiriSuggestions();
@@ -194,10 +196,13 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           if (path != null && path.contains(Constants.phraseType)) {
             String query =
                 path.substring(path.indexOf("${Constants.phraseType}=") + 11);
+            String commandQuery =
+                "${RoadSageStrings.voiceCommandsPrefix}.$query";
+            DateTime timestamp = DateTime.now();
             ref.read(recentsModelProvider.notifier).addCommand(
-                RoadSageStrings.googleAssistant,
-                "${RoadSageStrings.voiceCommandsPrefix}.$query",
-                DateTime.now());
+                RoadSageStrings.googleAssistant, commandQuery, timestamp);
+            addAppCommand(RoadSageStrings.googleAssistant, commandQuery,
+                timestamp, authClass);
             return MaterialPageRoute(builder: (_) => const MainScreen());
           }
           return null;
