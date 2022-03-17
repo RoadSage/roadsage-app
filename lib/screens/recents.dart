@@ -13,8 +13,17 @@ class RecentsScreen extends ConsumerStatefulWidget {
 
 class _RecentsScreenState extends ConsumerState<RecentsScreen> {
   @override
+  void didChangeDependencies() {
+    final recentsModel = ref.watch(recentsProvider);
+    if (recentsModel.recents.isEmpty) {
+      recentsModel.getDataFromDb();
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final recentsModel = ref.watch(recentsModelProvider);
+    final recentsModel = ref.watch(recentsProvider);
 
     return ListView(
       children: [
@@ -42,10 +51,10 @@ class _RecentsScreenState extends ConsumerState<RecentsScreen> {
               height: 20,
             ),
             //making list tiles for the recent purposes
-            ...recentsModel
+            ...recentsModel.recents
                 .map((e) => _buildCard(
                     title: translate(e.invocationMethod),
-                    desc: translate(e.query),
+                    desc: translate(e.command),
                     timestamp: e.timestamp))
                 .toList()
                 .reversed,

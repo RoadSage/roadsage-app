@@ -64,6 +64,7 @@ dependencies:
   pin_code_fields: ^7.3.0
   http: ^0.13.4
   intro_slider: ^3.0.3
+  sqflite: ^2.0.2
 
 dev_dependencies:
   flutter_test:

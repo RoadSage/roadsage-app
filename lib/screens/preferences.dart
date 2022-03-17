@@ -102,10 +102,9 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 subtitle: "Kilometers",
               ),
               SettingsTile(
-                title: translate("Clear recents"),
-                onPressed: (BuildContext context) =>
-                    ref.read(recentsModelProvider.notifier).clear(),
-              )
+                  title: translate("Clear recents"),
+                  onPressed: (BuildContext context) =>
+                      ref.read(recentsProvider.notifier).clearRecents())
             ],
           ),
           SettingsSection(

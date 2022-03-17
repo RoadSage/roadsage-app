@@ -19,6 +19,9 @@ class Constants {
   static const String getAssistantMethod = "getAssistantQuery";
   static const String webServerAddress = "192.168.1.103:8000";
 
+  static const String recentsDbFile = 'recents.db';
+  static const String recentsTableName = 'recentcommands';
+
   static const String phraseType = "phraseType";
 
   static const String prefsLocale = "sharedprefs.selected.locale";
