@@ -197,34 +197,6 @@ final remoteModelProvider =
 
 // Recents (recents.dart)  -----------------------------------------------
 
-// class RecentsList extends StateNotifier<List<RoadSageCommand>> {
-//   RecentsList([List<RoadSageCommand>? commands]) : super(commands ?? []);
-
-//   void addCommand(String invocation, String query, DateTime timestamp) {
-//     state = [
-//       ...state,
-//       RoadSageCommand(
-//         invocation,
-//         query,
-//         timestamp,
-//       )
-//     ];
-//   }
-
-//   List<RoadSageCommand> getCommands() {
-//     return state;
-//   }
-
-//   void clear() {
-//     state = [];
-//   }
-// }
-
-// final recentsModelProvider =
-// StateNotifierProvider<RecentsList, List<RoadSageCommand>>((ref) {
-// return RecentsList();
-// });
-
 final recentsProvider = ChangeNotifierProvider<RecentsProvider>((ref) {
   return RecentsProvider(ref);
 });
@@ -232,8 +204,6 @@ final recentsProvider = ChangeNotifierProvider<RecentsProvider>((ref) {
 class RecentsProvider with ChangeNotifier {
   final ChangeNotifierProviderRef? ref;
   List<RoadSageCommand> _recents = [];
-  static const tableName = 'recentcommands';
-
   RecentsProvider(this.ref) {
     if (ref != null) getDataFromDb();
   }
@@ -245,14 +215,15 @@ class RecentsProvider with ChangeNotifier {
     if (db == null) return;
     _recents.add(command);
     notifyListeners();
-    ref!.read(dbProvider).insert(tableName, command.toMap());
+    ref!.read(dbProvider).insert(Constants.recentsTableName, command.toMap());
   }
 
   Future<void> getDataFromDb() async {
     final db = ref!.read(dbProvider).db;
     if (db == null) return;
-    final dataList = await ref!.read(dbProvider.notifier).getData(tableName);
-    debugPrint('got ${dataList.length} items');
+    final dataList = await ref!
+        .read(dbProvider.notifier)
+        .getData(Constants.recentsTableName);
     _recents = dataList.map((e) => RoadSageCommand.fromMap(e)).toList();
     notifyListeners();
   }
@@ -262,7 +233,7 @@ class RecentsProvider with ChangeNotifier {
     if (db == null) return;
     _recents = [];
     notifyListeners();
-    await db.delete(tableName);
+    await db.delete(Constants.recentsTableName);
   }
 }
 

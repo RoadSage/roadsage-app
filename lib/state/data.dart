@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:roadsage/constants.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
 
@@ -18,18 +19,18 @@ class RoadSageCommand {
 
   Map<String, Object?> toMap() {
     return <String, Object?>{
-      "id": id,
-      "invocation_method": invocationMethod,
-      "command": command,
-      "timestamp": timestamp.toString(),
+      Constants.apiCommandId: id,
+      Constants.apiCommandInvocationMethod: invocationMethod,
+      Constants.apiCommandCommand: command,
+      Constants.apiCommandTimestamp: timestamp.toString(),
     };
   }
 
   RoadSageCommand.fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    invocationMethod = map['invocation_method'] as String;
-    command = map['command'] as String;
-    timestamp = DateTime.parse(map['timestamp'] as String);
+    id = map[Constants.apiCommandId];
+    invocationMethod = map[Constants.apiCommandInvocationMethod] as String;
+    command = map[Constants.apiCommandCommand] as String;
+    timestamp = DateTime.parse(map[Constants.apiCommandTimestamp] as String);
   }
 }
 
@@ -38,19 +39,18 @@ final dbProvider = ChangeNotifierProvider<DataBaseProvider>((ref) {
 });
 
 class DataBaseProvider with ChangeNotifier {
-  static const tableName = 'recentcommands';
   Database? db;
 
   void init() async {
     final dbPath = await getDatabasesPath();
-    db = await openDatabase(path.join(dbPath, 'recents.db'), version: 1,
-        onCreate: (Database db, int version) async {
+    db = await openDatabase(path.join(dbPath, Constants.recentsDbFile),
+        version: 1, onCreate: (Database db, int version) async {
       await db.execute('''
-  create table $tableName (
-    id integer primary key,
-    invocation_method text not null,
-    command text not null,
-    timestamp text not null
+  create table ${Constants.recentsTableName} (
+    ${Constants.apiCommandId} integer primary key,
+    ${Constants.apiCommandInvocationMethod} text not null,
+    ${Constants.apiCommandCommand} text not null,
+    ${Constants.apiCommandTimestamp} text not null
   )
   ''');
     });
@@ -63,9 +63,8 @@ class DataBaseProvider with ChangeNotifier {
   }
 
   Future<void> insert(String table, Map<String, Object?> data) async {
-    await db!
-        .insert(tableName, data, conflictAlgorithm: ConflictAlgorithm.replace);
-    debugPrint('stuff inserted');
+    await db!.insert(Constants.recentsTableName, data,
+        conflictAlgorithm: ConflictAlgorithm.replace);
     await db!.query(table).then((value) => debugPrint(value.length.toString()));
   }
 

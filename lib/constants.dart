@@ -22,6 +22,11 @@ class Constants {
   static const String recentsDbFile = 'recents.db';
   static const String recentsTableName = 'recentcommands';
 
+  static const String apiCommandId = 'id';
+  static const String apiCommandInvocationMethod = 'invocation_method';
+  static const String apiCommandCommand = 'command';
+  static const String apiCommandTimestamp = 'timestamp';
+
   static const String phraseType = "phraseType";
 
   static const String prefsLocale = "sharedprefs.selected.locale";
