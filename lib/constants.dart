@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Routes {
   static const String root = "/";
   static const String home = "/home";
-  // static const String permission = "/permission";
+  static const String welcome = "/welcome";
   static const String preferences = "/preferences";
   static const String remote = "/devices/remote";
   static const String display = "/devices/display";
@@ -56,6 +56,11 @@ class RoadSageStrings {
   static const String firstName = "login_page.firstName";
   static const String lastName = "login_page.lastName";
   static const String dateOfBirth = "login_page.dateOfBirth";
+
+  static const String welcomeToRoadSage = "welcome_page.welcome";
+  static const String welcomeDescription1 = "welcome_page.description1";
+  static const String welcomeDescription2 = "welcome_page.description2";
+  static const String welcomeDescription3 = "welcome_page.description3";
 
   static const String signInWithGoogle = 'Sign in with Google';
 

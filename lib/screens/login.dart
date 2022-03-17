@@ -199,13 +199,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     );
                   },
-                  // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
                 TextButton(
                   onPressed: () {
-                    navigateOrError(Routes.home,
+                    navigateOrError(Routes.welcome,
                         RoadSageStrings.permissionsFailed, context);
                   },
                   child: Text(

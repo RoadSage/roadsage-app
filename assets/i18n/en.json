@@ -54,6 +54,12 @@
     "dateOfBirth": "Date Of Birth",
     "checkYourMessages": "Check Your Messages"
   },
+  "welcome_page": {
+    "welcome": "Welcome to RoadSage",
+    "description1": "World's first smart device designed to let you drive with peace of mind",
+    "description2": "Turn your car's rear window into a semi-autonomous display",
+    "description3": "A smart device to autonomously warm tailgaters who intrude on your safe driving space and to conveniently convey your simple intentions."
+  },
   "menu_titles": {
     "userProfile": "User Profile",
     "activity": "Activity",
