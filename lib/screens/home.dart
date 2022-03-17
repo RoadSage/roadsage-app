@@ -24,7 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
               const Icon(Icons.mic_none, size: 60),
               Text(
                 translate(RoadSageStrings.trySaying),
-                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
               ),
             ]),
           ),
@@ -44,8 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {},
                   title: Text(
                     (Platform.isAndroid)
-                        ? translate(RoadSageStrings.homeAndroidTrySayingEntries[index])
-                        : translate(RoadSageStrings.homeIOSTrySayingEntries[index]),
+                        ? translate(
+                            RoadSageStrings.homeAndroidTrySayingEntries[index])
+                        : translate(
+                            RoadSageStrings.homeIOSTrySayingEntries[index]),
                   ),
                   tileColor: Theme.of(context).primaryColorLight,
                 );
