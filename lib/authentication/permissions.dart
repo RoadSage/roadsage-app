@@ -3,13 +3,11 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+/// Utility function to request permissions or check if they were already granted
 Future<bool> checkPermissions() async {
-  ///This is the page related to ask for permission of the applixation
   bool granted = await [
     Permission.location,
     Permission.microphone,
-
-    ///Microphone permission for siri or assistant
   ]
       .request()
       .then((value) => value.values.every((element) => element.isGranted));
@@ -17,6 +15,7 @@ Future<bool> checkPermissions() async {
   return granted;
 }
 
+/// Utility function to check permissions and then navigate to a [route] or show an [error]
 void navigateOrError(String route, String error, BuildContext context) async {
   if (await checkPermissions()) {
     Navigator.pushReplacementNamed(context, route);

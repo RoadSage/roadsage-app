@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//This is th eroute contanstant storing address of pages
+/// Routes identify main destinations in the app
 class Routes {
   static const String root = "/";
   static const String home = "/home";
@@ -13,6 +13,7 @@ class Routes {
   static const String faqSubmitQuestion = "/faq/submit_question";
 }
 
+/// Constants identify addresses, keys, filenames etc.
 class Constants {
   static const String siriSuggestionKey = "key";
   static const String androidMethodChannel =
@@ -36,7 +37,7 @@ class Constants {
   static const String prefsFirstLaunch = "sharedprefs.first_launch";
 }
 
-//These are the String constannts used for internationalization.
+/// These are the String constannts used for internationalization.
 class RoadSageStrings {
   static const String help = "app_bar.titles.help_and_feedback";
   static const String devices = "app_bar.titles.devices";

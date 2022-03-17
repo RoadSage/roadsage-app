@@ -21,7 +21,7 @@ class Resource {
 
 enum Status { success, error, cancelled }
 
-/// This is the main class that will handle all signing up, in and out of vairous different services.
+/// This is the main singleton class that will handle all signing up, in and out of various different services.
 class AuthClass {
   static final AuthClass _instance = AuthClass._internal();
 
@@ -29,7 +29,7 @@ class AuthClass {
     return _instance;
   }
 
-  // Empty constructor
+  // Singleton constructor
   AuthClass._internal();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -39,10 +39,11 @@ class AuthClass {
     // 'https://www.googleapis.com/auth/contacts.readonly'
   ]);
 
-  // TODO: passing informative errors here would help
+  /// Issues a sign up HTTP request to the RoadSage API
   Future<bool> signUpAPI(
       {String? email, String? fullName, String? password}) async {
     var url = Uri.http(Constants.webServerAddress, "/signup");
+    // TODO: returning informative errors from this would help
 
     Map data = {
       "email": email,
@@ -69,7 +70,6 @@ class AuthClass {
     }
 
     if (response!.statusCode == 200) {
-      debugPrint('Response body: ${response!.body}');
       return true;
     }
     // } else if (response!.statusCode == 409) {
@@ -79,9 +79,11 @@ class AuthClass {
     return false;
   }
 
-  // TODO: passing informative errors here would help
+  /// Issues a sign in HTTP request to the RoadSage API
+  /// Stores the returned authentication token on the device
   Future<bool> signInAPI(String email, String password) async {
     var url = Uri.http(Constants.webServerAddress, "/login");
+    // TODO: returning informative errors from this would help
 
     http.Response? response;
 
@@ -114,12 +116,9 @@ class AuthClass {
     return false;
   }
 
+  /// Returns the stored authentication token for the RoadSage API
   Future<String?> getAuthenticationToken() async {
     return tokenStorage.read(key: 'api_token');
-  }
-
-  Future<bool> isSignedInAPI() async {
-    return await getAuthenticationToken() != null;
   }
 
   /// Handles the signing in via google services
@@ -159,6 +158,7 @@ class AuthClass {
     }
   }
 
+  /// Handles the signing in with apple
   Future<void> signInWithApple(BuildContext context) async {
     final credential = await SignInWithApple.getAppleIDCredential(
       scopes: [
