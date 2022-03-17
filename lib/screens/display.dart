@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:roadsage/authentication/auth_services.dart';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/models.dart';
@@ -12,6 +13,8 @@ class DisplayScreen extends ConsumerStatefulWidget {
 }
 
 class _DisplayScreenState extends ConsumerState<DisplayScreen> {
+  final AuthClass authClass = AuthClass();
+
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(

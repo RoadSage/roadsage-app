@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:roadsage/authentication/auth_services.dart';
 import 'package:roadsage/constants.dart';
 import 'dart:io' show Platform;
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:roadsage/state/api.dart';
+import 'package:roadsage/state/data.dart';
+import 'package:roadsage/state/models.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final AuthClass authClass = AuthClass();
+
   @override
   Widget build(BuildContext context) {
+    final recentsModel = ref.watch(recentsModelProvider);
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -32,9 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: (Platform.isAndroid)
-                  ? RoadSageStrings.homeAndroidTrySayingEntries.length
-                  : RoadSageStrings.homeIOSTrySayingEntries.length,
+              itemCount: RoadSageStrings.voiceCommands.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   shape: RoundedRectangleBorder(
@@ -42,13 +49,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   contentPadding: const EdgeInsets.all(18),
                   leading: const Icon(Icons.message_outlined,
                       size: 28, color: RoadSageColours.lightBlue),
-                  onTap: () {},
+                  onTap: () async {
+                    String command =
+                        translate(RoadSageStrings.voiceCommands[index]);
+                    DateTime timestamp = DateTime.now();
+
+                    recentsModel.add(RoadSageCommand(
+                        RoadSageStrings.homeScreenButton, command, timestamp));
+
+                    addAppCommand(RoadSageStrings.homeScreenButton, command,
+                        timestamp, authClass);
+                  },
                   title: Text(
-                    (Platform.isAndroid)
-                        ? translate(
-                            RoadSageStrings.homeAndroidTrySayingEntries[index])
-                        : translate(
-                            RoadSageStrings.homeIOSTrySayingEntries[index]),
+                    "${translate((Platform.isAndroid) ? RoadSageStrings.androidAssistantPhrase : RoadSageStrings.iosAssistantPhrase)}, ${translate(RoadSageStrings.voiceCommands[index])}",
                   ),
                   tileColor: Theme.of(context).primaryColorLight,
                 );

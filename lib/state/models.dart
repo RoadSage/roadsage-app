@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/state/data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // SharedPreferences
@@ -13,18 +14,24 @@ final sharedPrefs = FutureProvider<SharedPreferences>(
 class RoadSageModel {
   RoadSageModel(
       {this.loggedIn = false,
+      this.firstLaunch = true,
       this.themeMode = ThemeMode.system,
       this.languageCode = "en"});
 
   // Status
   bool loggedIn;
+  bool firstLaunch;
   ThemeMode themeMode;
   String languageCode;
 
   RoadSageModel copyWith(
-      {bool? loggedIn, ThemeMode? themeMode, String? languageCode}) {
+      {bool? loggedIn,
+      bool? firstLaunch,
+      ThemeMode? themeMode,
+      String? languageCode}) {
     return RoadSageModel(
         loggedIn: loggedIn ?? this.loggedIn,
+        firstLaunch: firstLaunch ?? this.firstLaunch,
         themeMode: themeMode ?? this.themeMode,
         languageCode: languageCode ?? this.languageCode);
   }
@@ -52,11 +59,21 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
     if (loggedIn != null) {
       switchLoggedIn(loggedIn);
     }
+
+    bool? firstLaunch = prefs?.getBool(Constants.prefsFirstLaunch);
+    if (firstLaunch != null) {
+      switchFirstLaunch(firstLaunch);
+    }
   }
 
   void switchLoggedIn(bool value) {
     state = state.copyWith(loggedIn: value);
     prefs?.setBool(Constants.prefsLoggedIn, value);
+  }
+
+  void switchFirstLaunch(bool value) {
+    state = state.copyWith(firstLaunch: value);
+    prefs?.setBool(Constants.prefsFirstLaunch, value);
   }
 
   void switchThemeMode(ThemeMode value) {
@@ -176,6 +193,36 @@ class RemoteModelNotifier extends StateNotifier<RemoteModel> {
 final remoteModelProvider =
     StateNotifierProvider<RemoteModelNotifier, RemoteModel>((ref) {
   return RemoteModelNotifier();
+});
+
+// Recents (recents.dart)  -----------------------------------------------
+
+class RecentsList extends StateNotifier<List<RoadSageCommand>> {
+  RecentsList([List<RoadSageCommand>? commands]) : super(commands ?? []);
+
+  void addCommand(String invocation, String query, DateTime timestamp) {
+    state = [
+      ...state,
+      RoadSageCommand(
+        invocation,
+        query,
+        timestamp,
+      )
+    ];
+  }
+
+  List<RoadSageCommand> getCommands() {
+    return state;
+  }
+
+  void clear() {
+    state = [];
+  }
+}
+
+final recentsModelProvider =
+    StateNotifierProvider<RecentsList, List<RoadSageCommand>>((ref) {
+  return RecentsList();
 });
 
 // TranslatePreferences (for persistent locale switching)

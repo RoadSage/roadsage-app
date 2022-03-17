@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:roadsage/authentication/auth_services.dart';
 
 import 'package:roadsage/screens/display.dart';
 import 'package:roadsage/screens/faq.dart';
 import 'package:roadsage/screens/help.dart';
-import 'package:roadsage/screens/permission.dart';
 import 'package:roadsage/screens/preferences.dart';
 import 'package:roadsage/screens/profile.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:roadsage/screens/welcome.dart';
+import 'package:roadsage/state/api.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,7 +20,6 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
-import 'package:roadsage/authentication/auth_services.dart';
 import 'constants.dart';
 import 'siri_suggestions.dart';
 
@@ -41,8 +41,6 @@ void main() async {
   runApp(LocalizedApp(delegate, const ProviderScope(child: RoadSageApp())));
 }
 
-AuthClass authClass = AuthClass();
-
 class RoadSageApp extends ConsumerStatefulWidget {
   const RoadSageApp({Key? key}) : super(key: key);
 
@@ -52,6 +50,7 @@ class RoadSageApp extends ConsumerStatefulWidget {
 
 class _RoadSageApp extends ConsumerState<RoadSageApp> {
   final SiriSuggestions siri = SiriSuggestions();
+  final AuthClass authClass = AuthClass();
 
   _RoadSageApp() : super() {
     initSiriSuggestions();
@@ -126,7 +125,6 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
   @override
   Widget build(BuildContext context) {
     final roadSageModel = ref.watch(roadSageModelProvider);
-
     var localizationDelegate = LocalizedApp.of(context).delegate;
 
     return LocalizationProvider(
@@ -188,6 +186,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
         themeMode: roadSageModel.themeMode,
         routes: {
           Routes.root: (context) => const LoginScreen(),
+          Routes.welcome: (context) => const WelcomeScreen(),
           Routes.home: (context) => const MainScreen(),
           Routes.remote: (context) => const RemoteScreen(),
           Routes.display: (context) => const DisplayScreen(),
@@ -195,14 +194,22 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           Routes.faqSubmitQuestion: (context) => const SubmitQuestionScreen(),
           Routes.preferences: (context) => const PreferencesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
-          Routes.permission: (context) => const PermissionScreen(),
         },
-        initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
+        initialRoute: roadSageModel.firstLaunch
+            ? Routes.welcome
+            : (roadSageModel.loggedIn ? Routes.home : Routes.root),
         onGenerateRoute: (settings) {
           String? path = settings.name;
-          if (path != null && path.contains("phraseType")) {
-            String query = path.substring(path.indexOf("phraseType=") + 11);
-            Fluttertoast.showToast(msg: "Query is $query");
+          if (path != null && path.contains(Constants.phraseType)) {
+            String query =
+                path.substring(path.indexOf("${Constants.phraseType}=") + 11);
+            String commandQuery =
+                "${RoadSageStrings.voiceCommandsPrefix}.$query";
+            DateTime timestamp = DateTime.now();
+            ref.read(recentsModelProvider.notifier).addCommand(
+                RoadSageStrings.googleAssistant, commandQuery, timestamp);
+            addAppCommand(RoadSageStrings.googleAssistant, commandQuery,
+                timestamp, authClass);
             return MaterialPageRoute(builder: (_) => const MainScreen());
           }
           return null;
@@ -232,6 +239,7 @@ class MainScreen extends ConsumerStatefulWidget {
 
 class _MainScreenState extends ConsumerState<MainScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+  final AuthClass authClass = AuthClass();
 
   final FlutterBlue flutterBlue = FlutterBlue.instance;
   final List<BluetoothDevice> bleDevice = [];

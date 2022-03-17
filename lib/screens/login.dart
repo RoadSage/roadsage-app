@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:roadsage/authentication/permissions.dart';
 
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/authentication/auth_services.dart';
+import 'package:roadsage/screens/signup/login_with_email.dart';
+import 'package:roadsage/screens/signup/login_with_mobile.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
@@ -19,8 +22,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthClass authClass = AuthClass();
+
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
-  AuthClass authClass = AuthClass();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,8 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               AppleIDAuthorizationScopes.fullName,
                             ],
                           );
-                          Navigator.pushReplacementNamed(
-                              context, Routes.permission);
+                          navigateOrError(Routes.home,
+                              RoadSageStrings.permissionsFailed, context);
                         },
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
@@ -143,28 +148,65 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                 SignInButton(
                   Buttons.Facebook,
-                  onPressed: () => authClass.signInWithFacebook(context),
+                  onPressed: () async {
+                    Resource? loginStatus =
+                        await authClass.signInWithFacebook(context);
+                    if (loginStatus != null &&
+                        loginStatus.status == Status.success) {
+                      navigateOrError(Routes.home,
+                          RoadSageStrings.permissionsFailed, context);
+                    }
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
                 SignInButton(
                   Buttons.Email,
-                  text: "Login / Sign up",
-                  onPressed: () {
-                    // TODO: actually check for permissions on iOS
-                    var route =
-                        Platform.isIOS ? Routes.permission : Routes.home;
-                    Navigator.pushReplacementNamed(context, route);
+                  text:
+                      "${translate(RoadSageStrings.login)} / ${translate(RoadSageStrings.signUp)}",
+                  onPressed: () async {
+                    await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title:
+                              Text(translate(RoadSageStrings.loginSignUpUsing)),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const LoginWithMobileScreen(),
+                                  ),
+                                );
+                              },
+                              child: Text(translate(RoadSageStrings.mobile)),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const LoginWithEmailScreen(),
+                                  ),
+                                );
+                              },
+                              child: Text(translate(RoadSageStrings.email)),
+                            )
+                          ],
+                        );
+                      },
+                    );
                   },
-                  // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
                 TextButton(
                   onPressed: () {
-                    var route =
-                        Platform.isIOS ? Routes.permission : Routes.home;
-                    Navigator.pushReplacementNamed(context, route);
+                    // TODO: this is for testing to bypass API for login
+                    navigateOrError(Routes.home,
+                        RoadSageStrings.permissionsFailed, context);
                   },
                   child: Text(
                     translate(RoadSageStrings.troubleSigning),

@@ -102,11 +102,9 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 subtitle: "Kilometers",
               ),
               SettingsTile(
-                title: translate("prefs.login_status"),
-                subtitle: roadSageModel.loggedIn ? "Logged in" : "Logged out",
-                onPressed: (BuildContext context) => ref
-                    .read(roadSageModelProvider.notifier)
-                    .switchLoggedIn(!roadSageModel.loggedIn),
+                title: translate("Clear recents"),
+                onPressed: (BuildContext context) =>
+                    ref.read(recentsModelProvider.notifier).clear(),
               )
             ],
           ),
