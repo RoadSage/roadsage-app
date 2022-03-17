@@ -199,12 +199,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     );
                   },
-                  // onPressed: () => authClass.signUp(context, email: 'test', password: 'test'),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
                 TextButton(
                   onPressed: () {
+                    // TODO: this is for testing to bypass API for login
                     navigateOrError(Routes.home,
                         RoadSageStrings.permissionsFailed, context);
                   },

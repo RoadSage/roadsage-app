@@ -9,6 +9,7 @@ import 'package:roadsage/screens/profile.dart';
 import 'package:roadsage/screens/submit_question.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:roadsage/screens/welcome.dart';
 import 'package:roadsage/state/api.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
@@ -182,6 +183,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
         themeMode: roadSageModel.themeMode,
         routes: {
           Routes.root: (context) => const LoginScreen(),
+          Routes.welcome: (context) => const WelcomeScreen(),
           Routes.home: (context) => const MainScreen(),
           Routes.remote: (context) => const RemoteScreen(),
           Routes.display: (context) => const DisplayScreen(),
@@ -190,7 +192,9 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           Routes.preferences: (context) => const PreferencesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
         },
-        initialRoute: roadSageModel.loggedIn ? Routes.home : Routes.root,
+        initialRoute: roadSageModel.firstLaunch
+            ? Routes.welcome
+            : (roadSageModel.loggedIn ? Routes.home : Routes.root),
         onGenerateRoute: (settings) {
           String? path = settings.name;
           if (path != null && path.contains(Constants.phraseType)) {

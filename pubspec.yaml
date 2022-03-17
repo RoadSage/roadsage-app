@@ -63,6 +63,7 @@ dependencies:
   permission_handler: ^9.2.0
   pin_code_fields: ^7.3.0
   http: ^0.13.4
+  intro_slider: ^3.0.3
 
 dev_dependencies:
   flutter_test:

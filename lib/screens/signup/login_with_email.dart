@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:roadsage/authentication/auth_services.dart';
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/screens/signup/email_otp_verify_for_login.dart';
 import 'package:roadsage/screens/signup/register_with_email.dart';
+import 'package:roadsage/state/models.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
-class LoginWithEmailScreen extends StatefulWidget {
+class LoginWithEmailScreen extends ConsumerStatefulWidget {
   const LoginWithEmailScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginWithEmailScreen> createState() => _LoginWithEmailScreenState();
+  ConsumerState<LoginWithEmailScreen> createState() =>
+      _LoginWithEmailScreenState();
 }
 
-class _LoginWithEmailScreenState extends State<LoginWithEmailScreen> {
+class _LoginWithEmailScreenState extends ConsumerState<LoginWithEmailScreen> {
   final _formKey = GlobalKey<FormState>();
   final AuthClass authClass = AuthClass();
 
@@ -119,7 +122,16 @@ class _LoginWithEmailScreenState extends State<LoginWithEmailScreen> {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
 
+                        // Try to sign into the API
                         if (await authClass.signInAPI(email!, password!)) {
+                          // If successful, switch login status to logged in
+                          // TODO: this should be performed within EmailVerifyScreen
+                          // if and when the website api supports verification
+                          ref
+                              .read(roadSageModelProvider.notifier)
+                              .switchLoggedIn(true);
+
+                          // Navigate to email verify screen for verification
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) =>
