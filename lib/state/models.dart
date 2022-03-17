@@ -11,7 +11,7 @@ final sharedPrefs = FutureProvider<SharedPreferences>(
 
 // General app model --------------------------------------------------
 
-//This is the omodel of the state of the appllication holding all the data of the current state namely theme mode and login thing
+/// Model for storing general application state
 class RoadSageModel {
   RoadSageModel(
       {this.loggedIn = false,
@@ -38,6 +38,7 @@ class RoadSageModel {
   }
 }
 
+/// Notifier for subscribing to changes in a RoadSageModel
 class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
   final SharedPreferences? prefs;
 
@@ -45,8 +46,9 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
     _initPrefs();
   }
 
-  ///We are initilaizin the hared prefs in this method
+  /// Initialize shared preferences
   void _initPrefs() async {
+    // Get language setting if it's already stored on the device
     String? lang = prefs?.getString(Constants.prefsLocale);
     if (lang != null) {
       switchLanguage(lang);
@@ -68,6 +70,7 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
     }
   }
 
+  /// Helper function for switching the login status in the device storage
   void switchLoggedIn(bool value) {
     state = state.copyWith(loggedIn: value);
     prefs?.setBool(Constants.prefsLoggedIn, value);
@@ -89,6 +92,7 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
   }
 }
 
+/// Provider object for accessing the RoadSage model
 final roadSageModelProvider =
     StateNotifierProvider<RoadSageModelNotifier, RoadSageModel>((ref) {
   final prefs = ref.watch(sharedPrefs).maybeWhen(
@@ -199,10 +203,12 @@ final remoteModelProvider =
 
 // Recents (recents.dart)  -----------------------------------------------
 
+/// Provider object for accessing recents
 final recentsProvider = ChangeNotifierProvider<RecentsProvider>((ref) {
   return RecentsProvider(ref);
 });
 
+/// Notifier for performing changes to recents and subscribing to them
 class RecentsProvider with ChangeNotifier {
   final ChangeNotifierProviderRef? ref;
   List<RoadSageCommand> _recents = [];
@@ -210,8 +216,10 @@ class RecentsProvider with ChangeNotifier {
     if (ref != null) getDataFromDb();
   }
 
+  /// Get recents (used in RecentsScreen)
   List<RoadSageCommand> get recents => [..._recents];
 
+  /// Add a new command to recents, both model & database
   void addCommand(RoadSageCommand command) {
     final db = ref!.read(dbProvider).db;
     if (db == null) return;
@@ -220,6 +228,7 @@ class RecentsProvider with ChangeNotifier {
     ref!.read(dbProvider).insert(Constants.recentsTableName, command.toMap());
   }
 
+  /// Fetch recents from the database into the model
   Future<void> getDataFromDb() async {
     final db = ref!.read(dbProvider).db;
     if (db == null) return;
@@ -230,6 +239,7 @@ class RecentsProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  /// Clear recents in the model and database
   void clearRecents() async {
     final db = ref!.read(dbProvider).db;
     if (db == null) return;
