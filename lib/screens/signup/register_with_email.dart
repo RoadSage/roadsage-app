@@ -6,6 +6,7 @@ import 'package:roadsage/constants.dart';
 import 'package:roadsage/screens/signup/email_otp_verify_screen.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
+/// Screen for signing up to the RoadSage API using email & password
 class RegisterWithEmailScreen extends StatefulWidget {
   const RegisterWithEmailScreen({Key? key}) : super(key: key);
 
@@ -172,10 +173,12 @@ class _RegisterWithEmailScreenState extends State<RegisterWithEmailScreen> {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
 
+                        // Try to sign up using the API
                         if (await authClass.signUpAPI(
                             email: email,
                             fullName: "$firstName $lastName",
                             password: password)) {
+                          // Navigate to the verification screen if successful
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => const EmailVerifyScreen(),

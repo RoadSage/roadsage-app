@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/models.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
+/// Screen showing the status and options of the remote control device
 class RemoteScreen extends ConsumerStatefulWidget {
   const RemoteScreen({Key? key}) : super(key: key);
 

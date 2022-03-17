@@ -3,6 +3,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roadsage/constants.dart';
 
+/// Screen for verification after signing up with a mobile phone number
 class VerifyMobileScreen extends StatelessWidget {
   const VerifyMobileScreen({Key? key}) : super(key: key);
 

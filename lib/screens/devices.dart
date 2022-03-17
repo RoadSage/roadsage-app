@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
+/// Screen with devices used by the app (remote & display)
 class DevicesScreen extends StatefulWidget {
   const DevicesScreen({Key? key}) : super(key: key);
 

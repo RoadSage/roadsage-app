@@ -8,6 +8,7 @@ import 'package:roadsage/state/api.dart';
 import 'package:roadsage/state/data.dart';
 import 'package:roadsage/state/models.dart';
 
+/// Home page of the main screen, contains buttons with RoadSage commands
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -54,11 +55,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         translate(RoadSageStrings.voiceCommands[index]);
                     DateTime timestamp = DateTime.now();
 
+                    // Add command to recents
                     recentsModel.addCommand(RoadSageCommand(
                         invocationMethod: RoadSageStrings.homeScreenButton,
                         command: command,
                         timestamp: timestamp));
 
+                    // Send command to the API for data collection
                     addAppCommand(RoadSageStrings.homeScreenButton, command,
                         timestamp, authClass);
                   },

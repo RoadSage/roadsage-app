@@ -14,6 +14,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
 
+/// Screen with different ways of logging into the app
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -23,7 +24,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final AuthClass authClass = AuthClass();
-
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
 
   @override
@@ -110,10 +110,8 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: EdgeInsets.all(20),
             ),
             Column(
-              // TODO: change these guys to pushReplacementNamed
-              // Needed so that there's no back button after login
-              // Fine for now because testing and stuff
               children: [
+                // Checking the ios or android to show apple signin button
                 Platform.isIOS
                     ? SignInButton(
                         Buttons.Apple,
@@ -131,6 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(15)),
                       )
                     : const SizedBox(),
+
+                /// Hiding the google signin button in the ios
                 Platform.isIOS
                     ? const SizedBox()
                     : SignInButtonBuilder(
@@ -141,7 +141,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 20,
                         ),
                         backgroundColor: Colors.white,
-                        // innerPadding: EdgeInsets.only(left: 10),
                         onPressed: () => authClass.signInWithGoogle(context),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
@@ -153,6 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         await authClass.signInWithFacebook(context);
                     if (loginStatus != null &&
                         loginStatus.status == Status.success) {
+                      // Check permissions and navigate to home screen
                       navigateOrError(Routes.home,
                           RoadSageStrings.permissionsFailed, context);
                     }
@@ -205,6 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextButton(
                   onPressed: () {
                     // TODO: this is for testing to bypass API for login
+                    // should be removed in final production version
                     navigateOrError(Routes.home,
                         RoadSageStrings.permissionsFailed, context);
                   },

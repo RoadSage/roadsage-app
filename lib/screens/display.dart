@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/models.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
+/// Screen showing the status of the display device
 class DisplayScreen extends ConsumerStatefulWidget {
   const DisplayScreen({Key? key}) : super(key: key);
 
