@@ -20,7 +20,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final recentsModel = ref.watch(recentsModelProvider);
+    final recentsModel = ref.watch(recentsProvider);
 
     return Center(
       child: Column(
@@ -54,8 +54,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         translate(RoadSageStrings.voiceCommands[index]);
                     DateTime timestamp = DateTime.now();
 
-                    recentsModel.add(RoadSageCommand(
-                        RoadSageStrings.homeScreenButton, command, timestamp));
+                    recentsModel.addCommand(RoadSageCommand(
+                        invocationMethod: RoadSageStrings.homeScreenButton,
+                        command: command,
+                        timestamp: timestamp));
 
                     addAppCommand(RoadSageStrings.homeScreenButton, command,
                         timestamp, authClass);

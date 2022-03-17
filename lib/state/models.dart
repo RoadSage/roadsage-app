@@ -197,33 +197,45 @@ final remoteModelProvider =
 
 // Recents (recents.dart)  -----------------------------------------------
 
-class RecentsList extends StateNotifier<List<RoadSageCommand>> {
-  RecentsList([List<RoadSageCommand>? commands]) : super(commands ?? []);
+final recentsProvider = ChangeNotifierProvider<RecentsProvider>((ref) {
+  return RecentsProvider(ref);
+});
 
-  void addCommand(String invocation, String query, DateTime timestamp) {
-    state = [
-      ...state,
-      RoadSageCommand(
-        invocation,
-        query,
-        timestamp,
-      )
-    ];
+class RecentsProvider with ChangeNotifier {
+  final ChangeNotifierProviderRef? ref;
+  List<RoadSageCommand> _recents = [];
+  RecentsProvider(this.ref) {
+    if (ref != null) getDataFromDb();
   }
 
-  List<RoadSageCommand> getCommands() {
-    return state;
+  List<RoadSageCommand> get recents => [..._recents];
+
+  void addCommand(RoadSageCommand command) {
+    final db = ref!.read(dbProvider).db;
+    if (db == null) return;
+    _recents.add(command);
+    notifyListeners();
+    ref!.read(dbProvider).insert(Constants.recentsTableName, command.toMap());
   }
 
-  void clear() {
-    state = [];
+  Future<void> getDataFromDb() async {
+    final db = ref!.read(dbProvider).db;
+    if (db == null) return;
+    final dataList = await ref!
+        .read(dbProvider.notifier)
+        .getData(Constants.recentsTableName);
+    _recents = dataList.map((e) => RoadSageCommand.fromMap(e)).toList();
+    notifyListeners();
+  }
+
+  void clearRecents() async {
+    final db = ref!.read(dbProvider).db;
+    if (db == null) return;
+    _recents = [];
+    notifyListeners();
+    await db.delete(Constants.recentsTableName);
   }
 }
-
-final recentsModelProvider =
-    StateNotifierProvider<RecentsList, List<RoadSageCommand>>((ref) {
-  return RecentsList();
-});
 
 // TranslatePreferences (for persistent locale switching)
 class TranslatePreferences implements ITranslatePreferences {

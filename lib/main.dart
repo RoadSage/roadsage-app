@@ -11,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:roadsage/screens/welcome.dart';
 import 'package:roadsage/state/api.dart';
+import 'package:roadsage/state/data.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -203,8 +204,12 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
             String commandQuery =
                 "${RoadSageStrings.voiceCommandsPrefix}.$query";
             DateTime timestamp = DateTime.now();
-            ref.read(recentsModelProvider.notifier).addCommand(
-                RoadSageStrings.googleAssistant, commandQuery, timestamp);
+            ref.read(recentsProvider.notifier).addCommand(RoadSageCommand(
+                invocationMethod: RoadSageStrings.googleAssistant,
+                command: commandQuery,
+                timestamp: timestamp));
+
+            // Send the command to the API for data collection
             addAppCommand(RoadSageStrings.googleAssistant, commandQuery,
                 timestamp, authClass);
             return MaterialPageRoute(builder: (_) => const MainScreen());
