@@ -5,6 +5,7 @@ import 'package:roadsage/screens/signup/register_with_phone.dart';
 import 'package:roadsage/screens/signup/verify_mobile.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
+/// Screen for logging in to the API using a mobile phone number
 class LoginWithMobileScreen extends StatelessWidget {
   const LoginWithMobileScreen({Key? key}) : super(key: key);
 

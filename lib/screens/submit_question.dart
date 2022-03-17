@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../constants.dart';
 
+/// Screen allowing the user to submit a question
 class SubmitQuestionScreen extends StatefulWidget {
   const SubmitQuestionScreen({Key? key}) : super(key: key);
 
@@ -10,7 +11,6 @@ class SubmitQuestionScreen extends StatefulWidget {
 }
 
 class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
-  /// This page is responsble for submitting a question
   @override
   Widget build(BuildContext context) {
     return Scaffold(

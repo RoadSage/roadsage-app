@@ -3,6 +3,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roadsage/constants.dart';
 
+/// Screen for handling email verification after logging in
 class EmailVerifyScreenLogin extends StatelessWidget {
   const EmailVerifyScreenLogin({Key? key}) : super(key: key);
 

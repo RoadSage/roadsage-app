@@ -4,6 +4,7 @@ import 'package:roadsage/constants.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
 
+/// Screen showing help & feedback
 class HelpScreen extends StatefulWidget {
   const HelpScreen({Key? key}) : super(key: key);
 
@@ -118,6 +119,7 @@ class _HelpScreenState extends State<HelpScreen> {
     );
   }
 
+  /// Helper function to create button containers
   Widget getButtonContainer(final String text, String route) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -138,9 +140,11 @@ class _HelpScreenState extends State<HelpScreen> {
     );
   }
 
+  /// Function called when the fedeback 'submit' button is pressed
   static void submit(GlobalKey<FormState> formKey) {
     // formKey.currentState!.save();
     if (formKey.currentState!.validate()) {
+      // TODO: When the API supports it, this is where feedback should be sent
       Fluttertoast.showToast(msg: "Feedback submitted!");
     }
   }

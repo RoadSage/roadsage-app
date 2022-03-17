@@ -8,6 +8,7 @@ import 'package:roadsage/utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Screen showing app's preferences
 class PreferencesScreen extends ConsumerStatefulWidget {
   const PreferencesScreen({Key? key}) : super(key: key);
 
@@ -26,10 +27,12 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
     super.initState();
   }
 
+  // Shared preferences store the settings on device
   void initSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
   }
 
+  // Platform info lets us get device information
   void initPlatformInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     setState(() {
@@ -130,6 +133,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
     );
   }
 
+  /// Helper function for setting up theme selection
   Future<ThemeMode?> _chooseColourTheme() async {
     return showDialog<ThemeMode>(
         context: context,
@@ -155,6 +159,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
         });
   }
 
+  /// Helper function for setting up language selection
   Future<String?> _chooseLanguage() async {
     return showDialog<String>(
         context: context,
