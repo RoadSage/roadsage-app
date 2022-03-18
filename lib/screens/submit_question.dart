@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../constants.dart';
 
+/// Screen allowing the user to submit a question
 class SubmitQuestionScreen extends StatefulWidget {
   const SubmitQuestionScreen({Key? key}) : super(key: key);
 
@@ -29,7 +31,6 @@ class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
                         " ",
                         style: TextStyle(
                             fontSize: 34.0,
-                            color: Color(0xFFffffff),
                             fontWeight: FontWeight.w400,
                             fontFamily: "Roboto"),
                       ),
@@ -67,29 +68,19 @@ class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
                                   "Enter your question here:",
                                   style: TextStyle(
                                       fontSize: 16.0,
-                                      color: Colors.black,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: "Roboto"),
                                 )
                               ]),
-                          Padding(
-                              child: Container(
-                                color: const Color.fromARGB(60, 220, 220, 220),
-                                child: const TextField(
-                                  style: TextStyle(
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w200,
-                                      color: Colors.black,
-                                      fontFamily: "Roboto"),
-                                  maxLines: 15,
-                                  decoration: InputDecoration.collapsed(
-                                      hintText: "Enter your question here"),
-                                ),
+                          const Padding(
+                              child: TextField(
+                                maxLines: 10,
+                                decoration: InputDecoration(
+                                    hintText: "Enter your question here"),
                               ),
-                              padding:
-                                  const EdgeInsets.fromLTRB(20, 1.0, 20, 10.0))
+                              padding: EdgeInsets.fromLTRB(20, 1.0, 20, 10.0))
                         ]),
-                        color: const Color(0xFFfafafa),
+                        color: Theme.of(context).primaryColorLight,
                         padding: const EdgeInsets.all(0.0),
                         alignment: Alignment.center,
                       ),
@@ -104,13 +95,18 @@ class _SubmitQuestionScreenState extends State<SubmitQuestionScreen> {
                       height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFF0AC0FF),
                             textStyle: const TextStyle(fontSize: 20)),
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('Submit'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Fluttertoast.showToast(
+                              msg:
+                                  "Thank you for submitting your question, a member will get back to you as soon as possible");
+                        },
+                        child: const Text(
+                          'Submit',
+                        ),
                       ))),
             ]),
-        color: const Color(0xFFDCDCDC),
         padding: const EdgeInsets.all(0.0),
         alignment: Alignment.center,
       ),

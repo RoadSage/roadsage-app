@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">RoadSage</string>
+<string name="shortcut_short_label">Test Shortcut</string>
+<string name="thankYou">Thank you</string>
+<string name="thankYouLabel">Thank you Label</string>
+<string name="cheers">Cheers</string>
+<string name="cheersLabel">Cheers label</string>
+<string name="turnOffHighBeam">Turn off high beam</string>
+<string name="facebook_app_id">677765780246587</string>
+<string name="facebook_client_token">00848c02e16665482853ac5a2ce1fe17</string>
+
+<string-array name="sayRoadSage">
+    <item>show $message</item>
+    <item>show $message</item>
+    <item>display $message</item>
+    <item>display $message</item>
+</string-array>
+</resources>

@@ -1,0 +1,146 @@
+{
+  "title": "RoadSage",
+  "app_bar": {
+    "titles": {
+      "home": "Home",
+      "devices": "Devices",
+      "recents": "Recents",
+      "help_and_feedback": "Help & Feedback"
+    }
+  },
+  "prefs": {
+    "title": "Preferences",
+    "language": {
+      "lang": "Language",
+      "select_prompt": "Select the language",
+      "name": {
+        "en": "English",
+        "en_US": "English",
+        "en_GB": "English",
+        "fr": "French"
+      }
+    },
+    "color": "Theme",
+    "time_zone": "Time Zone",
+    "temp": "Temperature unit",
+    "dist": "Distance Unit",
+    "clear_recents": "Clear recents",
+    "login_status": "Login Status",
+    "about_app": "About App",
+    "version": "App Version",
+    "about_roadsage": "About RoadSage",
+    "prod_info": "Product Info",
+    "prod_info_sub": "RoadSage for cars",
+    "theme": {
+      "select": "Select colour theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "login_page": {
+    "title": "RoadSage Home Page",
+    "tncAgreement": "By clicking Login, you agree to our terms and conditions. Learn how we process your data in our ...",
+    "byUnitic": "By Unitic",
+    "troubleSigning": "Trouble Signing in?",
+    "login": "Log in",
+    "password": "Password",
+    "signUp": "Sign up",
+    "loginSignUpUsing": "Login / Sign up Using",
+    "mobile": "Mobile",
+    "email": "Email",
+    "enter6DigitCode": "Enter 6-Digit Code",
+    "checkYourEmailInbox": "Check your email inbox",
+    "resendCode": "Resend code 55s",
+    "emailAddress": "Email Address",
+    "byContinuing": "By Continuing you agree to our Terms of Service and confirm that you read our privacy policy",
+    "phoneNumber": "Phone Number",
+    "sendCode": "SEND CODE",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "dateOfBirth": "Date Of Birth",
+    "checkYourMessages": "Check Your Messages"
+  },
+  "welcome_page": {
+    "welcome": "Welcome to RoadSage",
+    "description1": "World's first smart device designed to let you drive with peace of mind",
+    "description2": "Turn your car's rear window into a semi-autonomous display",
+    "description3": "A smart device to autonomously warm tailgaters who intrude on your safe driving space and to conveniently convey your simple intentions."
+  },
+  "menu_titles": {
+    "userProfile": "User Profile",
+    "activity": "Activity",
+    "buyRoadSage": "Buy RoadSage",
+    "referAFriend": "Refer a Friend",
+    "preferences": "Preferences",
+    "signOut": "Sign Out",
+    "faqs": "FAQs",
+    "rateUs": "Rate Us",
+    "contactUs": "Contact Us"
+  },
+  "connected": "Connected",
+  "disconnected": "Disconnected",
+  "form_strings": {
+    "formName": "Name",
+    "formFirstName": "First Name",
+    "formLastName": "Last Name",
+    "formFirstNameExample": "Fatma",
+    "formLastNameExample": "Alsayegh",
+    "formEmail": "Email",
+    "formEmailExample": "example@mail.com",
+    "formPhone": "Phone",
+    "formPhoneExample": "phone",
+    "formSubmit": "Submit"
+  },
+  "device_list": {
+    "remote": "Remote",
+    "display": "Display"
+  },
+  "device_info": {
+    "status": "Status",
+    "batteryLevel": "Battery level",
+    "brightnessLevel": "Brightness level",
+    "adaptiveBrightness": "Adaptive Brightness",
+    "sensor": "Sensor",
+    "stoppingDistance": "Stopping distance"
+  },
+  "control_strings": {
+    "openRoadsage": "Open_Roadsage",
+    "openRoadsageDesc": "Opens the application",
+    "launchRoadsage": "Launch Roadsage",
+    "startRoadsage": "Start Roadsage",
+    "thanksRoadsage": "Thanks_Roadsage",
+    "thanksRoadsageDesc": "Says thank you to the car behind you",
+    "thanksRoadsagePhrase": "Say Thank you on Roadsage",
+    "cheersRoadsage": "Cheers_Roadsage",
+    "cheersRoadsageDesc": "Says cheers to the car behind you",
+    "cheersRoadsagePhrase": "Say Cheers on Roadsage",
+    "beamRoadsage": "Beam_Roadsage",
+    "beamRoadsageDesc": "Asks car behind you to turn off high beam",
+    "beamRoadsagePhrase": "Say turn off high beam on Roadsage",
+    "trySaying": "Try Saying",
+    "helpAndFeedback": "Help & Feedback",
+    "helpAndFeedbackDesc": "Your  feedback is important to help us improve our products.",
+    "feedbackHint": "Write your feedback here",
+    "giveFeedback": "Give Feedback"
+  },
+  "voice_commands": {
+    "android_assistant_phrase": "Hey Google",
+    "ios_assistant_phrase": "Hey Siri",
+    "THANK_YOU": "Say Thank you on RoadSage",
+    "CHEERS": "Say Cheers on RoadSage",
+    "TURN_OFF_HIGH_BEAM": "Say Turn off High Beam on RoadSage"
+  },
+  "permissions": {
+    "not_granted": "Permissions not granted!"
+  },
+  "recents_screen": {
+    "communication": "Communication",
+    "check_your_previous": "Check your previous recent commands",
+    "google_assistant": "Google Assistant",
+    "siri": "Siri",
+    "asd": "AS&D",
+    "mountain_safe": "Mountain Safe Distance",
+    "home_screen_button": "Home Screen Button"
+  }
+}
