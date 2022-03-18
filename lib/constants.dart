@@ -86,8 +86,9 @@ class RoadSageStrings {
   static const String rateUs = 'menu_titles.rateUs';
   static const String contactUs = 'menu_titles.contactUs';
 
-  static const String connected = 'connected';
-  static const String disconnected = 'disconnected';
+  static const String connected = 'Connected';
+  static const String scanning = 'Scanning....';
+  static const String disconnected = 'Disconnected';
 
   static const String formName = 'form_strings.formName';
   static const String formFirstName = 'form_strings.formFirstName';

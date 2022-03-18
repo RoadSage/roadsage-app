@@ -5,6 +5,7 @@ import 'package:roadsage/constants.dart';
 import 'dart:io' show Platform;
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/state/api.dart';
+import 'package:roadsage/state/ble.dart';
 import 'package:roadsage/state/data.dart';
 import 'package:roadsage/state/models.dart';
 
@@ -54,6 +55,39 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     String command =
                         translate(RoadSageStrings.voiceCommands[index]);
                     DateTime timestamp = DateTime.now();
+
+                    /*
+                    The code below should replace the code following it
+                    when the testing stage is over
+                    Leaving it commented out right now so that it is possible
+                    to present the recents functionality without needing a working
+                    bluetooth device
+
+                    // Send the command to the device through bluetooth
+                    BluetoothHandler.sendText(translate(command)).then((value) {
+                      if (!value) {
+                        Fluttertoast.showToast(
+                            msg: "Could not connect to the RoadSage device");
+                        return;
+                      }
+
+                      // Add issued command to recents
+                      ref.read(recentsProvider.notifier).addCommand(RoadSageCommand(
+                          invocationMethod: RoadSageStrings.homeScreenButton,
+                          command: command,
+                          timestamp: timestamp));
+
+                      // Send the command to the API for data collection
+                      addAppCommand(RoadSageStrings.homeScreenButton, command, timestamp,
+                          authClass);
+                    }).onError((error, stackTrace) {
+                      Fluttertoast.showToast(
+                          msg: "Could not connect to the RoadSage device");
+                    });
+                    */
+
+                    // Send the command to the device through bluetooth
+                    BluetoothHandler.sendText(translate(command));
 
                     // Add command to recents
                     recentsModel.addCommand(RoadSageCommand(

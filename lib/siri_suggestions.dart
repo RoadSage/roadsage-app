@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'dart:async';
 import 'constants.dart';
 
+import 'package:roadsage/state/ble.dart';
+
 /*
 Implementation adapted from
 https://github.com/myriky/flutter_siri_suggestions/blob/master/lib/flutter_siri_suggestions.dart
@@ -60,6 +62,7 @@ class SiriSuggestions {
   }
 
   void addEzSuggestion(String actionKey, String desc, String phrase) async {
+    BluetoothHandler.sendText(phrase);
     addSuggestion(
         actionKey + " suggestion", actionKey, true, true, desc, phrase);
   }

@@ -13,11 +13,13 @@ import 'package:roadsage/screens/welcome.dart';
 import 'package:roadsage/state/api.dart';
 import 'package:roadsage/state/data.dart';
 import 'package:roadsage/state/models.dart';
+import 'package:roadsage/state/ble.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'constants.dart';
 import 'siri_suggestions.dart';
@@ -66,6 +68,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
     if (user != null) {
       ref.read(roadSageModelProvider.notifier).switchLoggedIn(true);
     }
+
     super.initState();
   }
 
@@ -209,19 +212,31 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           if (path != null && path.contains(Constants.phraseType)) {
             String query =
                 path.substring(path.indexOf("${Constants.phraseType}=") + 11);
-            String commandQuery =
-                "${RoadSageStrings.voiceCommandsPrefix}.$query";
+            String command = "${RoadSageStrings.voiceCommandsPrefix}.$query";
             DateTime timestamp = DateTime.now();
 
-            // Add issued command to recents
-            ref.read(recentsProvider.notifier).addCommand(RoadSageCommand(
-                invocationMethod: RoadSageStrings.googleAssistant,
-                command: commandQuery,
-                timestamp: timestamp));
+            // Send the command to the device through bluetooth
+            BluetoothHandler.sendText(translate(command)).then((value) {
+              if (!value) {
+                Fluttertoast.showToast(
+                    msg: "Could not connect to the RoadSage device");
+                return;
+              }
 
-            // Send the command to the API for data collection
-            addAppCommand(RoadSageStrings.googleAssistant, commandQuery,
-                timestamp, authClass);
+              // Add issued command to recents
+              ref.read(recentsProvider.notifier).addCommand(RoadSageCommand(
+                  invocationMethod: RoadSageStrings.googleAssistant,
+                  command: command,
+                  timestamp: timestamp));
+
+              // Send the command to the API for data collection
+              addAppCommand(RoadSageStrings.googleAssistant, command, timestamp,
+                  authClass);
+            }).onError((error, stackTrace) {
+              Fluttertoast.showToast(
+                  msg: "Could not connect to the RoadSage device");
+            });
+
             return MaterialPageRoute(builder: (_) => const MainScreen());
           }
           return null;
@@ -273,6 +288,27 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  void bleConnect() async {
+    BluetoothHandler.displayModel = ref.watch(displayModelProvider);
+    BluetoothHandler.scanDevices();
+    setState(() {});
+
+    await Future.delayed(const Duration(seconds: 4), () {});
+    if (BluetoothHandler.bluetoothDevice == null) {
+      Fluttertoast.showToast(msg: "Could not connect to RoadSage");
+      BluetoothHandler.displayModel?.displayStatus = false;
+      BluetoothHandler.bluetoothDevice = null;
+    }
+    BluetoothHandler.isScanning = false;
+
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     final displayModel = ref.watch(displayModelProvider);
 
@@ -292,17 +328,28 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
             child: ElevatedButton(
               style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(BluetoothHandler.isScanning
+                          ? Colors.yellow
+                          : displayModel.displayStatus
+                              ? Colors.green
+                              : Colors.red),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)))),
-              child: Text(displayModel.displayStatus
-                  ? translate(RoadSageStrings.connected)
-                  : translate(RoadSageStrings.disconnected)),
-              onPressed: () => Navigator.pushNamed(context, Routes.display),
+              child: Text(BluetoothHandler.isScanning
+                  ? translate(RoadSageStrings.scanning)
+                  : displayModel.displayStatus
+                      ? translate(RoadSageStrings.connected)
+                      : translate(RoadSageStrings.disconnected)),
+              onPressed: () async {
+                bleConnect();
+              },
             )),
         IconButton(
           icon: const Icon(Icons.menu),
           iconSize: 36,
           color: RoadSageColours.lightBlue,
+          // color: Colors.red,
           onPressed: () {
             _key.currentState!.openEndDrawer();
           },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:roadsage/constants.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:roadsage/state/ble.dart';
 
 /// Screen with devices used by the app (remote & display)
 class DevicesScreen extends StatefulWidget {
@@ -21,7 +22,32 @@ class _DevicesScreenState extends State<DevicesScreen> {
               child: ListView(
             padding: const EdgeInsets.all(18),
             children: [
+              Center(
+                child: (BluetoothHandler.bluetoothDevice == null)
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        child: Text(
+                          "Cannot find devices\nPlease connect to RoadSage",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyLarge
+                                ?.color,
+                            shadows: const <Shadow>[
+                              Shadow(
+                                  offset: Offset(0.3, 0.5),
+                                  blurRadius: 3,
+                                  color: Colors.black),
+                            ],
+                          ),
+                        ),
+                      )
+                    : null,
+              ),
               ListTile(
+                enabled: BluetoothHandler.bluetoothDevice != null,
                 contentPadding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
@@ -41,6 +67,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
               ),
               const SizedBox(height: 15),
               ListTile(
+                enabled: BluetoothHandler.bluetoothDevice != null,
                 contentPadding: const EdgeInsets.all(16),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),

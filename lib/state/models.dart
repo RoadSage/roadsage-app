@@ -108,7 +108,7 @@ final roadSageModelProvider =
 
 class DisplayModel {
   DisplayModel(
-      {this.displayStatus = true,
+      {this.displayStatus = false,
       this.sensorStatus = true,
       this.batteryLevel = 68,
       this.adaptiveBrightness = true,
