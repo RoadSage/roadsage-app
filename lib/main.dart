@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:roadsage/screens/welcome.dart';
 import 'package:roadsage/state/api.dart';
 import 'package:roadsage/state/models.dart';
+import 'package:roadsage/state/ble.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -241,9 +242,6 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   final AuthClass authClass = AuthClass();
 
-  final FlutterBlue flutterBlue = FlutterBlue.instance;
-  final List<BluetoothDevice> bleDevice = [];
-
   // default - 2 - HomeScreen
   int _selectedIndex = 2;
 
@@ -261,42 +259,40 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     });
   }
 
-  Future<bool> connectToBle() async {
-    flutterBlue.startScan(timeout: const Duration(seconds: 5));
-    final displayModel = ref.watch(displayModelProvider);
-
-    // Listen to scan results
-    var subscription = flutterBlue.scanResults.listen((results) async {
-      // do something with scan results
-      for (ScanResult r in results) {
-        if (r.device.name == 'RoadSage') {
-          bleDevice.add(r.device);
-          displayModel.displayStatus = true;
-          Fluttertoast.showToast(msg: "Found RoadSage");
-
-          await r.device.connect();
-        }
-      }
-    });
-
-    List _list = await flutterBlue.connectedDevices;
-
-    subscription.onDone(() async {
-      if (_list.isNotEmpty) {
-        Fluttertoast.showToast(msg: "RoadSage Connected");
-      } else {
-        Fluttertoast.showToast(msg: "Failed to connect to roadsage");
-      }
-    });
-
-    // Stop scanning
-    flutterBlue.stopScan();
-    return _list.isNotEmpty;
-  }
-
   @override
   void initState() {
     super.initState();
+  }
+
+  void bleConnect() async {
+    BluetoothHandler.displayModel = ref.watch(displayModelProvider);
+    BluetoothHandler.scanDevices();
+    setState(() {});
+
+    await Future.delayed(const Duration(seconds: 4), () {});
+    if (BluetoothHandler.bluetoothDevice == null) {
+      Fluttertoast.showToast(msg: "Could not connect to RoadSage");
+      BluetoothHandler.displayModel?.displayStatus = false;
+      BluetoothHandler.bluetoothDevice = null;
+    } else {
+      List<BluetoothService>? services =
+          await BluetoothHandler.bluetoothDevice?.discoverServices();
+      services?.forEach((service) async {
+        if (service.toString().contains("Nordic")) {
+          Fluttertoast.showToast(msg: "$service");
+          await Future.delayed(const Duration(seconds: 2), () {});
+        }
+        service.characteristics.forEach((characteristic) async {
+          if (service.toString().contains("Tx")) {
+            Fluttertoast.showToast(msg: "$service: $characteristic");
+            await Future.delayed(const Duration(seconds: 2), () {});
+          }
+        });
+      });
+    }
+    BluetoothHandler.isScanning = false;
+
+    setState(() {});
   }
 
   @override
@@ -318,18 +314,21 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
             child: ElevatedButton(
               style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(BluetoothHandler.isScanning
+                          ? Colors.yellow
+                          : displayModel.displayStatus
+                              ? Colors.green
+                              : Colors.red),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)))),
-              child: Text(displayModel.displayStatus
-                  ? translate(RoadSageStrings.connected)
-                  : translate(RoadSageStrings.disconnected)),
+              child: Text(BluetoothHandler.isScanning
+                  ? translate(RoadSageStrings.scanning)
+                  : displayModel.displayStatus
+                      ? translate(RoadSageStrings.connected)
+                      : translate(RoadSageStrings.disconnected)),
               onPressed: () async {
-                List _list = await flutterBlue.connectedDevices;
-                if (_list.isNotEmpty) {
-                  Navigator.pushNamed(context, Routes.display);
-                } else {
-                  await connectToBle();
-                }
+                bleConnect();
               },
             )),
         IconButton(
