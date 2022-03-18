@@ -212,19 +212,31 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           if (path != null && path.contains(Constants.phraseType)) {
             String query =
                 path.substring(path.indexOf("${Constants.phraseType}=") + 11);
-            String commandQuery =
-                "${RoadSageStrings.voiceCommandsPrefix}.$query";
+            String command = "${RoadSageStrings.voiceCommandsPrefix}.$query";
             DateTime timestamp = DateTime.now();
 
-            // Add issued command to recents
-            ref.read(recentsProvider.notifier).addCommand(RoadSageCommand(
-                invocationMethod: RoadSageStrings.googleAssistant,
-                command: commandQuery,
-                timestamp: timestamp));
+            // Send the command to the device through bluetooth
+            BluetoothHandler.sendText(translate(command)).then((value) {
+              if (!value) {
+                Fluttertoast.showToast(
+                    msg: "Could not connect to the RoadSage device");
+                return;
+              }
 
-            // Send the command to the API for data collection
-            addAppCommand(RoadSageStrings.googleAssistant, commandQuery,
-                timestamp, authClass);
+              // Add issued command to recents
+              ref.read(recentsProvider.notifier).addCommand(RoadSageCommand(
+                  invocationMethod: RoadSageStrings.googleAssistant,
+                  command: command,
+                  timestamp: timestamp));
+
+              // Send the command to the API for data collection
+              addAppCommand(RoadSageStrings.googleAssistant, command, timestamp,
+                  authClass);
+            }).onError((error, stackTrace) {
+              Fluttertoast.showToast(
+                  msg: "Could not connect to the RoadSage device");
+            });
+
             return MaterialPageRoute(builder: (_) => const MainScreen());
           }
           return null;

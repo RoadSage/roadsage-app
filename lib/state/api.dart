@@ -5,7 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:roadsage/authentication/auth_services.dart';
 import 'package:roadsage/constants.dart';
-import 'package:roadsage/state/ble.dart';
 
 /// Fetch sensor readings between dates [from] and [to] using [authClass] from the API
 Future<String?> getSensorReadings(
@@ -65,8 +64,6 @@ Future<void> addAppCommand(String invocation, String query, DateTime timestamp,
   // Encode the timestamp for the API
   String timestring = timestamp.toString().replaceAll(' ', 'T');
   timestring = timestring.substring(0, timestring.length - 3) + 'Z';
-
-  BluetoothHandler.sendText(translate(query));
 
   // Combine all arguments for the API
   Map data = {
