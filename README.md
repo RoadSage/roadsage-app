@@ -1,16 +1,23 @@
 # roadsage
 
-A new Flutter project.
+RoadSage app for Android & iOS written in flutter
 
-## Getting Started
+## Instructions
 
-This project is a starting point for a Flutter application.
+### Running the project for debugging & development
 
-A few resources to get you started if this is your first Flutter project:
+flutter run
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Testing the project
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+flutter test
+flutter analyze
+
+### Building the project
+
+flutter build appbundle (for realease on PlayStore)
+flutter build apk (to get an apk file)
+
+### Generating app icons
+
+flutter pub run flutter_launcher_icons:main

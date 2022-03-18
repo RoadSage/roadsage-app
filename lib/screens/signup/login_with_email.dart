@@ -9,6 +9,7 @@ import 'package:roadsage/screens/signup/register_with_email.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
+/// Screen for logging in to the API using email & password
 class LoginWithEmailScreen extends ConsumerStatefulWidget {
   const LoginWithEmailScreen({Key? key}) : super(key: key);
 

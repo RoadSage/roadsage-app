@@ -4,6 +4,7 @@ import 'package:roadsage/constants.dart';
 import 'package:roadsage/screens/signup/verify_mobile.dart';
 import 'package:roadsage/widgets/custom_button.dart';
 
+/// Screen for signing up to the RoadSage API using a mobile phone number
 class RegisterWithMobile extends StatelessWidget {
   const RegisterWithMobile({Key? key}) : super(key: key);
 

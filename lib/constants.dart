@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Routes identify main destinations in the app
 class Routes {
   static const String root = "/";
   static const String home = "/home";
@@ -12,12 +13,21 @@ class Routes {
   static const String faqSubmitQuestion = "/faq/submit_question";
 }
 
+/// Constants identify addresses, keys, filenames etc.
 class Constants {
   static const String siriSuggestionKey = "key";
   static const String androidMethodChannel =
       "io.unitic.roadsage/google_assistant";
   static const String getAssistantMethod = "getAssistantQuery";
   static const String webServerAddress = "192.168.1.103:8000";
+
+  static const String recentsDbFile = 'recents.db';
+  static const String recentsTableName = 'recentcommands';
+
+  static const String apiCommandId = 'id';
+  static const String apiCommandInvocationMethod = 'invocation_method';
+  static const String apiCommandCommand = 'command';
+  static const String apiCommandTimestamp = 'timestamp';
 
   static const String phraseType = "phraseType";
 
@@ -27,6 +37,7 @@ class Constants {
   static const String prefsFirstLaunch = "sharedprefs.first_launch";
 }
 
+/// These are the String constannts used for internationalization.
 class RoadSageStrings {
   static const String help = "app_bar.titles.help_and_feedback";
   static const String devices = "app_bar.titles.devices";
@@ -150,6 +161,28 @@ class RoadSageStrings {
   ];
 
   static const String permissionsFailed = "permissions.not_granted";
+
+  static const String prefsLang = "prefs.language.lang";
+  static const String prefsLangName = "prefs.language.name";
+  static const String prefsColor = "prefs.color";
+  static const String prefsTz = "prefs.time_zone";
+  static const String prefsTemp = "prefs.temp";
+  static const String prefsDist = "prefs.dist";
+  static const String prefsClearRecents = "prefs.clear_recents";
+  static const String prefsAbout = "prefs.about_app";
+  static const String prefsVersion = "prefs.version";
+  static const String prefsAboutRoadSage = "prefs.about_roadsage";
+  static const String prefsProdInfo = "prefs.prod_info";
+  static const String prefsProdInfoSub = "prefs.prod_info_sub";
+  static const String prefsThemeSelect = "prefs.theme.select";
+  static const String prefsThemeSystem = "prefs.theme.system";
+  static const String prefsThemeLight = "prefs.theme.light";
+  static const String prefsThemeDark = "prefs.theme.dark";
+  static const String prefsLangSelect = "prefs.language.select_prompt";
+  static const String prefsLangNameEn = "prefs.language.name.en";
+  static const String prefsLangNameFr = "prefs.language.name.fr";
+  static const String prefsLangEn = "en";
+  static const String prefsLangFr = "fr";
 }
 
 class RoadSageIcons {

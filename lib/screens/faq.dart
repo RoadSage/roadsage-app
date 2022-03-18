@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
+/// Screen showing FAQs
 class FAQScreen extends StatefulWidget {
   const FAQScreen({Key? key}) : super(key: key);
 

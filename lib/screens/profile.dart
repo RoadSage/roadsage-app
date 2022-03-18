@@ -3,6 +3,9 @@ import 'package:roadsage/constants.dart';
 
 import 'package:flutter_translate/flutter_translate.dart';
 
+// TODO: when the api supports it, user profile data should show up here
+
+/// Profile screen shows the user profile
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 

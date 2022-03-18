@@ -24,12 +24,19 @@
     "time_zone": "Time Zone",
     "temp": "Temperature unit",
     "dist": "Distance Unit",
+    "clear_recents": "Clear recents",
     "login_status": "Login Status",
     "about_app": "About App",
     "version": "App Version",
     "about_roadsage": "About RoadSage",
     "prod_info": "Product Info",
-    "prod_info_sub": "RoadSage for cars"
+    "prod_info_sub": "RoadSage for cars",
+    "theme": {
+      "select": "Select colour theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
   },
   "login_page": {
     "title": "RoadSage Home Page",

@@ -6,6 +6,7 @@ import 'package:intro_slider/slide_object.dart';
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/state/models.dart';
 
+/// Screen shown to the user on the first launch of the app
 class WelcomeScreen extends ConsumerStatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
@@ -20,25 +21,21 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
   void initState() {
     super.initState();
 
+    // Add welcome slides one by one
     slides.add(Slide(
         title: translate(RoadSageStrings.welcomeToRoadSage),
         marginTitle: const EdgeInsets.only(top: 400),
         description: translate(RoadSageStrings.welcomeDescription1),
-        // styleDescription: const TextStyle(color: Colors.black),
         backgroundColor: Colors.transparent));
     slides.add(Slide(
         title: translate(RoadSageStrings.welcomeToRoadSage),
         marginTitle: const EdgeInsets.only(top: 400),
-        // styleTitle: const TextStyle(color: Colors.black),
         description: translate(RoadSageStrings.welcomeDescription2),
-        // styleDescription: const TextStyle(color: Colors.black),
         backgroundColor: Colors.transparent));
     slides.add(Slide(
         title: translate(RoadSageStrings.welcomeToRoadSage),
         marginTitle: const EdgeInsets.only(top: 400),
-        // styleTitle: const TextStyle(color: Colors.black),
         description: translate(RoadSageStrings.welcomeDescription3),
-        // styleDescription: const TextStyle(color: Colors.black),
         backgroundColor: Colors.transparent));
   }
 

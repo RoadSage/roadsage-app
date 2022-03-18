@@ -3,6 +3,7 @@ import 'package:roadsage/constants.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/state/ble.dart';
 
+/// Screen with devices used by the app (remote & display)
 class DevicesScreen extends StatefulWidget {
   const DevicesScreen({Key? key}) : super(key: key);
 

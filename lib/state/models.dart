@@ -11,6 +11,7 @@ final sharedPrefs = FutureProvider<SharedPreferences>(
 
 // General app model --------------------------------------------------
 
+/// Model for storing general application state
 class RoadSageModel {
   RoadSageModel(
       {this.loggedIn = false,
@@ -37,6 +38,7 @@ class RoadSageModel {
   }
 }
 
+/// Notifier for subscribing to changes in a RoadSageModel
 class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
   final SharedPreferences? prefs;
 
@@ -44,7 +46,9 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
     _initPrefs();
   }
 
+  /// Initialize shared preferences
   void _initPrefs() async {
+    // Get language setting if it's already stored on the device
     String? lang = prefs?.getString(Constants.prefsLocale);
     if (lang != null) {
       switchLanguage(lang);
@@ -66,6 +70,7 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
     }
   }
 
+  /// Helper function for switching the login status in the device storage
   void switchLoggedIn(bool value) {
     state = state.copyWith(loggedIn: value);
     prefs?.setBool(Constants.prefsLoggedIn, value);
@@ -81,12 +86,13 @@ class RoadSageModelNotifier extends StateNotifier<RoadSageModel> {
     prefs?.setInt(Constants.prefsTheme, value.index);
   }
 
-  // No need to directly change prefs - handled by TranslatePreferences
+  /// No need to directly change prefs - handled by TranslatePreferences
   void switchLanguage(String lang) {
     state = state.copyWith(languageCode: lang);
   }
 }
 
+/// Provider object for accessing the RoadSage model
 final roadSageModelProvider =
     StateNotifierProvider<RoadSageModelNotifier, RoadSageModel>((ref) {
   final prefs = ref.watch(sharedPrefs).maybeWhen(
@@ -197,33 +203,51 @@ final remoteModelProvider =
 
 // Recents (recents.dart)  -----------------------------------------------
 
-class RecentsList extends StateNotifier<List<RoadSageCommand>> {
-  RecentsList([List<RoadSageCommand>? commands]) : super(commands ?? []);
+/// Provider object for accessing recents
+final recentsProvider = ChangeNotifierProvider<RecentsProvider>((ref) {
+  return RecentsProvider(ref);
+});
 
-  void addCommand(String invocation, String query, DateTime timestamp) {
-    state = [
-      ...state,
-      RoadSageCommand(
-        invocation,
-        query,
-        timestamp,
-      )
-    ];
+/// Notifier for performing changes to recents and subscribing to them
+class RecentsProvider with ChangeNotifier {
+  final ChangeNotifierProviderRef? ref;
+  List<RoadSageCommand> _recents = [];
+  RecentsProvider(this.ref) {
+    if (ref != null) getDataFromDb();
   }
 
-  List<RoadSageCommand> getCommands() {
-    return state;
+  /// Get recents (used in RecentsScreen)
+  List<RoadSageCommand> get recents => [..._recents];
+
+  /// Add a new command to recents, both model & database
+  void addCommand(RoadSageCommand command) {
+    final db = ref!.read(dbProvider).db;
+    if (db == null) return;
+    _recents.add(command);
+    notifyListeners();
+    ref!.read(dbProvider).insert(Constants.recentsTableName, command.toMap());
   }
 
-  void clear() {
-    state = [];
+  /// Fetch recents from the database into the model
+  Future<void> getDataFromDb() async {
+    final db = ref!.read(dbProvider).db;
+    if (db == null) return;
+    final dataList = await ref!
+        .read(dbProvider.notifier)
+        .getData(Constants.recentsTableName);
+    _recents = dataList.map((e) => RoadSageCommand.fromMap(e)).toList();
+    notifyListeners();
+  }
+
+  /// Clear recents in the model and database
+  void clearRecents() async {
+    final db = ref!.read(dbProvider).db;
+    if (db == null) return;
+    _recents = [];
+    notifyListeners();
+    await db.delete(Constants.recentsTableName);
   }
 }
-
-final recentsModelProvider =
-    StateNotifierProvider<RecentsList, List<RoadSageCommand>>((ref) {
-  return RecentsList();
-});
 
 // TranslatePreferences (for persistent locale switching)
 class TranslatePreferences implements ITranslatePreferences {

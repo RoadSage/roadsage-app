@@ -8,6 +8,7 @@ import 'package:roadsage/utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Screen showing app's preferences
 class PreferencesScreen extends ConsumerStatefulWidget {
   const PreferencesScreen({Key? key}) : super(key: key);
 
@@ -26,10 +27,12 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
     super.initState();
   }
 
+  // Shared preferences store the settings on device
   void initSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
   }
 
+  // Platform info lets us get device information
   void initPlatformInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     setState(() {
@@ -61,9 +64,9 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
             title: 'General',
             tiles: [
               SettingsTile(
-                title: translate("prefs.language.lang"),
+                title: translate(RoadSageStrings.prefsLang),
                 subtitle: translate(
-                    "prefs.language.name.${roadSageModel.languageCode}"),
+                    "${RoadSageStrings.prefsLangName}.${roadSageModel.languageCode}"),
                 onPressed: (BuildContext context) async {
                   var result = await _chooseLanguage();
                   if (result != null) {
@@ -75,7 +78,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 },
               ),
               SettingsTile(
-                title: (translate("prefs.color")),
+                title: (translate(RoadSageStrings.prefsColor)),
                 subtitle: roadSageModel.themeMode
                     .toString()
                     .substring(10)
@@ -90,39 +93,38 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 },
               ),
               SettingsTile(
-                title: translate("prefs.time_zone"),
+                title: translate(RoadSageStrings.prefsTz),
                 subtitle: "GMT (London)",
               ),
               SettingsTile(
-                title: translate("prefs.temp"),
+                title: translate(RoadSageStrings.prefsTemp),
                 subtitle: "Celsius",
               ),
               SettingsTile(
-                title: translate("prefs.dist"),
+                title: translate(RoadSageStrings.prefsDist),
                 subtitle: "Kilometers",
               ),
               SettingsTile(
-                title: translate("Clear recents"),
-                onPressed: (BuildContext context) =>
-                    ref.read(recentsModelProvider.notifier).clear(),
-              )
+                  title: translate(RoadSageStrings.prefsClearRecents),
+                  onPressed: (BuildContext context) =>
+                      ref.read(recentsProvider.notifier).clearRecents())
             ],
           ),
           SettingsSection(
-            title: translate("prefs.about_app"),
+            title: translate(RoadSageStrings.prefsAbout),
             tiles: [
               SettingsTile(
-                title: translate("prefs.version"),
+                title: translate(RoadSageStrings.prefsVersion),
                 subtitle: _appVersion,
               )
             ],
           ),
           SettingsSection(
-            title: translate("prefs.about_roadsage"),
+            title: translate(RoadSageStrings.prefsAboutRoadSage),
             tiles: [
               SettingsTile(
-                title: translate("prefs.prod_info"),
-                subtitle: translate("prefs.prod_info_sub"),
+                title: translate(RoadSageStrings.prefsProdInfo),
+                subtitle: translate(RoadSageStrings.prefsProdInfoSub),
               )
             ],
           )
@@ -131,46 +133,50 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
     );
   }
 
+  /// Helper function for setting up theme selection
   Future<ThemeMode?> _chooseColourTheme() async {
     return showDialog<ThemeMode>(
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: const Text('Select colour theme'),
+            title: Text(translate(RoadSageStrings.prefsThemeSelect)),
             contentPadding: const EdgeInsets.all(20),
             children: [
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, ThemeMode.system),
-                child: const Text('System'),
+                child: Text(translate(RoadSageStrings.prefsThemeSystem)),
               ),
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, ThemeMode.light),
-                child: const Text('Light'),
+                child: Text(translate(RoadSageStrings.prefsThemeLight)),
               ),
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, ThemeMode.dark),
-                child: const Text('Dark'),
+                child: Text(translate(RoadSageStrings.prefsThemeDark)),
               )
             ],
           );
         });
   }
 
+  /// Helper function for setting up language selection
   Future<String?> _chooseLanguage() async {
     return showDialog<String>(
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: Text(translate('prefs.language.select_prompt')),
+            title: Text(translate(RoadSageStrings.prefsLangSelect)),
             contentPadding: const EdgeInsets.all(20),
             children: [
               SimpleDialogOption(
-                onPressed: () => Navigator.pop(context, 'en'),
-                child: Text(translate('prefs.language.name.en')),
+                onPressed: () =>
+                    Navigator.pop(context, RoadSageStrings.prefsLangEn),
+                child: Text(translate(RoadSageStrings.prefsLangNameEn)),
               ),
               SimpleDialogOption(
-                onPressed: () => Navigator.pop(context, 'fr'),
-                child: Text(translate('prefs.language.name.fr')),
+                onPressed: () =>
+                    Navigator.pop(context, RoadSageStrings.prefsLangFr),
+                child: Text(translate(RoadSageStrings.prefsLangNameFr)),
               ),
             ],
           );

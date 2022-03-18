@@ -4,6 +4,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/state/models.dart';
 
+/// Screen showing recently issued RoadSage commands
 class RecentsScreen extends ConsumerStatefulWidget {
   const RecentsScreen({Key? key}) : super(key: key);
 
@@ -13,8 +14,18 @@ class RecentsScreen extends ConsumerStatefulWidget {
 
 class _RecentsScreenState extends ConsumerState<RecentsScreen> {
   @override
+  void didChangeDependencies() {
+    // Ensures recents are properly loaded from on device storage
+    final recentsModel = ref.watch(recentsProvider);
+    if (recentsModel.recents.isEmpty) {
+      recentsModel.getDataFromDb();
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final recentsModel = ref.watch(recentsModelProvider);
+    final recentsModel = ref.watch(recentsProvider);
 
     return ListView(
       children: [
@@ -41,11 +52,11 @@ class _RecentsScreenState extends ConsumerState<RecentsScreen> {
             const SizedBox(
               height: 20,
             ),
-            //making list tiles for the recent purposes
-            ...recentsModel
+            // make list tiles for recents entries
+            ...recentsModel.recents
                 .map((e) => _buildCard(
                     title: translate(e.invocationMethod),
-                    desc: translate(e.query),
+                    desc: translate(e.command),
                     timestamp: e.timestamp))
                 .toList()
                 .reversed,
@@ -55,6 +66,7 @@ class _RecentsScreenState extends ConsumerState<RecentsScreen> {
     );
   }
 
+  /// Helper function for building a recents list card
   _buildCard({
     required String title,
     required String desc,

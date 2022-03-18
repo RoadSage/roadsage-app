@@ -11,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:roadsage/screens/welcome.dart';
 import 'package:roadsage/state/api.dart';
+import 'package:roadsage/state/data.dart';
 import 'package:roadsage/state/models.dart';
 import 'package:roadsage/state/ble.dart';
 import 'package:tuple/tuple.dart';
@@ -29,15 +30,18 @@ import 'screens/home.dart';
 import 'screens/recents.dart';
 import 'screens/remote.dart';
 
+/// Start point for the app
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  // Setup internationalization
   var delegate = await LocalizationDelegate.create(
       fallbackLocale: 'en_GB',
       supportedLocales: ['en_GB', 'en_US', 'fr'],
       preferences: TranslatePreferences());
 
+  // Run the actual app
   runApp(LocalizedApp(delegate, const ProviderScope(child: RoadSageApp())));
 }
 
@@ -48,6 +52,7 @@ class RoadSageApp extends ConsumerStatefulWidget {
   _RoadSageApp createState() => _RoadSageApp();
 }
 
+/// Widget that sets up most of the app's structure
 class _RoadSageApp extends ConsumerState<RoadSageApp> {
   final SiriSuggestions siri = SiriSuggestions();
   final AuthClass authClass = AuthClass();
@@ -58,6 +63,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
 
   @override
   void initState() {
+    // Check if user is logged in with Firebase
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       ref.read(roadSageModelProvider.notifier).switchLoggedIn(true);
@@ -68,31 +74,27 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
 
   @override
   void dispose() {
-    // _intentStream?.cancel();
     super.dispose();
   }
 
   void initSiriSuggestions() async {
-    //print("Initializing siri suggestions");
     WidgetsFlutterBinding.ensureInitialized();
     siri.configure(onLaunch: (Map<String, dynamic> message) async {
-      //print("Siri Suggestion called to perform ${message['key']}");
-
       switch (message[Constants.siriSuggestionKey]) {
         case RoadSageStrings.openRoadsage:
           // Launch main page
           break;
         case RoadSageStrings.thanksRoadsage:
-          // say thank you
+          // Say thank you
           break;
         case RoadSageStrings.cheersRoadsage:
-          // say cheers
+          // Say cheers
           break;
         case RoadSageStrings.beamRoadsage:
-          // open beam
+          // Open beam
           break;
         default:
-          // suggestion key wasn't added
+          // Suggestion key wasn't added
           break;
       }
     });
@@ -119,7 +121,6 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
         translate(RoadSageStrings.beamRoadsage),
         translate(RoadSageStrings.beamRoadsageDesc),
         translate(RoadSageStrings.beamRoadsagePhrase));
-    //print("Initialized Siri Successfully!");
   }
 
   @override
@@ -131,6 +132,8 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
       state: LocalizationProvider.of(context).state,
       child: MaterialApp(
         title: translate(RoadSageStrings.title),
+
+        // Set up the light theme for the app
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: RoadSageColours.lightGrey,
           primaryColor: RoadSageColours.lightGrey,
@@ -159,6 +162,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
             color: Colors.black,
           ),
         ),
+        // Set up the dark theme for the app
         darkTheme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: RoadSageColours.darkBg,
           primaryColor: RoadSageColours.darkGrey,
@@ -183,7 +187,9 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
             color: Colors.white,
           ),
         ),
+        // Current theme is determined by the app's roadSageModel
         themeMode: roadSageModel.themeMode,
+        // Main destinations in the app
         routes: {
           Routes.root: (context) => const LoginScreen(),
           Routes.welcome: (context) => const WelcomeScreen(),
@@ -195,9 +201,12 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
           Routes.preferences: (context) => const PreferencesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
         },
+        // Start with either welcome screen, login screen or home screen
         initialRoute: roadSageModel.firstLaunch
             ? Routes.welcome
             : (roadSageModel.loggedIn ? Routes.home : Routes.root),
+        // Called when navigating to an unknown route
+        // Used by Google Assistant to pass commands through deep links
         onGenerateRoute: (settings) {
           String? path = settings.name;
           if (path != null && path.contains(Constants.phraseType)) {
@@ -206,14 +215,21 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
             String commandQuery =
                 "${RoadSageStrings.voiceCommandsPrefix}.$query";
             DateTime timestamp = DateTime.now();
-            ref.read(recentsModelProvider.notifier).addCommand(
-                RoadSageStrings.googleAssistant, commandQuery, timestamp);
+
+            // Add issued command to recents
+            ref.read(recentsProvider.notifier).addCommand(RoadSageCommand(
+                invocationMethod: RoadSageStrings.googleAssistant,
+                command: commandQuery,
+                timestamp: timestamp));
+
+            // Send the command to the API for data collection
             addAppCommand(RoadSageStrings.googleAssistant, commandQuery,
                 timestamp, authClass);
             return MaterialPageRoute(builder: (_) => const MainScreen());
           }
           return null;
         },
+        // Called if onGenerateRoute returned null
         onUnknownRoute: (_) {
           return MaterialPageRoute(builder: (_) => const MainScreen());
         },
@@ -230,6 +246,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
   }
 }
 
+/// Main screen of the app, contains bottom navigation and a nav drawer
 class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({Key? key, String? query}) : super(key: key);
 
@@ -294,6 +311,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       elevation: 0,
       centerTitle: false,
       actions: [
+        // (Dis)connected button on the app bar
         Padding(
             padding: const EdgeInsets.only(top: 18, bottom: 22, right: 20),
             child: ElevatedButton(
@@ -327,6 +345,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       ],
     );
 
+    /// This is the bottom bar present in the home page.
     final BottomNavigationBar bottomNavBar = BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(

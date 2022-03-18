@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:roadsage/constants.dart';
+import 'package:roadsage/screens/signup/login_with_email.dart';
 
+/// Screen for handling email verification after signing up
 class EmailVerifyScreen extends StatelessWidget {
   const EmailVerifyScreen({Key? key}) : super(key: key);
 
@@ -61,8 +63,11 @@ class EmailVerifyScreen extends StatelessWidget {
                   animationType: AnimationType.fade,
                   animationDuration: const Duration(milliseconds: 300),
                   onCompleted: (v) {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil(Routes.home, (route) => false);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginWithEmailScreen(),
+                      ),
+                    );
                   },
                   onChanged: (String value) {},
                 ),

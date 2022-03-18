@@ -7,6 +7,7 @@ import 'package:roadsage/authentication/auth_services.dart';
 import 'package:roadsage/constants.dart';
 import 'package:roadsage/state/ble.dart';
 
+/// Fetch sensor readings between dates [from] and [to] using [authClass] from the API
 Future<String?> getSensorReadings(
     String from, String to, AuthClass authClass) async {
   String? token = await authClass.getAuthenticationToken();
@@ -29,6 +30,7 @@ Future<String?> getSensorReadings(
   return response.body;
 }
 
+/// Post sensor readings encoded in [data] to the API using [authClass]
 Future<String?> addSensorReadings(Map data, AuthClass authClass) async {
   String? token = await authClass.getAuthenticationToken();
 
@@ -50,6 +52,7 @@ Future<String?> addSensorReadings(Map data, AuthClass authClass) async {
   return response.body;
 }
 
+/// Send a recents entry with [invocation], [query] and [timestamp] to the API using [authClass]
 Future<void> addAppCommand(String invocation, String query, DateTime timestamp,
     AuthClass authClass) async {
   String? token = await authClass.getAuthenticationToken();
@@ -59,11 +62,13 @@ Future<void> addAppCommand(String invocation, String query, DateTime timestamp,
     return;
   }
 
+  // Encode the timestamp for the API
   String timestring = timestamp.toString().replaceAll(' ', 'T');
   timestring = timestring.substring(0, timestring.length - 3) + 'Z';
 
   BluetoothHandler.sendText(translate(query));
 
+  // Combine all arguments for the API
   Map data = {
     'timestamp': timestring,
     'command': translate(query),
