@@ -274,21 +274,6 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       Fluttertoast.showToast(msg: "Could not connect to RoadSage");
       BluetoothHandler.displayModel?.displayStatus = false;
       BluetoothHandler.bluetoothDevice = null;
-    } else {
-      List<BluetoothService>? services =
-          await BluetoothHandler.bluetoothDevice?.discoverServices();
-      services?.forEach((service) async {
-        if (service.toString().contains("Nordic")) {
-          Fluttertoast.showToast(msg: "$service");
-          await Future.delayed(const Duration(seconds: 2), () {});
-        }
-        service.characteristics.forEach((characteristic) async {
-          if (service.toString().contains("Tx")) {
-            Fluttertoast.showToast(msg: "$service: $characteristic");
-            await Future.delayed(const Duration(seconds: 2), () {});
-          }
-        });
-      });
     }
     BluetoothHandler.isScanning = false;
 

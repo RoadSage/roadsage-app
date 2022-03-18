@@ -17,14 +17,14 @@ class BluetoothHandler {
     isScanning = true;
 
     // Listen to scan results
-    var scanner = instance.scanResults.listen(
+    instance.scanResults.listen(
       (results) {
         for (ScanResult r in results) {
           if (r.device.name == "Roadsage" && bluetoothDevice != r.device) {
             displayModel?.displayStatus = true;
             r.device.connect();
             bluetoothDevice = r.device;
-            Fluttertoast.showToast(msg: "Found ${r.device.name}");
+            Fluttertoast.showToast(msg: "Connected to ${r.device.name}");
             return;
           }
         }

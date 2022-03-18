@@ -24,7 +24,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
               Center(
                 child: (BluetoothHandler.bluetoothDevice == null)
                     ? Padding(
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
                         child: Text(
                           "Cannot find devices\nPlease connect to RoadSage",
                           textAlign: TextAlign.center,
