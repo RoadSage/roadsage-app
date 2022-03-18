@@ -64,9 +64,9 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
             title: 'General',
             tiles: [
               SettingsTile(
-                title: translate("prefs.language.lang"),
+                title: translate(RoadSageStrings.prefsLang),
                 subtitle: translate(
-                    "prefs.language.name.${roadSageModel.languageCode}"),
+                    "${RoadSageStrings.prefsLangName}.${roadSageModel.languageCode}"),
                 onPressed: (BuildContext context) async {
                   var result = await _chooseLanguage();
                   if (result != null) {
@@ -78,7 +78,7 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 },
               ),
               SettingsTile(
-                title: (translate("prefs.color")),
+                title: (translate(RoadSageStrings.prefsColor)),
                 subtitle: roadSageModel.themeMode
                     .toString()
                     .substring(10)
@@ -93,38 +93,38 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
                 },
               ),
               SettingsTile(
-                title: translate("prefs.time_zone"),
+                title: translate(RoadSageStrings.prefsTz),
                 subtitle: "GMT (London)",
               ),
               SettingsTile(
-                title: translate("prefs.temp"),
+                title: translate(RoadSageStrings.prefsTemp),
                 subtitle: "Celsius",
               ),
               SettingsTile(
-                title: translate("prefs.dist"),
+                title: translate(RoadSageStrings.prefsDist),
                 subtitle: "Kilometers",
               ),
               SettingsTile(
-                  title: translate("Clear recents"),
+                  title: translate(RoadSageStrings.prefsClearRecents),
                   onPressed: (BuildContext context) =>
                       ref.read(recentsProvider.notifier).clearRecents())
             ],
           ),
           SettingsSection(
-            title: translate("prefs.about_app"),
+            title: translate(RoadSageStrings.prefsAbout),
             tiles: [
               SettingsTile(
-                title: translate("prefs.version"),
+                title: translate(RoadSageStrings.prefsVersion),
                 subtitle: _appVersion,
               )
             ],
           ),
           SettingsSection(
-            title: translate("prefs.about_roadsage"),
+            title: translate(RoadSageStrings.prefsAboutRoadSage),
             tiles: [
               SettingsTile(
-                title: translate("prefs.prod_info"),
-                subtitle: translate("prefs.prod_info_sub"),
+                title: translate(RoadSageStrings.prefsProdInfo),
+                subtitle: translate(RoadSageStrings.prefsProdInfoSub),
               )
             ],
           )
@@ -139,20 +139,20 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: const Text('Select colour theme'),
+            title: Text(translate(RoadSageStrings.prefsThemeSelect)),
             contentPadding: const EdgeInsets.all(20),
             children: [
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, ThemeMode.system),
-                child: const Text('System'),
+                child: Text(translate(RoadSageStrings.prefsThemeSystem)),
               ),
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, ThemeMode.light),
-                child: const Text('Light'),
+                child: Text(translate(RoadSageStrings.prefsThemeLight)),
               ),
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, ThemeMode.dark),
-                child: const Text('Dark'),
+                child: Text(translate(RoadSageStrings.prefsThemeDark)),
               )
             ],
           );
@@ -165,16 +165,18 @@ class _PreferencesScreenState extends ConsumerState<PreferencesScreen> {
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: Text(translate('prefs.language.select_prompt')),
+            title: Text(translate(RoadSageStrings.prefsLangSelect)),
             contentPadding: const EdgeInsets.all(20),
             children: [
               SimpleDialogOption(
-                onPressed: () => Navigator.pop(context, 'en'),
-                child: Text(translate('prefs.language.name.en')),
+                onPressed: () =>
+                    Navigator.pop(context, RoadSageStrings.prefsLangEn),
+                child: Text(translate(RoadSageStrings.prefsLangNameEn)),
               ),
               SimpleDialogOption(
-                onPressed: () => Navigator.pop(context, 'fr'),
-                child: Text(translate('prefs.language.name.fr')),
+                onPressed: () =>
+                    Navigator.pop(context, RoadSageStrings.prefsLangFr),
+                child: Text(translate(RoadSageStrings.prefsLangNameFr)),
               ),
             ],
           );
