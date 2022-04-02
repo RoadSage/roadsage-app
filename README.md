@@ -11,11 +11,13 @@ flutter run
 ### Testing the project
 
 flutter test
+
 flutter analyze
 
 ### Building the project
 
 flutter build appbundle (for realease on PlayStore)
+
 flutter build apk (to get an apk file)
 
 ### Generating app icons
