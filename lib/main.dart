@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:roadsage/authentication/auth_services.dart';
 
 import 'package:roadsage/screens/display.dart';
@@ -61,6 +62,31 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
     initSiriSuggestions();
   }
 
+  void ask_bluetoothPermission() async {
+    final status = await Permission.bluetooth.request();
+    if (status == PermissionStatus.granted) {
+      print('Permission granted');
+    } else if (status == PermissionStatus.denied) {
+      print(
+          'Denied. Show a dialog with a reason and again ask for the permission.');
+    } else if (status == PermissionStatus.permanentlyDenied) {
+      print('Take the user to the settings page.');
+    }
+    ask_bluetoothConnect_Permission();
+  }
+
+  void ask_bluetoothConnect_Permission() async {
+    final status = await Permission.bluetoothConnect.request();
+    if (status == PermissionStatus.granted) {
+      print('Permission granted');
+    } else if (status == PermissionStatus.denied) {
+      print(
+          'Denied. Show a dialog with a reason and again ask for the permission.');
+    } else if (status == PermissionStatus.permanentlyDenied) {
+      print('Take the user to the settings page.');
+    }
+  }
+
   @override
   void initState() {
     // Check if user is logged in with Firebase
@@ -68,6 +94,7 @@ class _RoadSageApp extends ConsumerState<RoadSageApp> {
     if (user != null) {
       ref.read(roadSageModelProvider.notifier).switchLoggedIn(true);
     }
+    ask_bluetoothPermission();
 
     super.initState();
   }

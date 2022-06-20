@@ -62,6 +62,7 @@ class _DevicesScreenState extends State<DevicesScreen> {
                 ),
                 tileColor: Theme.of(context).primaryColorLight,
                 onTap: () {
+                  debugPrint('pressed');
                   Navigator.pushNamed(context, Routes.remote);
                 },
               ),

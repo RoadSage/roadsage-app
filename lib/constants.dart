@@ -16,8 +16,7 @@ class Routes {
 /// Constants identify addresses, keys, filenames etc.
 class Constants {
   static const String siriSuggestionKey = "key";
-  static const String androidMethodChannel =
-      "io.unitic.roadsage/google_assistant";
+  static const String androidMethodChannel = "io.unitic.roadsage/google_assistant";
   static const String getAssistantMethod = "getAssistantQuery";
   static const String webServerAddress = "192.168.1.103:8000";
 

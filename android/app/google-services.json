@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "147423212069-jclq6850pqgba618kf9679md61ejvjdt.apps.googleusercontent.com",
+          "client_id": "147423212069-r1q5a97erbqjrvdltvnicm1ikgf3u3t0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "io.unitic.roadsage",
-            "certificate_hash": "aeaa21d87a5d7aa0c74d0829bcd14d112a547d21"
+            "certificate_hash": "3a69688fa2c8f8d7bc644dd47e39239c44ba38b1"
           }
         },
         {
@@ -35,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "147423212069-tkp7qqr8vb9if7tl97ngg5f1idvkfum1.apps.googleusercontent.com",
+              "client_id": "147423212069-r73hl9odt613rud4134ilq0ifdfo696q.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "147423212069-vau3d56s8ksojb0i9fdtei7otmvofves.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.unitic.roadsage"
+              }
             }
           ]
         }

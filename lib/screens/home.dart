@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:roadsage/authentication/auth_services.dart';
 import 'package:roadsage/constants.dart';
 import 'dart:io' show Platform;
@@ -56,12 +57,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         translate(RoadSageStrings.voiceCommands[index]);
                     DateTime timestamp = DateTime.now();
 
-                    /*
-                    The code below should replace the code following it
-                    when the testing stage is over
-                    Leaving it commented out right now so that it is possible
-                    to present the recents functionality without needing a working
-                    bluetooth device
+                    // The code below should replace the code following it
+                    // when the testing stage is over
+                    // Leaving it commented out right now so that it is possible
+                    // to present the recents functionality without needing a working
+                    // bluetooth device
 
                     // Send the command to the device through bluetooth
                     BluetoothHandler.sendText(translate(command)).then((value) {
@@ -72,32 +72,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       }
 
                       // Add issued command to recents
-                      ref.read(recentsProvider.notifier).addCommand(RoadSageCommand(
-                          invocationMethod: RoadSageStrings.homeScreenButton,
-                          command: command,
-                          timestamp: timestamp));
+                      ref.read(recentsProvider.notifier).addCommand(
+                          RoadSageCommand(
+                              invocationMethod:
+                                  RoadSageStrings.homeScreenButton,
+                              command: command,
+                              timestamp: timestamp));
 
                       // Send the command to the API for data collection
-                      addAppCommand(RoadSageStrings.homeScreenButton, command, timestamp,
-                          authClass);
+                      addAppCommand(RoadSageStrings.homeScreenButton, command,
+                          timestamp, authClass);
                     }).onError((error, stackTrace) {
                       Fluttertoast.showToast(
                           msg: "Could not connect to the RoadSage device");
                     });
-                    */
 
-                    // Send the command to the device through bluetooth
-                    BluetoothHandler.sendText(translate(command));
-
-                    // Add command to recents
-                    recentsModel.addCommand(RoadSageCommand(
-                        invocationMethod: RoadSageStrings.homeScreenButton,
-                        command: command,
-                        timestamp: timestamp));
-
-                    // Send command to the API for data collection
-                    addAppCommand(RoadSageStrings.homeScreenButton, command,
-                        timestamp, authClass);
+                    // // Send the command to the device through bluetooth
+                    // BluetoothHandler.sendText(translate(command));
+                    //
+                    // // Add command to recents
+                    // recentsModel.addCommand(RoadSageCommand(
+                    //     invocationMethod: RoadSageStrings.homeScreenButton,
+                    //     command: command,
+                    //     timestamp: timestamp));
+                    //
+                    // // Send command to the API for data collection
+                    // addAppCommand(RoadSageStrings.homeScreenButton, command,
+                    //     timestamp, authClass);
                   },
                   title: Text(
                     "${translate((Platform.isAndroid) ? RoadSageStrings.androidAssistantPhrase : RoadSageStrings.iosAssistantPhrase)}, ${translate(RoadSageStrings.voiceCommands[index])}",
